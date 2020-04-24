@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  user: one
+  start_time: 2020-04-24 13:34:45
+  end_time: 2020-04-24 13:34:45
+  status: MyString
+  availability: one
+
+two:
+  user: two
+  user: two
+  start_time: 2020-04-24 13:34:45
+  end_time: 2020-04-24 13:34:45
+  status: MyString
+  availability: two
