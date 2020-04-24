@@ -3,9 +3,9 @@
 one:
   first_name: MyString
   dob: 2020-04-24
-  user: one
+  parent: one
 
 two:
   first_name: MyString
   dob: 2020-04-24
-  user: two
+  parent: two
