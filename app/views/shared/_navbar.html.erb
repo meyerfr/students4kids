@@ -28,12 +28,8 @@
         </div>
       </li>
     <% else %>
-      <li class="nav-item dropdown active">
-        <span class="nav-item dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log in</span>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <%= link_to "als Babysitter", '#', class: 'dropdown-item' %>
-          <%= link_to "als Kunde", '#', class: 'dropdown-item' %>
-        </div>
+      <li class="nav-item active">
+        <%= link_to "Login", new_user_session_path, class: 'dropdown-item' %>
       </li>
     <% end %>
   </ul>

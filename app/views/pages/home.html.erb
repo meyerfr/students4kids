@@ -56,7 +56,7 @@
         <% if current_user %>
           <%= link_to "Werde Babysitter", '#', class: "nav-link sfk-button" %>
         <% else %>
-          <%= link_to "Werde Babysitter", '#', class: "nav-link sfk-button" %>
+          <%= link_to "Werde Babysitter", new_user_registration_path(role: 'sitter'), class: "nav-link sfk-button" %>
         <% end %>
       </div>
       <div class="part">
@@ -81,7 +81,7 @@
         <% if current_user %>
           <%= link_to "Werde Kunde", '#', class: "nav-link sfk-button" %>
         <% else %>
-          <%= link_to "Werde Kunde", '#', class: "nav-link sfk-button" %>
+          <%= link_to "Werde Kunde", new_user_registration_path(role: 'parent'), class: "nav-link sfk-button" %>
         <% end %>
       </div>
     </div>
