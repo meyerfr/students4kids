@@ -1,0 +1,5 @@
+meta_product_name: "Students for Kids"
+meta_title: "Students for Kids - Hilf damit geholfen werden kann"
+meta_description: "Mit Hilfe eines sozialen Projektes möchte die Düsseldorfer Jugend ein Zeichen gegen Corona und für den Zusammenhalt setzen."
+meta_image: "family-drawing.png" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards

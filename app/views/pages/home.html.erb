@@ -1,0 +1,147 @@
+<div class="home-wrapper">
+  <div class="section top">
+    <div class="header">
+      <div class="quote">
+        <i class="fas fa-quote-left darker"></i>
+        <h1 class="top">
+          An Tagen wie diesen…
+        </h1>
+        <h1 class="top">
+          wünscht man sich Zusammenhalt!
+        </h1>
+        <i class="fas fa-quote-right darker"></i>
+      </div>
+      <h1 class="header top">
+        Düsseldorf zeigt wie es geht.
+      </h1>
+    </div>
+    <div class="hands-container">
+      <div class="hand">
+        <%= image_tag 'hand-print-green.png' %>
+        <span class="green">Vertrautes Umfeld & Bekannte Kontakte</span>
+      </div>
+      <div class="hand">
+        <%= image_tag 'hand-print-red.png' %>
+        <span class="red">Ehrenamtliche Kinderbetreuung</span>
+      </div>
+      <div class="hand">
+        <%= image_tag 'hand-print-yellow.png' %>
+        <span class="yellow">Flexible & Zuverlässige Unterstützung</span>
+      </div>
+    </div>
+    <div class="header" style="margin-top: 50px;">
+      <h1 class="header">Babysitter werden und Düsseldorfer Eltern helfen!</h1>
+    </div>
+  </div>
+  <div class="section drawing">
+    <div class="text">
+      <div class="quote">
+        <i class="fas fa-quote-left"></i>
+        <h3 class="header">Komm’ dir entgegen, dich abzuholen</h3>
+        <i class="fas fa-quote-right"></i>
+      </div>
+      <span>Aufgrund der aktuellen Corona Lage in Deutschland haben alle Schulen, Kindergärten, Kitas und Kindertagesstätten geschlossen. Mit diesem sozialen Projekt möchten wir ein Zeichen setzen und den Düsseldorfer Eltern unter die Arme greifen. Ärzte, Krankenschwestern, Pfleger und sonstige berufstätige Eltern sollen beruhigt zur Arbeit gehen können, mit dem guten Gefühl, dass ihre Kinder in den besten Händen sind. Mit Hilfe eines sozialen Projektes möchte die Düsseldorfer Jugend ein Zeichen gegen Corona und für den Zusammenhalt setzen.</span>
+    </div>
+    <%= image_tag 'family-drawing.png' %>
+  </div>
+  <div class="section">
+    <div class="section-part">
+      <div class="part set-width">
+        <div class="quote">
+          <i class="fas fa-quote-left darker"></i>
+          <h2 class="header">Wie ausgemacht, zur selben Uhrzeit</h2>
+          <i class="fas fa-quote-right darker"></i>
+        </div>
+        <span>Du möchtest Düsseldorf helfen und Familien in dieser Lage unterstützen? Super! Werde Teil dieses Projekts und registriere Dich bei uns. Mit deiner Unterstützung können wir Krankenschwestern, Ärzten und vielen anderen berufstätigen Eltern helfen.</span>
+        <% if current_user %>
+          <%= link_to "Werde Babysitter", '#', class: "nav-link sfk-button" %>
+        <% else %>
+          <%= link_to "Werde Babysitter", '#', class: "nav-link sfk-button" %>
+        <% end %>
+      </div>
+      <div class="part">
+        <%= image_tag 'hand-print-green.png' %>
+        <%= image_tag 'hand-print-green.png' %>
+      </div>
+    </div>
+    <div class="section-part">
+      <div class="part reverse">
+        <%= image_tag 'hand-print-yellow.png' %>
+        <%= image_tag 'hand-print-yellow.png' %>
+      </div>
+      <div class="part set-width">
+        <div class="quote">
+          <i class="fas fa-quote-left darker"></i>
+          <h2 class="header">Am selben Treffpunkt, wie letztes mal</h2>
+          <i class="fas fa-quote-right darker"></i>
+        </div>
+        <span>
+          Du suchst eine zuverlässige und liebevolle Betreuung für Deine Kinder in dieser Lage? Verständlich! Werde auch Du Teil unseres Projektes und wir helfen dir einen geeigneten Babysitter in deinem Bezirk zu finden.
+        </span>
+        <% if current_user %>
+          <%= link_to "Werde Kunde", '#', class: "nav-link sfk-button" %>
+        <% else %>
+          <%= link_to "Werde Kunde", '#', class: "nav-link sfk-button" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="section-part">
+      <div class="part set-width">
+        <div class="quote">
+          <h2 class="header">Werde Unterstützer</h2>
+        </div>
+        <span>Du findest unsere Idee gut und möchtest uns mit einer freiwilligen Spende unterstützen? Da freuen wir uns sehr! Unser Team arbeitet täglich ehrenamtlich um die Düsseldorfer Gemeinschaft zu unterstützen denn... An Tagen wie diesen wünscht man sich Zusammenhalt...</span>
+        <div id="open-popup-button">
+          <button class="sfk-button">Werde Unterstützer</button>
+        </div>
+        <%#= link_to "Werde Unterstützer", '#', class: "nav-link sfk-button open-popup", id: 'open-popup-button' %>
+      </div>
+      <div class="part">
+        <%= image_tag 'hand-print-green.png' %>
+        <%= image_tag 'hand-print-green.png' %>
+      </div>
+      <div id="popup-container" class="d-none part">
+        <div id="popup-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Wir freuen uns über deine Spende.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name:</td>
+                <td>Hannah Meyer</td>
+              </tr>
+              <tr>
+                <td>Betreff:</td>
+                <td>Students for kids</td>
+              </tr>
+              <tr>
+                <td>IBAN:</td>
+                <td>DE70 1001 1001 2629 5300 38</td>
+              </tr>
+              <tr>
+                <td>BIC:</td>
+                <td>NTSBDEB1XXX</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <h2 class="header">Wer sind wir?</h2>
+    <div class="section-part about-us">
+      <div class="about-me">
+        <span>Ich heiße Hannah Meyer bin 21 Jahre alt und studiere Sportmanagement in München. Ich selber Babysitte seit dem ich 13 Jahre alt bin und wurde überhäuft mit Anfragen in letzter Zeit. Ich möchte mit diesem Projekt eine Plattform schaffen, in der die Jugend von Düsseldorf ihre Unterstützung anbieten kann.</span>
+      </div>
+      <div class="about-me">
+        <span>
+          Ich heiße Fritz Meyer, bin 20 Jahre alt und studiere Software-Engineering in Berlin. Diese Website habe ich gebaut, um dieses Projekt zu unterstützen und zu zeigen, dass wir in der heutigen Zeit zusammen halten müssen.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

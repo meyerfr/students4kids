@@ -1,0 +1,51 @@
+@media (max-width: 768px) {
+  .navbar-sfk h1{font-size: 1.5rem !important}
+}
+.navbar-sfk {
+  justify-content: center;
+  background: white;
+  // .navbar-collapse {
+  //   flex-grow: 0;
+  //   position: absolute;
+  //   right: 1rem;
+    .dropdown{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+    // }
+  }
+  .navbar-toggler{
+    position: absolute;
+    right: 1rem;
+  }
+  .navbar-brand {
+    position: absolute;
+    left: 1rem;
+    img {
+      width: 40px;
+    }
+  }
+  .avatar-dropdown{
+    height: 100%;
+    position: absolute;
+    right: 1rem;
+    z-index: 10;
+    align-items: center;
+    cursor: pointer;
+    @media (max-width: 768px) {
+      top: 0;
+    }
+  }
+  h1{
+    font-size: 34px;
+    margin: 0;
+  }
+  .login-links{
+    display: flex;
+    align-items: baseline;
+  }
+  .dropdown-toggle::after{
+    content: none;
+  }
+}

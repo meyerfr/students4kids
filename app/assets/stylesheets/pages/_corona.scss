@@ -1,0 +1,12 @@
+.corona-info-wrapper{
+  display: flex;
+  padding: 50px;
+  justify-content: center;
+  .corona-info{
+    h2{text-align: center;}
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+    width: 95%;
+  }
+}

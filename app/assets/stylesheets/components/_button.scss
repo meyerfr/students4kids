@@ -1,0 +1,46 @@
+.edit-button{
+  position: absolute;
+  right: -12px;
+  top: -10px;
+  color: #929292;
+  transition: .3s;
+  i{
+    font-size: 19px;
+    background: white;
+  }
+}
+
+.edit-button:hover{
+  color: #22C3B5;
+}
+
+.back-button{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: #A2A2A2;
+  transition: .3s;
+  i{
+    font-size: 19px;
+  }
+}
+
+.back-button:hover{
+  color: black;
+}
+
+.sfk-button{
+  background: $red;
+  padding: 5px 25px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 3px 4px #ff00002e;
+  color: white;
+  transition: all .8s ease;
+  width: fit-content;
+}
+
+.sfk-button:hover{
+  background: white;
+  color: $red;
+  text-decoration: none;
+}
