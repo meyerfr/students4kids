@@ -6,4 +6,8 @@ class User < ApplicationRecord
   has_many :bookings
   has_many :availabilities
   has_many :children
+
+  def is_role?(role)
+    self.role == role
+  end
 end

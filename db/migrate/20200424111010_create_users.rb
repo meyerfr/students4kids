@@ -16,14 +16,14 @@ class CreateUsers < ActiveRecord::Migration[5.2]
         # add a CHECK constraint
         execute <<-SQL
           ALTER TABLE users
-            ADD CONSTRAINT role_option_constraint
+            ADD CONSTRAINT user_role_constraint
               CHECK (role IN ('admin', 'parent', 'sitter'));
         SQL
       end
       dir.down do
         execute <<-SQL
           ALTER TABLE users
-            DROP CONSTRAINT role_option_constraint
+            DROP CONSTRAINT user_role_constraint
         SQL
       end
     end

@@ -14,14 +14,14 @@ class CreateBookings < ActiveRecord::Migration[5.2]
         # add a CHECK constraint
         execute <<-SQL
           ALTER TABLE bookings
-            ADD CONSTRAINT status_option_constraint
+            ADD CONSTRAINT booking_status_constraint
               CHECK (status IN ('pending', 'confirmed', 'declined'));
         SQL
       end
       dir.down do
         execute <<-SQL
           ALTER TABLE bookings
-            DROP CONSTRAINT status_option_constraint
+            DROP CONSTRAINT booking_status_constraint
         SQL
       end
     end
