@@ -6,9 +6,26 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.date :dob
       t.string :phone
       t.text :bio
-      t.string :role, inclusion: { in: ['admin', 'sitter', 'parent'] }, default: 'parent', null: false
+      t.string :role, default: 'parent', null: false
 
       t.timestamps
+    end
+
+    reversible do |dir|
+      dir.up do
+        # add a CHECK constraint
+        execute <<-SQL
+          ALTER TABLE users
+            ADD CONSTRAINT role_option_constraint
+              CHECK (role IN ('admin', 'parent', 'sitter'));
+        SQL
+      end
+      dir.down do
+        execute <<-SQL
+          ALTER TABLE users
+            DROP CONSTRAINT role_option_constraint
+        SQL
+      end
     end
   end
 end

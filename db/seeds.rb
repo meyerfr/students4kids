@@ -14,3 +14,4 @@ User.create(email: 'Adam@Ali', first_name: 'Adam', last_name: 'Ali', password: '
 User.create(email: 'Ben@Bauer', first_name: 'Ben', last_name: 'Bauer', password: 'benBauer', role: 'sitter')
 User.create(email: 'Claudia@Corona', first_name: 'Claudia', last_name: 'Corona', password: 'claudiaCorona', role: 'parent')
 User.create(email: 'Dirk@Dauer', first_name: 'Dirk', last_name: 'Dauer', password: 'dirkDauer', role: 'parent')
+User.create(email: 'Erik@Eiermann', first_name: 'Erik', last_name: 'Eiermann', password: 'erikEiermann', role: 'pa')
