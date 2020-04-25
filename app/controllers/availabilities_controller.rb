@@ -1,11 +1,8 @@
 class AvailabilitiesController < ApplicationController
-  before_action :set_availability, only: [:show, :edit, :update, :destroy]
+  before_action :set_availability, only: [:edit, :update, :destroy]
 
   def index
-    @availabilities = Availability.all
-  end
-
-  def new
+    @availabilities = Availability.where(status == "available")
     @availability = Availability.new
   end
 
@@ -15,10 +12,10 @@ class AvailabilitiesController < ApplicationController
 
     respond_to do |format|
       if @availability.save
-        format.html { redirect_to @availability, notice: 'Availability was successfully created.' }
-        format.json { render :show, status: :created, location: @availability }
+        format.html { redirect_to availabilities_url, notice: 'Availability was successfully created.' }
+        format.json { render :index, status: :created, location: @availability }
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @availability.errors, status: :unprocessable_entity }
       end
     end
@@ -30,8 +27,8 @@ class AvailabilitiesController < ApplicationController
   def update
     respond_to do |format|
       if @availability.update(availability_params)
-        format.html { redirect_to @availability, notice: 'Availability was successfully updated.' }
-        format.json { render :show, status: :ok, location: @availability }
+        format.html { redirect_to availabilities_url, notice: 'Availability was successfully updated.' }
+        format.json { render :index, status: :ok, location: @availability }
       else
         format.html { render :edit }
         format.json { render json: @availability.errors, status: :unprocessable_entity }

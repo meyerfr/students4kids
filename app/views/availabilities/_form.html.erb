@@ -1,4 +1,4 @@
-<%= form_with(model: availability, local: true) do |form| %>
+<%= simple_form_for @availability do |form| %>
   <% if availability.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(availability.errors.count, "error") %> prohibited this availability from being saved:</h2>
@@ -21,12 +21,7 @@
     <%= form.datetime_select :end_time %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
-  </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit id:'submit_button' %>
   </div>
 <% end %>
