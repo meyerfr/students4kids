@@ -4,7 +4,16 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.geocoded
+
+    @markers = @users.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { user: user }),
+        image_url: helpers.asset_url('hand-print-red.png')
+      }
+    end
   end
 
   # GET /users/1
@@ -48,6 +57,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role)
+      params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
     end
 end
