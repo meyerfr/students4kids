@@ -7,7 +7,7 @@
 
   <ul class="navbar-nav avatar-dropdown">
     <% if current_user %>
-      <% if current_customer %>
+      <% if current_user.is_role?("parent") %>
         <li class="nav-item active">
           <%= link_to "Babysitter finden", sitters_path, class: "nav-link" %>
         </li>
@@ -16,7 +16,7 @@
         <%= link_to "COVID-19", corona_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown">
-        <% if current_admin || !current_user.photo.attached? %>
+        <% if current_user.is_role?("admin") || !current_user.photo.attached? %>
           <i class="fas fa-user avatar dropdown-toggle avatar-bordered" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
         <% else %>
           <%= cl_image_tag(current_user.photo.key, width: 40, height: 40, gravity: 'face:center', crop: :fill, effect: :sharpen, class: 'avatar dropdown-toggle avatar-bordered', id: 'navbarDropdown', data: { toggle: "dropdown"}, 'aria-haspopup': true, 'aria-expanded': false) %>
