@@ -1,0 +1,58 @@
+.simple_form{
+  .form-group{
+    select{
+      -webkit-appearance: none;
+    }
+    ::placeholder{
+      opacity: 0.5;
+    }
+    .form-control{
+      border: 1px solid #ced4da;
+      border-radius: 3px;
+      letter-spacing: 2px;
+      font-size: 14px;
+      background-image: none;
+      padding: 6px 12px;
+    }
+    label{
+      color: black;
+      font-size: 15px;
+      abbr[title="required"]{
+        display: none;
+      }
+    }
+    .form-control:focus{
+      color: black;
+    }
+  }
+  .form-group.no-margin{
+    margin: 0;
+  }
+  // label{
+  //   color: black;
+  // }
+}
+.was-validated .form-control:valid, .form-control.is-valid{
+  border-color: inherit;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid:focus{
+  border-color: white;
+  box-shadow: 0 0 0 0.2rem rgba(22, 127, 251, 0.25);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #d1d5da;
+  -webkit-text-fill-color: black;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+

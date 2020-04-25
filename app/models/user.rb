@@ -6,8 +6,14 @@ class User < ApplicationRecord
   has_many :bookings
   has_many :availabilities
   has_many :children
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   def is_role?(role)
     self.role == role
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 end
