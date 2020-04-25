@@ -1,0 +1,6 @@
+<% @availabilities.each do |availability| %>
+  <%= availability.start_time %>
+  <%= availability.end_time %>
+  <%= availability.status %>
+  <%= availability.sitter.first_name %>
+<% end %>
