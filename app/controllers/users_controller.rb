@@ -4,13 +4,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @sitters = sitters_inside_radius
     @users = User.geocoded
 
-    @markers = @users.map do |user|
+    @markers = @sitters.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { user: user }),
+        infoWindow: render_to_string(partial: 'info_window', locals: { user: user }),
         image_url: helpers.asset_url('hand-print-red.png')
       }
     end
@@ -62,8 +63,7 @@ class UsersController < ApplicationController
   end
 
   def sitters_inside_radius
-    # @parent = current_user
-    # @sitters = User.select{|u| u.is_role?('sitter') && u.longitude.present? && u.latitude.present? }
-    # @sitters.select{|s| s.distance_to(@parent) <= s.radius }
+    @sitters = helpers.all_sitters.select{ |u| u.longitude.present? && u.latitude.present? }
+    @sitters.select{ |s| s.distance_to(current_user) <= s.radius }
   end
 end
