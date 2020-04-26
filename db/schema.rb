@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2020_04_25_111003) do
     t.bigint "parent_id"
     t.bigint "sitter_id"
     t.string "status", default: "pending"
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
     t.bigint "availability_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

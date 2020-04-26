@@ -1,0 +1,23 @@
+<% if bookings.length > 0 %>
+  <ul>
+    <% bookings.each do |booking| %>
+      <li>
+        <p>Start time: <%= booking.start_time %></p>
+        <p>End time: <%= booking.end_time %></p>
+        <p>Parent: <%= booking.parent_id %></p>
+        <p>Sitter: <%= booking.sitter_id %></p>
+        <p>Status: <%= booking.status %></p>
+        <% if status == 'pending' && current_user.is_role?("sitter") %>
+          <%= link_to 'Confirm', confirm_booking_path(booking) %>
+          <%= link_to 'Decline', decline_booking_path(booking) %>
+        <% elsif status == 'pending' && current_user.is_role?("parent") %>
+          <%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% elsif status == 'confirmed' %>
+          <%= link_to 'Cancel', decline_booking_path(booking) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No <%= status %> bookings.</p>
+<% end %>

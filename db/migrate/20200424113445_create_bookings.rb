@@ -4,6 +4,8 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.references :parent, foreign_key: { to_table: :users }
       t.references :sitter, foreign_key: { to_table: :users }
       t.string :status, default: 'pending'
+      t.datetime "start_time", null: false
+      t.datetime "end_time", null: false
       t.references :availability, foreign_key: true
 
       t.timestamps
