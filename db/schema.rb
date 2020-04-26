@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_111003) do
+ActiveRecord::Schema.define(version: 2020_04_26_090832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2020_04_25_111003) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sitter_id"], name: "index_availabilities_on_sitter_id"
+    t.index ["start_time"], name: "index_availabilities_on_start_time"
+    t.index ["status"], name: "index_availabilities_on_status"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_111003) do
     t.index ["availability_id"], name: "index_bookings_on_availability_id"
     t.index ["parent_id"], name: "index_bookings_on_parent_id"
     t.index ["sitter_id"], name: "index_bookings_on_sitter_id"
+    t.index ["status"], name: "index_bookings_on_status"
   end
 
   create_table "children", force: :cascade do |t|
@@ -63,8 +66,12 @@ ActiveRecord::Schema.define(version: 2020_04_25_111003) do
     t.string "address", default: "", null: false
     t.float "latitude"
     t.float "longitude"
+    t.integer "radius"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name", "last_name"], name: "index_users_on_first_name_and_last_name"
+    t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role"], name: "index_users_on_role"
   end
 
   add_foreign_key "availabilities", "users", column: "sitter_id"
