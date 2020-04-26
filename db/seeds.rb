@@ -21,7 +21,8 @@
 puts 'Add Fake Address to all Users'
 User.all.each do |user|
   user.update(
-    address: "#{Faker::Address.street_address}" #=> "282 Kevin Brook, Imogeneborough, CA 58517"
+    address: "#{Faker::Address.street_address}", #=> "282 Kevin Brook, Imogeneborough, CA 58517"
+    radius: rand(2..10)
   )
 end
 puts 'Finished!'

@@ -60,4 +60,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
   end
+
+  def sitters_inside_radius
+    # @parent = current_user
+    # @sitters = User.select{|u| u.is_role?('sitter') && u.longitude.present? && u.latitude.present? }
+    # @sitters.select{|s| s.distance_to(@parent) <= s.radius }
+  end
 end
