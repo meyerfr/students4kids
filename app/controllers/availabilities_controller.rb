@@ -3,11 +3,12 @@ class AvailabilitiesController < ApplicationController
   before_action :authenticate_sitter, only: [:index, :create, :edit, :update, ]
 
   def index
-    @availabilities = Availability.where(status == 'available')
+    @availabilities = Availability.where(status == 'available' && sitter == current_user)
     @availability = Availability.new
   end
 
   def create
+    @availabilities = Availability.where(status == 'available' && sitter == current_user)
     @availability = Availability.new(availability_params)
     @availability.sitter = current_user
 
