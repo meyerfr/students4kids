@@ -5,6 +5,7 @@ class AddGeocodingToUser < ActiveRecord::Migration[5.2]
       t.string :address, null: false, default: ""
       t.float :latitude
       t.float :longitude
+      t.integer :radius
     end
   end
 

@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   # Availability Routes
   resources :availabilities, only: [:index, :create, :edit, :update, :destroy]
+  
+  # Sitters Routes
+  get "sitters", to: "users#sitters", as: "sitters"
 end

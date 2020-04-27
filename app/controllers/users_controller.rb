@@ -1,18 +1,29 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: %i(show edit update destroy)
 
   # GET /users
   # GET /users.json
   def index
+    @sitters = sitters_inside_radius
     @users = User.geocoded
 
-    @markers = @users.map do |user|
+    @markers = @sitters.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { user: user }),
+        infoWindow: render_to_string(partial: 'info_window', locals: { user: user }),
         image_url: helpers.asset_url('hand-print-red.png')
       }
+    end
+  end
+
+  # GET /sitters
+  # GET /sitters.json
+  def sitters
+    if params[:start_time_query].present? && params[:end_time_query].present?
+      @sitters = sitters_with_availabilities(params[:start_time_query]..params[:end_time_query])
+    else
+      @sitters = sitters_inside_radius
     end
   end
 
@@ -50,13 +61,29 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
+  end
+
+  def sitters_inside_radius
+    @sitters = helpers.all_sitters.select(&:geocoded?)
+    @sitters.select { |s| s.distance_to(current_user) <= s.radius }
+  end
+
+  def sitters_with_availabilities(parent_timerange)
+    sitters = []
+    sitters_inside_radius.select do |sitter|
+      sitter.availabilities.each do |availability|
+        sitters << sitter if availability.has_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
+      end
     end
+    sitters
+  end
 end
