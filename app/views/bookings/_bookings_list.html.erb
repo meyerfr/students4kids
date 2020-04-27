@@ -1,0 +1,20 @@
+<% if bookings.length > 0 %>
+  <ul>
+    <% bookings.each do |booking| %>
+      <li>
+        <%= booking.start_time.strftime('%a, %d.%m.%y, %H:%M') %> -
+        <%= booking.end_time.strftime('%a, %d.%m.%y, %H:%M') %>
+        <% if status == 'pending' && current_user.is_role?("sitter") %>
+          <%= link_to 'Confirm', confirm_booking_path(booking), class: "btn btn-alert" %>
+          <%= link_to 'Decline', decline_booking_path(booking), class: "btn btn-alert" %>
+        <% elsif status == 'pending' && current_user.is_role?("parent") %>
+          <%= link_to 'Cancel', decline_booking_path(booking) %>
+        <% elsif status == 'confirmed' %>
+          <%= link_to 'Cancel', decline_booking_path(booking) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No <%= status %> bookings.</p>
+<% end %>

@@ -1,12 +1,14 @@
 class AvailabilitiesController < ApplicationController
-  before_action :set_availability, only: %i(show edit update destroy)
+  before_action :set_availability, only: [:edit, :update, :destroy]
+  before_action :authenticate_sitter, only: [:index, :create, :edit, :update, ]
 
   def index
-    @availabilities = Availability.where(status == "available")
+    @availabilities = Availability.where(status == 'available' && sitter == current_user)
     @availability = Availability.new
   end
 
   def create
+    @availabilities = Availability.where(status == 'available' && sitter == current_user)
     @availability = Availability.new(availability_params)
     @availability.sitter = current_user
 
@@ -54,5 +56,10 @@ class AvailabilitiesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def availability_params
     params.require(:availability).permit(:start_time, :end_time, :status)
+  end
+
+  # Check whether current user is a sitter
+  def authenticate_sitter
+    redirect_to root_path unless current_user.is_role?('sitter')
   end
 end
