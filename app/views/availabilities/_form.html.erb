@@ -13,12 +13,16 @@
 
   <div class="field">
     <%= form.label :start_time %>
-    <%= form.datetime_select :start_time, :minute_step => 15, min: DateTime.current %>
+    <%= form.datetime_select :start_time,
+                             :minute_step => 15,
+                             :selected => DateTime.current.beginning_of_hour.advance(hours: 1) %>
   </div>
 
   <div class="field">
     <%= form.label :end_time %>
-    <%= form.datetime_select :end_time, :minute_step => 15, min: DateTime.current %>
+    <%= form.datetime_select :end_time,
+                             :minute_step => 15,
+                             :selected => DateTime.current.beginning_of_hour.advance(hours: 4) %>
   </div>
 
   <div class="actions">
