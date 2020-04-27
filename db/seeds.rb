@@ -18,11 +18,16 @@
 # User.create(email: 'Erik@Eiermann', first_name: 'Erik', last_name: 'Eiermann', password: 'erikEiermann', role: 'pa')
 # User.create(email: 'Felix@Fuchs', first_name: 'Felix', last_name: 'Fuchs', password: 'felixFuchs', role: 'sitter', address: 'address: "858 Hickle Shoal, Parisianburg')
 
-puts 'Add Fake Address to all Users'
-User.all.each do |user|
-  user.update(
-    address: "#{Faker::Address.street_address}", #=> "282 Kevin Brook, Imogeneborough, CA 58517"
-    radius: rand(2..10)
-  )
-end
-puts 'Finished!'
+# puts 'Add Fake Address to all Users'
+# User.all.each do |user|
+#   user.update(
+#     address: "#{Faker::Address.street_address}", #=> "282 Kevin Brook, Imogeneborough, CA 58517"
+#     radius: rand(2..10)
+#   )
+# end
+# puts 'Finished!'
+
+Availability.create(start_time: Time.parse("#{Date.tomorrow} 10"), end_time: Time.parse("#{Date.tomorrow} 17"), sitter_id: 3, status: 'available')
+Availability.create(start_time: Time.parse("#{Date.tomorrow+1.day} 10"), end_time: Time.parse("#{Date.tomorrow+1.day} 17"), sitter_id: 3, status: 'available')
+Availability.create(start_time: Time.parse("#{Date.tomorrow+2.day} 10"), end_time: Time.parse("#{Date.tomorrow+2.day} 17"), sitter_id: 3, status: 'available')
+Availability.create(start_time: Time.parse("#{Date.tomorrow+3.day} 10"), end_time: Time.parse("#{Date.tomorrow+3.day} 17"), sitter_id: 3, status: 'available')

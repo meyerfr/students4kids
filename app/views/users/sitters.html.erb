@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sitters</h1>
+
+<%= form_tag sitters_path, method: :get do %>
+  <%= datetime_field_tag :start_time_query,
+    params[:start_time_query],
+    class: "form-control"
+  %>
+  <%= datetime_field_tag :end_time_query,
+    params[:end_time_query],
+    class: "form-control"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Dob</th>
+      <th>Phone</th>
+      <th>Bio</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sitters.each do |sitter| %>
+      <tr>
+        <td><%= sitter.first_name %></td>
+        <td><%= sitter.last_name %></td>
+        <td><%= sitter.dob %></td>
+        <td><%= sitter.phone %></td>
+        <td><%= sitter.bio %></td>
+        <td><%= sitter.role %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

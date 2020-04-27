@@ -17,6 +17,16 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /sitters
+  # GET /sitters.json
+  def sitters
+    if params[:start_time_query].present? && params[:end_time_query].present?
+      @sitters = sitters_with_availabilities(params[:start_time_query]..params[:end_time_query])
+    else
+      @sitters = sitters_inside_radius
+    end
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -63,7 +73,17 @@ class UsersController < ApplicationController
   end
 
   def sitters_inside_radius
-    @sitters = helpers.all_sitters.select{ |u| u.longitude.present? && u.latitude.present? }
-    @sitters.select{ |s| s.distance_to(current_user) <= s.radius }
+    @sitters = helpers.all_sitters.select(&:geocoded?)
+    @sitters.select { |s| s.distance_to(current_user) <= s.radius }
+  end
+
+  def sitters_with_availabilities(parent_timerange)
+    sitters = []
+    sitters_inside_radius.select do |sitter|
+      sitter.availabilities.each do |availability|
+        sitters << sitter if availability.has_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
+      end
+    end
+    sitters
   end
 end

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :bookings
   resources :availabilities
   resources :users
+  get "sitters", to: "users#sitters", as: "sitters"
 end
