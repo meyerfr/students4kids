@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :bookings
-  has_many :availabilities
+  has_many :availabilities, foreign_key: 'sitter_id'
   has_many :children
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
