@@ -14,30 +14,46 @@
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Dob</th>
-      <th>Phone</th>
-      <th>Bio</th>
-      <th>Role</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sitters.each do |sitter| %>
-      <tr>
-        <td><%= sitter.first_name %></td>
-        <td><%= sitter.last_name %></td>
-        <td><%= sitter.dob %></td>
-        <td><%= sitter.phone %></td>
-        <td><%= sitter.bio %></td>
-        <td><%= sitter.role %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="sitters-list-wrapper">
+  <% @sitters.each do |sitter| %>
+    <div class="sitter-and-availabilities-wrapper">
+      <div class="sitter-info">
+        <span>Name: <%= sitter.full_name %></span>
+      </div>
+      <ul class="availabilities-wrapper">
+        <% sitter.availabilities.each do |availability| %>
+          <div class="availability">
+            <li><%= availability.start_time %> - <%= availability.end_time %></li>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              Book
+            </button>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
 <br>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
