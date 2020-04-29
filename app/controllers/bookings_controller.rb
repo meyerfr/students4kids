@@ -25,10 +25,15 @@ class BookingsController < ApplicationController
         availability_id: 1
     }
     availability = Availability.find(params[:availability_id])
-    @booking = Booking.new(
-        start_time: availability.start_time,
-        end_time: availability.end_time
-    )
+    # @booking = Booking.new(
+    #     start_time: availability.start_time,
+    #     end_time: availability.end_time
+    # )
+    @booking = Booking.new
+    respond_to do |format|
+      format.html
+      format.js { render :new, location: @booking }
+    end
   end
 
   # GET /bookings/1/edit
@@ -38,14 +43,16 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(
-        availability_id: 1,
-        parent: current_user,
-        sitter: Availability.find(1).sitter,
-        start_time: Availability.find(1).start_time,
-        end_time: Availability.find(1).end_time,
-        status: 'pending'
-    )
+    @booking = Booking.new(booking_params)
+    raise
+    # @booking = Booking.new(
+    #     availability_id: 1,
+    #     parent: current_user,
+    #     sitter: Availability.find(1).sitter,
+    #     start_time: Availability.find(1).start_time,
+    #     end_time: Availability.find(1).end_time,
+    #     status: 'pending'
+    # )
 
     respond_to do |format|
       if @booking.save
@@ -93,6 +100,7 @@ class BookingsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_booking
     @booking = Booking.find(params[:id])

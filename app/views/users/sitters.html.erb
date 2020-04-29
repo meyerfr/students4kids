@@ -25,9 +25,10 @@
           <div class="availability">
             <li><%= availability.start_time %> - <%= availability.end_time %></li>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
               Book
-            </button>
+            </button> -->
+            <%= link_to 'Book', new_booking_path, data: {toggle: 'modal', target: '#myModal', availability: availability.id, sitter: sitter.id } %>
           </div>
         <% end %>
       </ul>
@@ -47,12 +48,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" id="modal-body">
+        <%#= render 'bookings/new', booking: Booking.new %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <%= link_to 'confirm booking', bookings_path(booking: {availability_id: nil}), method: :post, class: 'btn btn-primary', type: 'button', id: 'submit-booking' %>
       </div>
     </div>
   </div>
