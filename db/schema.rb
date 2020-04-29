@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_04_26_090832) do
     t.string "address", default: "", null: false
     t.float "latitude"
     t.float "longitude"
-    t.integer "radius"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["first_name", "last_name"], name: "index_users_on_first_name_and_last_name"
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

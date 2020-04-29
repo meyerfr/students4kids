@@ -26,10 +26,10 @@ class Availability < ApplicationRecord
     if start_time.present? && end_time.present?
       Availability.where(sitter: sitter).each do |availability|
         if start_time > availability.start_time.advance(:hours => -0.5) && start_time < availability.end_time.advance(:hours => +0.5)
-          errors.add(:start_time, "- you have another availability ending within 30 minutes of or during the availability you are trying to add.")
+          errors.add(:start_time, "is within 30 minutes of or during another one of your availabilities.")
           break
         elsif end_time > availability.start_time.advance(:hours => -0.5) && end_time < availability.end_time.advance(:hours => +0.5)
-          errors.add(:end_time, "- you have another availability starting within 30 minutes of or during the availability you are trying to add.")
+          errors.add(:end_time, "is within 30 minutes of or during another one of your availabilities.")
           break
         end
       end

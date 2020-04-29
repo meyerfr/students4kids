@@ -1,6 +1,6 @@
 class AvailabilitiesController < ApplicationController
   before_action :set_availability, only: [:edit, :update, :destroy]
-  before_action :authenticate_sitter, only: [:index, :create, :edit, :update, ]
+  before_action :authenticate_sitter
 
   def index
     @availabilities = Availability.where(status == 'available' && sitter == current_user)
@@ -11,6 +11,7 @@ class AvailabilitiesController < ApplicationController
     @availabilities = Availability.where(status == 'available' && sitter == current_user)
     @availability = Availability.new(availability_params)
     @availability.sitter = current_user
+    @availability.end_time = calc_end_time(availability_params)
 
     respond_to do |format|
       if @availability.save
@@ -61,5 +62,17 @@ class AvailabilitiesController < ApplicationController
   # Check whether current user is a sitter
   def authenticate_sitter
     redirect_to root_path unless current_user.is_role?('sitter')
+  end
+
+  # Calculate the start_time & end_time
+  def calc_end_time(params)
+    break
+    DateTime.new(
+        params["start_time(1i)"].to_i,
+        params["start_time(2i)"].to_i,
+        params["start_time(3i)"].to_i,
+        params["end_time(4i)"].to_i,
+        params["end_time(5i)"].to_i
+    )
   end
 end
