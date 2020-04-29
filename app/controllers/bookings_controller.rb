@@ -24,11 +24,6 @@ class BookingsController < ApplicationController
     params = {
         availability_id: 1
     }
-    availability = Availability.find(params[:availability_id])
-    # @booking = Booking.new(
-    #     start_time: availability.start_time,
-    #     end_time: availability.end_time
-    # )
     @booking = Booking.new
     respond_to do |format|
       format.html
@@ -44,14 +39,6 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = current_user.parent_bookings.new(booking_params)
-    # @booking = Booking.new(
-    #     availability_id: 1,
-    #     parent: current_user,
-    #     sitter: Availability.find(1).sitter,
-    #     start_time: Availability.find(1).start_time,
-    #     end_time: Availability.find(1).end_time,
-    #     status: 'pending'
-    # )
 
     respond_to do |format|
       if @booking.save
