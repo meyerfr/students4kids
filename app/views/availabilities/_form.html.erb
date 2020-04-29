@@ -1,31 +1,30 @@
-<%= simple_form_for @availability do |form| %>
-  <% if availability.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(availability.errors.count, "error") %> prohibited this availability from being saved:</h2>
-
-      <ul>
-        <% availability.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for @availability, wrapper: :inline_form, html: { class: "form-inline" }, wrapper_mappings: { boolean: :inline_boolean} do |form| %>
+  <div class="row">
+    <div class="col-auto">
+      <%= form.input :start_time,
+                     as: :datetime,
+                     minute_step: 15,
+                     selected: DateTime.current.beginning_of_hour.advance(hours: 1),
+                     label: false
+      %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :start_time %>
-    <%= form.datetime_select :start_time,
-                             :minute_step => 15,
-                             :selected => DateTime.current.beginning_of_hour.advance(hours: 1) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_time %>
-    <%= form.datetime_select :end_time,
-                             :minute_step => 15,
-                             :selected => DateTime.current.beginning_of_hour.advance(hours: 4) %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit id:'submit_button' %>
+    -
+    <div class="col-auto">
+      <%= form.input :end_time,
+                     as: :time,
+                     minute_step: 15,
+                     selected: Time.current.beginning_of_hour.advance(hours: 4),
+                     label: false
+      %>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-2">
+        <% if request.fullpath == "/availabilities" %>
+          New Availability
+        <% else %>
+          Save Changes
+        <% end %>
+      </button>
+    </div>
   </div>
 <% end %>

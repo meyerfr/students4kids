@@ -2,8 +2,8 @@
   <ul>
     <% bookings.each do |booking| %>
       <li>
-        <%= booking.start_time.strftime('%a, %d.%m.%y, %H:%M') %> -
-        <%= booking.end_time.strftime('%a, %d.%m.%y, %H:%M') %>
+        <%= booking.availability.start_time.strftime('%a, %d.%m.%y, %H:%M') %> -
+        <%= booking.availability.end_time.strftime('%a, %d.%m.%y, %H:%M') %>
         <% if status == 'pending' && current_user.is_role?("sitter") %>
           <%= link_to 'Confirm', confirm_booking_path(booking), class: "btn btn-alert" %>
           <%= link_to 'Decline', decline_booking_path(booking), class: "btn btn-alert" %>

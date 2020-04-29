@@ -1,11 +1,17 @@
-<%= render 'form', availability: @availability %>
-<ul>
+<div class="container">
+  <h1>Your Availabilities</h1>
+  <%= render 'form', availability: @availability %>
   <% @availabilities.each do |availability| %>
-    <li>
-      <%= availability.start_time.strftime('%a, %d.%m.%y, %H:%M') %> -
-      <%= availability.end_time.strftime('%a, %d.%m.%y, %H:%M') %>
-      <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
-      <td><%= link_to 'Remove', availability, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </li>
+    <div class="availability">
+      <div class="availability-content">
+        <%= availability.start_time.strftime('%a, %d.%m.%y, %H:%M') %> -
+        <%= availability.end_time.strftime('%H:%M') %>
+      </div>
+
+      <div class="availability-actions">
+        <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
+        <td><%= link_to 'Remove', availability, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

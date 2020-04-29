@@ -18,13 +18,11 @@ class UsersController < ApplicationController
   end
 
   # GET /sitters
-  # GET /sitters.json
   def sitters
-    if params[:start_time_query].present? && params[:end_time_query].present?
-      @sitters = sitters_with_availabilities(params[:start_time_query]..params[:end_time_query])
-    else
-      @sitters = sitters_inside_radius
-    end
+    @start_time_query = params[:start_time].present? ? params[:start_time] : "#{Date.tomorrow}T10:00"
+    @end_time_query = params[:end_time].present? ? params[:end_time] : "#{Date.tomorrow}T16:00"
+    @sitters = sitters_with_availabilities(@start_time_query..@end_time_query)
+    # raise
   end
 
   # GET /users/1
@@ -81,7 +79,9 @@ class UsersController < ApplicationController
     sitters = []
     sitters_inside_radius.select do |sitter|
       sitter.availabilities.each do |availability|
-        sitters << sitter if availability.has_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
+        if availability.is_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
+          sitters << { sitter: sitter, availability: availability }
+        end
       end
     end
     sitters
