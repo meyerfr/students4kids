@@ -1,6 +1,6 @@
 class AvailabilitiesController < ApplicationController
   before_action :set_availability, only: [:edit, :update, :destroy]
-  before_action :authenticate_sitter, only: [:index, :create, :edit, :update, ]
+  before_action :authenticate_sitter
 
   def index
     @availabilities = Availability.where(status == 'available' && sitter == current_user)
@@ -11,7 +11,7 @@ class AvailabilitiesController < ApplicationController
     @availabilities = Availability.where(status == 'available' && sitter == current_user)
     @availability = Availability.new(availability_params)
     @availability.sitter = current_user
-    @availability.end_time = calc_datetime(availability_params)
+    @availability.end_time = calc_end_time(availability_params)
 
     respond_to do |format|
       if @availability.save
@@ -65,7 +65,8 @@ class AvailabilitiesController < ApplicationController
   end
 
   # Calculate the start_time & end_time
-  def calc_datetime(params)
+  def calc_end_time(params)
+    break
     DateTime.new(
         params["start_time(1i)"].to_i,
         params["start_time(2i)"].to_i,

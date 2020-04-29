@@ -5,8 +5,7 @@
                      as: :datetime,
                      minute_step: 15,
                      selected: DateTime.current.beginning_of_hour.advance(hours: 1),
-                     label: false,
-                     input_html: { type: "date", class: "mb-2 mr-sm-2" }
+                     label: false
       %>
     </div>
     -
@@ -15,12 +14,17 @@
                      as: :time,
                      minute_step: 15,
                      selected: Time.current.beginning_of_hour.advance(hours: 4),
-                     label: false,
-                     input_html: { type: "time", class: "mb-2 mr-sm-2" }
+                     label: false
       %>
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      <button type="submit" class="btn btn-primary mb-2">
+        <% if request.fullpath == "/availabilities" %>
+          New Availability
+        <% else %>
+          Save Changes
+        <% end %>
+      </button>
     </div>
   </div>
 <% end %>
