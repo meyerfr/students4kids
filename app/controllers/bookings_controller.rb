@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authenticate_parent, only: [:new, :create]
+  before_action :authenticate_parent!, only: [:new, :create]
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
   # GET /bookings
@@ -111,7 +111,7 @@ class BookingsController < ApplicationController
   end
 
   # Check whether current user is a parent
-  def authenticate_parent
+  def authenticate_parent!
     redirect_to bookings_path unless current_user.is_role?('parent')
   end
 end

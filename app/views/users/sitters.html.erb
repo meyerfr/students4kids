@@ -2,6 +2,7 @@
 
 <h1>Sitters</h1>
 
+
 <%= form_tag sitters_path, method: :get do %>
   <%= datetime_field_tag :start_time,
     @start_time_query,
@@ -13,6 +14,9 @@
   %>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
+
+<h3>Your Search</h3>
+<span><%= @start_time_query %> - <%= @end_time_query %></span>
 
 <%#= form_tag sitters_path, method: :get do |f| %>
   <%#= datetime_field_tag :start_time,
@@ -34,6 +38,8 @@
   <%#= submit_tag 'Search', class: 'btn btn-primary' %>
 <%# end %>
 
+<h3>Results</h3>
+<span><%= @sitters.count %></span>
 <div class="sitters-list-wrapper">
   <% @sitters.each do |sitter_availabity_hash| %>
     <div class="sitter-and-availabilities-wrapper">

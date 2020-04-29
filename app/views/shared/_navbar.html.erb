@@ -11,8 +11,30 @@
         <%= link_to "COVID-19", corona_path, class: "nav-link" %>
       </li>
       <% if current_user.is_role?("parent") %>
-        <li class="nav-item">
-          <%= link_to "Babysitter finden", users_path, class: "nav-link" %>
+       <!--  <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div> -->
+
+        <li class="nav-item dropdown">
+          <%= link_to "Babysitter finden", '', class: "nav-link dropdown-toggle", id: 'dropdownMenuButton', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } %>
+          <%= form_tag sitters_path, method: :get, class: 'dropdown-menu p-4', 'aria-labelledby': 'dropdownMenuButton' do %>
+            <%= datetime_field_tag :start_time,
+              "#{Date.tomorrow}T10:00",
+              class: "form-control"
+            %>
+            <%= datetime_field_tag :end_time,
+              "#{Date.tomorrow}T16:00",
+              class: "form-control"
+            %>
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+          <% end %>
         </li>
       <% elsif current_user.is_role?("sitter") %>
         <li class="nav-item">
