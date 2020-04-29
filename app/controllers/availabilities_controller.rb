@@ -66,7 +66,6 @@ class AvailabilitiesController < ApplicationController
 
   # Calculate the start_time & end_time
   def calc_end_time(params)
-    break
     DateTime.new(
         params["start_time(1i)"].to_i,
         params["start_time(2i)"].to_i,
