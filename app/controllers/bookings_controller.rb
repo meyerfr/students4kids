@@ -43,8 +43,7 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params)
-    raise
+    @booking = current_user.parent_bookings.new(booking_params)
     # @booking = Booking.new(
     #     availability_id: 1,
     #     parent: current_user,
@@ -108,7 +107,7 @@ class BookingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def booking_params
-    params.require(:booking).permit(:user_id, :user_id, :start_time, :end_time, :status, :availability_id)
+    params.require(:booking).permit(:sitter_id, :parent_id, :start_time, :end_time, :status, :availability_id)
   end
 
   # Check whether current user is a parent

@@ -3,35 +3,51 @@
 <h1>Sitters</h1>
 
 <%= form_tag sitters_path, method: :get do %>
-  <%= datetime_field_tag :start_time_query,
-    params[:start_time_query],
+  <%= datetime_field_tag :start_time,
+    @start_time_query,
     class: "form-control"
   %>
-  <%= datetime_field_tag :end_time_query,
-    params[:end_time_query],
+  <%= datetime_field_tag :end_time,
+    @end_time_query,
     class: "form-control"
   %>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
+<%#= form_tag sitters_path, method: :get do |f| %>
+  <%#= datetime_field_tag :start_time,
+              @start_time_query
+               # as: :datetime,
+               # minute_step: 15,
+               # selected: @start_time_query,
+               # label: false,
+               # input_html: { type: "date" }
+  %>
+  <%#= datetime_field_tag :end_time,
+              @end_time_query
+               # as: :datetime,
+               # minute_step: 15,
+               # selected: @end_time_query,
+               # label: false,
+               # input_html: { type: "date" }
+  %>
+  <%#= submit_tag 'Search', class: 'btn btn-primary' %>
+<%# end %>
+
 <div class="sitters-list-wrapper">
-  <% @sitters.each do |sitter| %>
+  <% @sitters.each do |sitter_availabity_hash| %>
     <div class="sitter-and-availabilities-wrapper">
       <div class="sitter-info">
-        <span>Name: <%= sitter.full_name %></span>
+        <span>Name: <%= sitter_availabity_hash[:sitter].full_name %></span>
+        <li class="d-none"><%= sitter_availabity_hash[:availability].start_time %> - <%= sitter_availabity_hash[:availability].end_time %></li>
+        <%= link_to 'Book', new_booking_path, data: {toggle: 'modal', target: '#myModal', availability: sitter_availabity_hash[:availability].id, sitter: sitter_availabity_hash[:sitter].id } %>
       </div>
-      <ul class="availabilities-wrapper">
-        <% sitter.availabilities.each do |availability| %>
-          <div class="availability">
-            <li><%= availability.start_time %> - <%= availability.end_time %></li>
-            <!-- Button trigger modal -->
-            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-              Book
-            </button> -->
-            <%= link_to 'Book', new_booking_path, data: {toggle: 'modal', target: '#myModal', availability: availability.id, sitter: sitter.id } %>
-          </div>
-        <% end %>
-      </ul>
+      <!-- <div class="availability"> -->
+          <!-- Button trigger modal -->
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Book
+          </button> -->
+      <!-- </div> -->
     </div>
   <% end %>
 </div>
