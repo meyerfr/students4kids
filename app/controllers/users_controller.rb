@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_parent!, only: [:sitters]
   before_action :set_user, only: %i(show edit update destroy)
 
   # GET /users
@@ -22,7 +23,6 @@ class UsersController < ApplicationController
     @start_time_query = params[:start_time].present? ? params[:start_time] : "#{Date.tomorrow}T10:00"
     @end_time_query = params[:end_time].present? ? params[:end_time] : "#{Date.tomorrow}T16:00"
     @sitters = sitters_with_availabilities(@start_time_query..@end_time_query)
-    # raise
   end
 
   # GET /users/1
@@ -85,5 +85,9 @@ class UsersController < ApplicationController
       end
     end
     sitters
+  end
+
+  def authenticate_parent!
+    redirect_to current_user unless current_user.is_role?('parent')
   end
 end
