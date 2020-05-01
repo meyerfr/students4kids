@@ -1,10 +1,10 @@
 # # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   sitter: one
-#   start_time: 2020-04-24 13:33:28
-#   end_time: 2020-04-24 13:33:28
-#   status: MyString
+one:
+  sitter: schack (User)
+  start_time: "2020-06-01 10:00:00"
+  end_time: "2020-06-01 16:00:00"
+  status: available
 
 # two:
 #   sitter: two

@@ -15,8 +15,6 @@ class BookingsTest < ApplicationSystemTestCase
     click_on "New Booking"
 
     fill_in "Availability", with: @booking.availability_id
-    fill_in "End time", with: @booking.end_time
-    fill_in "Start time", with: @booking.start_time
     fill_in "Status", with: @booking.status
     fill_in "User", with: @booking.user_id
     click_on "Create Booking"
@@ -30,8 +28,6 @@ class BookingsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Availability", with: @booking.availability_id
-    fill_in "End time", with: @booking.end_time
-    fill_in "Start time", with: @booking.start_time
     fill_in "Status", with: @booking.status
     fill_in "User", with: @booking.user_id
     click_on "Update Booking"

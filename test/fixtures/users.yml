@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  first_name: john
-  last_name: lennon
-  email: johnlennon@gmail.de
+schack:
+  first_name: fritz
+  last_name: schack
+  email: fritz.schack@code.berlin
   dob: 2000-04-24
   phone: 012345678
   bio: MyText
   role: sitter
 
-# two:
-#   first_name: MyString
-#   last_name: MyString
-#   email:
-#   dob: 2020-04-24
-#   phone: MyString
-#   bio: MyText
-#   role: MyString
+meyer:
+  first_name: fritz
+  last_name: meyer
+  email: fritz.meyer@code.berlin
+  dob: 2020-04-24
+  phone: 012345678
+  bio: MyText
+  role: parent
