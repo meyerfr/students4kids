@@ -7,7 +7,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   include Devise::Test::IntegrationHelpers
-  include Warden::Test::Helpers
+  # include Warden::Test::Helpers
   # Add more helper methods to be used by all tests here...
 
   # Returns true if a test user is logged in.
@@ -16,13 +16,13 @@ class ActiveSupport::TestCase
   end
 
   # Log in user.
-  def log_in(user)
-    if integration_test?
-      login_as(user, :scope => :user)
-    else
-      sign_in(user)
-    end
-  end
+  # def log_in(user)
+  #   if integration_test?
+  #     login_as(user, :scope => :user)
+  #   else
+  #     sign_in(user)
+  #   end
+  # end
 end
 
 # class ActionDispatch::IntegrationTest

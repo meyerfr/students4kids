@@ -7,7 +7,23 @@ class UsersTest < ApplicationSystemTestCase
 
   test 'user registration' do
     visit new_user_registration_url
+    assert_selector 'h2', text: 'Sign up'
+    fill_in 'First name', with: @user.first_name
+    fill_in 'Last name', with: @user.last_name
+    fill_in 'Email', with: @user.email
+    fill_in 'user_password', with: @user.encrypted_password
+    fill_in 'user_password_confirmation', with: @user.encrypted_password
+    click_on 'Sign up'
+    assert_text "User was successfully created"
   end
+
+  # test 'user registration' do
+  #   sign_in @user
+  #   visit users_url
+  #   assert_selector 'h1', text: 'Sitters'
+
+  #   # assert_text 'User was successfully created'
+  # end
 
   # test "visiting the index" do
   #   visit users_url
