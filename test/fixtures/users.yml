@@ -19,3 +19,13 @@ meyer:
   bio: MyText
   role: parent
   encrypted_password: <%= User.new.send(:password_digest, 'fritzMeyer') %>
+
+lennon:
+  first_name: john
+  last_name: lennon
+  email: john.lennon@code.berlin
+  dob: 2020-04-24
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  # encrypted_password: <%= User.new.send(:password_digest, 'fritzMeyer') %>
