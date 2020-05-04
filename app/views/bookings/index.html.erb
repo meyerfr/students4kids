@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <h1>Your Bookings</h1>
+  <h3>Pending</h3>
+  <%= render 'bookings_list', :bookings => @bookings_pending, :status => 'pending' %>
+  <h3>Confirmed</h3>
+  <%= render 'bookings_list', :bookings => @bookings_confirmed, :status => 'confirmed' %>
+  <h3>Declined</h3>
+  <%= render 'bookings_list', :bookings => @bookings_declined, :status => 'declined' %>
 
-<h1>Your Bookings</h1>
-<h4>Current user: <%= current_user.id %></h4>
-<h3>Pending</h3>
-<%= render 'bookings_list', :bookings => @bookings_pending, :status => 'pending' %>
-<h3>Confirmed</h3>
-<%= render 'bookings_list', :bookings => @bookings_confirmed, :status => 'confirmed' %>
-<h3>Declined</h3>
-<%= render 'bookings_list', :bookings => @bookings_declined, :status => 'declined' %>
-
-<% if current_user.is_role?('parent') %>
-  <%= link_to 'New Booking', new_booking_path %>
-<% end %>
+  <% if current_user.is_role?('parent') %>
+    <%= link_to 'New Booking', new_booking_path %>
+  <% end %>
+</div>

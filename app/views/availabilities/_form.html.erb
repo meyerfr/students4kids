@@ -1,24 +1,26 @@
 <%= simple_form_for @availability, wrapper: :inline_form, html: { class: "form-inline" }, wrapper_mappings: { boolean: :inline_boolean} do |form| %>
-  <div class="row">
-    <div class="col-auto">
-      <%= form.input :start_time,
-                     as: :datetime,
-                     minute_step: 15,
-                     selected: DateTime.current.beginning_of_hour.advance(hours: 1),
-                     label: false
-      %>
+  <div class="availability-form-box">
+    <div class="availability-form-inputs">
+      <div class="availability-form-field">
+        <%= form.input :start_time,
+                       as: :datetime,
+                       datetime_separator: '-',
+                       minute_step: 15,
+                       selected: DateTime.current.beginning_of_hour.advance(hours: 1),
+                       label: false
+        %>
+      </div>
+      <div class="availability-form-field">
+        <%= form.input :end_time,
+                       as: :time,
+                       minute_step: 15,
+                       selected: Time.current.beginning_of_hour.advance(hours: 4),
+                       label: false
+        %>
+      </div>
     </div>
-    -
-    <div class="col-auto">
-      <%= form.input :end_time,
-                     as: :time,
-                     minute_step: 15,
-                     selected: Time.current.beginning_of_hour.advance(hours: 4),
-                     label: false
-      %>
-    </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-primary mb-2">
+    <div class="availability-form-submit">
+      <button type="submit" class="btn btn-primary availability-form-submit-btn">
         <% if request.fullpath == "/availabilities" %>
           New Availability
         <% else %>
