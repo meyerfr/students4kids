@@ -2,42 +2,81 @@
 
 <h1>Sitters</h1>
 
+
 <%= form_tag sitters_path, method: :get do %>
-  <%= datetime_field_tag :start_time_query,
-    params[:start_time_query],
+  <%= datetime_field_tag :start_time,
+    @start_time_query,
     class: "form-control"
   %>
-  <%= datetime_field_tag :end_time_query,
-    params[:end_time_query],
+  <%= datetime_field_tag :end_time,
+    @end_time_query,
     class: "form-control"
   %>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Dob</th>
-      <th>Phone</th>
-      <th>Bio</th>
-      <th>Role</th>
-    </tr>
-  </thead>
+<h3>Your Search</h3>
+<span><%= @start_time_query %> - <%= @end_time_query %></span>
 
-  <tbody>
-    <% @sitters.each do |sitter| %>
-      <tr>
-        <td><%= sitter.first_name %></td>
-        <td><%= sitter.last_name %></td>
-        <td><%= sitter.dob %></td>
-        <td><%= sitter.phone %></td>
-        <td><%= sitter.bio %></td>
-        <td><%= sitter.role %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%#= form_tag sitters_path, method: :get do |f| %>
+  <%#= datetime_field_tag :start_time,
+              @start_time_query
+               # as: :datetime,
+               # minute_step: 15,
+               # selected: @start_time_query,
+               # label: false,
+               # input_html: { type: "date" }
+  %>
+  <%#= datetime_field_tag :end_time,
+              @end_time_query
+               # as: :datetime,
+               # minute_step: 15,
+               # selected: @end_time_query,
+               # label: false,
+               # input_html: { type: "date" }
+  %>
+  <%#= submit_tag 'Search', class: 'btn btn-primary' %>
+<%# end %>
 
+<h3>Results</h3>
+<span><%= @sitters.count %></span>
+<div class="sitters-list-wrapper">
+  <% @sitters.each do |sitter_availabity_hash| %>
+    <div class="sitter-and-availabilities-wrapper">
+      <div class="sitter-info">
+        <span>Name: <%= sitter_availabity_hash[:sitter].full_name %></span>
+        <li class="d-none"><%= sitter_availabity_hash[:availability].start_time %> - <%= sitter_availabity_hash[:availability].end_time %></li>
+        <%= link_to 'Book', new_booking_path, data: {toggle: 'modal', target: '#myModal', availability: sitter_availabity_hash[:availability].id, sitter: sitter_availabity_hash[:sitter].id } %>
+      </div>
+      <!-- <div class="availability"> -->
+          <!-- Button trigger modal -->
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Book
+          </button> -->
+      <!-- </div> -->
+    </div>
+  <% end %>
+</div>
 <br>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <%#= render 'bookings/new', booking: Booking.new %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= link_to 'confirm booking', bookings_path(booking: {availability_id: nil}), method: :post, class: 'btn btn-primary', type: 'button', id: 'submit-booking' %>
+      </div>
+    </div>
+  </div>
+</div>

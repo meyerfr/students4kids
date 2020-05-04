@@ -24,11 +24,11 @@ class BookingsController < ApplicationController
     params = {
         availability_id: 1
     }
-    availability = Availability.find(params[:availability_id])
-    @booking = Booking.new(
-        start_time: availability.start_time,
-        end_time: availability.end_time
-    )
+    @booking = Booking.new
+    respond_to do |format|
+      format.html
+      format.js { render :new, location: @booking }
+    end
   end
 
   # GET /bookings/1/edit
@@ -38,14 +38,7 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(
-        availability_id: 1,
-        parent: current_user,
-        sitter: Availability.find(1).sitter,
-        start_time: Availability.find(1).start_time,
-        end_time: Availability.find(1).end_time,
-        status: 'pending'
-    )
+    @booking = current_user.parent_bookings.new(booking_params)
 
     respond_to do |format|
       if @booking.save
@@ -93,6 +86,7 @@ class BookingsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_booking
     @booking = Booking.find(params[:id])
@@ -100,11 +94,11 @@ class BookingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def booking_params
-    params.require(:booking).permit(:user_id, :user_id, :start_time, :end_time, :status, :availability_id)
+    params.require(:booking).permit(:sitter_id, :parent_id, :start_time, :end_time, :status, :availability_id)
   end
 
   # Check whether current user is a parent
-  def authenticate_parent
+  def authenticate_parent!
     redirect_to bookings_path unless current_user.is_role?('parent')
   end
 end

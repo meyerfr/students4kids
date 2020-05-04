@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   get 'corona', to: 'pages#corona', as: 'corona'
 
   # User Routes
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
   resources :users
 
   # Booking Routes
@@ -14,7 +17,7 @@ Rails.application.routes.draw do
 
   # Availability Routes
   resources :availabilities, only: [:index, :create, :edit, :update, :destroy]
-  
+
   # Sitters Routes
   get "sitters", to: "users#sitters", as: "sitters"
 end

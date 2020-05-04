@@ -3,7 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :bookings
+  # has_many :bookings, foreign_key: [:sitter_id, :parent_id]
+  has_many :parent_bookings, class_name: "Booking", foreign_key: "parent_id"
+  has_many :sitter_bookings, class_name: "Booking", foreign_key: "sitter_id"
+  # has_many :bookings, class_name: "User", foreign_key: "sitter_id"
   has_many :availabilities, foreign_key: 'sitter_id'
   has_many :children
   geocoded_by :address
@@ -14,6 +17,6 @@ class User < ApplicationRecord
   end
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}".downcase.titleize
   end
 end
