@@ -3,12 +3,12 @@ class AvailabilitiesController < ApplicationController
   before_action :authenticate_sitter
 
   def index
-    @availabilities = Availability.where(status == 'available' && sitter == current_user)
+    @availabilities = Availability.where(status == 'available' && sitter == current_user
     @availability = Availability.new
   end
 
   def create
-    @availabilities = Availability.where(status == 'available' && sitter == current_user)
+    @availabilities = Availability.where(status == 'available' && sitter == current_user
     @availability = Availability.new(availability_params)
     @availability.sitter = current_user
     @availability.end_time = calc_end_time(availability_params)

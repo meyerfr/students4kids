@@ -3,14 +3,19 @@
   <%= render 'form', availability: @availability %>
   <% @availabilities.each do |availability| %>
     <div class="availability">
+      <div class="availability-weekday">
+        <h6><%= availability.start_time.strftime('%a').upcase %></h6>
+      </div>
       <div class="availability-content">
-        <%= availability.start_time.strftime('%a, %d.%m.%y, %H:%M') %> -
-        <%= availability.end_time.strftime('%H:%M') %>
+        <h6>
+          <%= availability.start_time.strftime('%d.%m.%y | %H:%M') %> -
+          <%= availability.end_time.strftime('%H:%M') %>
+        </h6>
       </div>
 
       <div class="availability-actions">
-        <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
-        <td><%= link_to 'Remove', availability, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td><%= link_to '✏️', edit_availability_path(availability), class: "emoji-link" %></td>
+        <td><%= link_to '🗑', availability, method: :delete, data: {confirm: 'Are you sure?'}, class: "emoji-link" %></td>
       </div>
     </div>
   <% end %>
