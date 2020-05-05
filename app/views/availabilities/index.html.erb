@@ -1,6 +1,8 @@
 <div class="container">
   <h1>Your Availabilities</h1>
-  <%= render 'form', availability: @availability %>
+  <%= form_tag availabilities_path, method: :post, wrapper: :inline_form, html: { class: "form-inline" }, wrapper_mappings: { boolean: :inline_boolean} do %>
+    <%= render 'form', availability: @availability %>
+  <% end %>
   <% @availabilities.each do |availability| %>
     <div class="availability">
       <div class="availability-weekday">

@@ -1,32 +1,32 @@
-<%= simple_form_for @availability, wrapper: :inline_form, html: { class: "form-inline" }, wrapper_mappings: { boolean: :inline_boolean} do |form| %>
-  <div class="availability-form-box">
-    <div class="availability-form-inputs">
-      <div class="availability-form-field">
-        <%= form.input :start_time,
-                       as: :datetime,
-                       datetime_separator: '-',
-                       minute_step: 15,
-                       selected: DateTime.current.beginning_of_hour.advance(hours: 1),
-                       label: false
-        %>
-      </div>
-      <div class="availability-form-field">
-        <%= form.input :end_time,
-                       as: :time,
-                       minute_step: 15,
-                       selected: Time.current.beginning_of_hour.advance(hours: 4),
-                       label: false
-        %>
-      </div>
+<div class="availability-form-box">
+  <div class="availability-form-inputs">
+    <div class="availability-form-field">
+      <%= date_field_tag :date,
+                         @availability.start_time.nil? ? "#{Date.tomorrow}" : @availability.start_time.to_date,
+                         class: "form-control"
+      %>
     </div>
-    <div class="availability-form-submit">
-      <button type="submit" class="btn btn-primary availability-form-submit-btn">
-        <% if request.fullpath == "/availabilities" %>
-          New Availability
-        <% else %>
-          Save Changes
-        <% end %>
-      </button>
+    <div class="availability-form-field">
+      <%= time_field_tag :start_time,
+                         @availability.start_time.nil? ? "10:00" : @availability.start_time.strftime('%H:%M'),
+                         class: "form-control"
+      %>
+    </div>
+    <div class="availability-form-field">
+      <%= time_field_tag :end_time,
+                         @availability.end_time.nil? ? "16:00" : @availability.end_time.strftime('%H:%M'),
+                         class: "form-control"
+      %>
     </div>
   </div>
-<% end %>
+  <div class="availability-form-submit">
+    <button type="submit" class="btn btn-red availability-form-submit-btn">
+      <% if request.fullpath == "/availabilities" %>
+        New Availability
+      <% else %>
+        Save Changes
+      <% end %>
+    </button>
+  </div>
+</div>
+

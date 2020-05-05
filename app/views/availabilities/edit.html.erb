@@ -1,5 +1,9 @@
-<h1>Editing Availability</h1>
+<div class="container">
+  <h1>Edit Availability</h1>
 
-<%= render 'form', availability: @availability %>
+  <%= form_tag availability_path(@availability), method: :put, wrapper: :inline_form, html: { class: "form-inline" }, wrapper_mappings: { boolean: :inline_boolean} do %>
+    <%= render 'form', availability: @availability %>
+  <% end %>
 
-<%= link_to 'Back', availabilities_path %>
+  <%= link_to 'Back', availabilities_path, class: "link-red" %>
+</div>

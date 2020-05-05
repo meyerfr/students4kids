@@ -1,64 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Sitters</h1>
-
-
-<%= form_tag sitters_path, method: :get do %>
-  <%= datetime_field_tag :start_time,
-    @start_time_query,
-    class: "form-control"
-  %>
-  <%= datetime_field_tag :end_time,
-    @end_time_query,
-    class: "form-control"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %>
-
-<h3>Your Search</h3>
-<span><%= @start_time_query %> - <%= @end_time_query %></span>
-
-<%#= form_tag sitters_path, method: :get do |f| %>
-  <%#= datetime_field_tag :start_time,
-              @start_time_query
-               # as: :datetime,
-               # minute_step: 15,
-               # selected: @start_time_query,
-               # label: false,
-               # input_html: { type: "date" }
-  %>
-  <%#= datetime_field_tag :end_time,
-              @end_time_query
-               # as: :datetime,
-               # minute_step: 15,
-               # selected: @end_time_query,
-               # label: false,
-               # input_html: { type: "date" }
-  %>
-  <%#= submit_tag 'Search', class: 'btn btn-primary' %>
-<%# end %>
-
-<h3>Results</h3>
-<span><%= @sitters.count %></span>
-<div class="sitters-list-wrapper">
-  <% @sitters.each do |sitter_availabity_hash| %>
-    <div class="sitter-and-availabilities-wrapper">
-      <div class="sitter-info">
-        <span>Name: <%= sitter_availabity_hash[:sitter].full_name %></span>
-        <li class="d-none"><%= sitter_availabity_hash[:availability].start_time %> - <%= sitter_availabity_hash[:availability].end_time %></li>
-        <%= link_to 'Book', new_booking_path, data: {toggle: 'modal', target: '#myModal', availability: sitter_availabity_hash[:availability].id, sitter: sitter_availabity_hash[:sitter].id } %>
+<div class="container">
+  <h1>Available Sitters</h1>
+  <%= form_tag sitters_path, method: :get, wrapper: :inline_form, html: { class: "form-inline" }, wrapper_mappings: { boolean: :inline_boolean} do %>
+    <div class="booking-form-box">
+      <div class="booking-form-inputs">
+        <div class="booking-form-field">
+          <%= date_field_tag :date,
+                            @start_time_query.present? ? @start_time_query.to_date : "#{Date.tomorrow}",
+                            class: "form-control"
+          %>
+        </div>
+        <div class="booking-form-field">
+          <%= time_field_tag :start_time,
+                           @start_time_query.present? ? @start_time_query.split(" ")[1] : "10:00",
+                           class: "form-control"
+          %>
+        </div>
+        <div class="booking-form-field">
+          <%= time_field_tag :end_time,
+                           @end_time_query.present? ? @end_time_query.split(" ")[1] : "16:00",
+                           class: "form-control"
+          %>
+        </div>
       </div>
-      <!-- <div class="availability"> -->
-          <!-- Button trigger modal -->
-          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Book
-          </button> -->
-      <!-- </div> -->
+      <div class="booking-form-submit">
+        <%= submit_tag "Search", class: "btn btn-red" %>
+      </div>
     </div>
   <% end %>
+  <h3>Results</h3>
+  <span><%= @sitters.count %></span>
+  <div class="sitters-list-wrapper">
+    <% @sitters.each do |sitter_availabity_hash| %>
+      <div class="sitter-and-availabilities-wrapper">
+        <div class="sitter-info">
+          <span>Name: <%= sitter_availabity_hash[:sitter].full_name %></span>
+          <li class="d-none"><%= sitter_availabity_hash[:availability].start_time %>
+            - <%= sitter_availabity_hash[:availability].end_time %></li>
+          <%= link_to 'Book', new_booking_path, data: {toggle: 'modal', target: '#myModal', availability: sitter_availabity_hash[:availability].id, sitter: sitter_availabity_hash[:sitter].id} %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-<br>
-
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
@@ -70,12 +53,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="modal-body">
-        <%#= render 'bookings/new', booking: Booking.new %>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= link_to 'confirm booking', bookings_path(booking: {availability_id: nil}), method: :post, class: 'btn btn-primary', type: 'button', id: 'submit-booking' %>
+        <%= link_to 'Confirm Booking', bookings_path(booking: {availability_id: nil}), method: :post, class: 'btn btn-primary', type: 'button', id: 'submit-booking' %>
       </div>
     </div>
   </div>
