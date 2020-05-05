@@ -7,7 +7,7 @@ Students For Kids requires the latest version of [Ruby](https://www.ruby-lang.or
 ### Clone the repository
 
 ```shell
-git clone git@github.com:juliendargelos/project.git
+git clone git@github.com:meyerfr/students4kids.git
 cd project
 ```
 
