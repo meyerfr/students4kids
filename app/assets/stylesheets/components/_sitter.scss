@@ -1,0 +1,63 @@
+.sitter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  background: white;
+  border: 1px solid rgb(235,235,235);
+  border-radius: 5px;
+  height: 40px;
+}
+
+.sitter .sitter-content {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.sitter .sitter-content h6 {
+  margin: 0;
+}
+
+.sitter .sitter-weekday {
+  flex-grow: 0;
+  width: 50px;
+  height: 100%;
+  background: #ef5044;
+  color: white;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+  padding: 10px 0;
+}
+
+.sitter .sitter-weekday h6 {
+  margin: 0;
+}
+
+.sitter p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.sitter small {
+  color: #999999;
+  font-weight: bold;
+}
+.sitter .sitter-actions {
+  opacity: 0;
+  display: flex;
+  transition: ease .3s;
+}
+
+.sitter:hover .sitter-actions {
+  opacity: 1;
+  margin-right: 10px;
+}
+
+.sitter .sitter-actions a {
+  color: #999999;
+  font-size: 14px;
+  margin: 5px;
+}
+
+.sitter .sitter-actions a:hover {
+  color: #555555;
+}

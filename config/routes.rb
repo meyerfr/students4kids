@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  resources :users
+  resources :users, only: [:show, :edit, :update, :destroy]
 
   # Booking Routes
-  resources :bookings, only: [:index, :new, :create, :destroy]
+  resources :bookings, only: [:index, :create]
   get 'bookings/confirm/:id', to: 'bookings#confirm_booking', as: 'confirm_booking'
   get 'bookings/decline/:id', to: 'bookings#decline_booking', as: 'decline_booking'
 

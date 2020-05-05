@@ -57,6 +57,18 @@
   opacity: 80%;
 }
 
+.btn-white {
+  border-radius: 5px;
+  background: white;
+  color: $red;
+}
+
+.btn-white:hover {
+  background: white;
+  color: $red;
+  opacity: 80%;
+}
+
 .link-red {
   color: red;
   text-decoration: none;

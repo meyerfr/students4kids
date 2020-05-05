@@ -1,18 +1,18 @@
 <div class="availability-form-box">
   <div class="availability-form-inputs">
-    <div class="availability-form-field">
+    <div class="availability-form-date">
       <%= date_field_tag :date,
                          @availability.start_time.nil? ? "#{Date.tomorrow}" : @availability.start_time.to_date,
                          class: "form-control"
       %>
     </div>
-    <div class="availability-form-field">
+    <div class="availability-form-time">
       <%= time_field_tag :start_time,
                          @availability.start_time.nil? ? "10:00" : @availability.start_time.strftime('%H:%M'),
                          class: "form-control"
       %>
     </div>
-    <div class="availability-form-field">
+    <div class="availability-form-time">
       <%= time_field_tag :end_time,
                          @availability.end_time.nil? ? "16:00" : @availability.end_time.strftime('%H:%M'),
                          class: "form-control"

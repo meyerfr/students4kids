@@ -77,9 +77,16 @@
   justify-content: stretch;
 }
 
-.availability-form-field > * {
+.availability-form-date {
   margin: 0;
-  padding: 0;
+  padding-right: 10px;
+  width: 50%;
+}
+
+.availability-form-time {
+  margin: 0;
+  padding-right: 10px;
+  width: 25%;
 }
 
 .availability-form-submit-btn {

@@ -77,9 +77,16 @@
   justify-content: stretch;
 }
 
-.booking-form-field > * {
+.booking-form-date {
   margin: 0;
-  padding: 0;
+  padding-right: 10px;
+  width: 50%;
+}
+
+.booking-form-time {
+  margin: 0;
+  padding-right: 10px;
+  width: 25%;
 }
 
 .booking-form-submit-btn {
