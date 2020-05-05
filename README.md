@@ -7,8 +7,8 @@ Students For Kids requires the latest version of [Ruby](https://www.ruby-lang.or
 ### Clone the repository
 
 ```shell
-git clone git@github.com:meyerfr/students4kids.git
-cd project
+git clone git@github.com:meyerfr/students4kids.git students4kids
+cd students4kids
 ```
 
 ### Check your Ruby version
@@ -44,3 +44,44 @@ rails db:create db:migrate db:seed
 ```shell
 rails s
 ```
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Built With
+
+* [Ruby](https://www.ruby-lang.org/en/)
+* [Rails](https://rubyonrails.org/) - Web Framework
+* [PostgreSQL](https://postgesql.org) - Database System
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **[Fritz Meyer](https://github.com/meyerfr)**
+* **[Friedrich Schack](https://github.com/fritzschack)** - 
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
