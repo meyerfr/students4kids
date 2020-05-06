@@ -36,7 +36,7 @@ bundle && yarn
 ### Initialize the database
 
 ```shell
-rails db:create db:migrate db:seed
+rails db:create db:migrate db:seed (or just rails db:setup)
 ```
 
 ## Serve

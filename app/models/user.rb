@@ -4,13 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   # has_many :bookings, foreign_key: [:sitter_id, :parent_id]
-  has_many :parent_bookings, class_name: "Booking", foreign_key: "parent_id"
-  has_many :sitter_bookings, class_name: "Booking", foreign_key: "sitter_id"
+  with_options dependent: :destroy do |assoc|
+    assoc.has_many :parent_bookings, class_name: "Booking", foreign_key: "parent_id"
+    assoc.has_many :sitter_bookings, class_name: "Booking", foreign_key: "sitter_id"
+    assoc.has_many :availabilities, foreign_key: 'sitter_id'
+    assoc.has_many :children, foreign_key: 'parent_id'
+  end
   # has_many :bookings, class_name: "User", foreign_key: "sitter_id"
-  has_many :availabilities, foreign_key: 'sitter_id'
-  has_many :children
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
 
   def is_role?(role)
     self.role == role
