@@ -1,7 +1,9 @@
 class Availability < ApplicationRecord
   belongs_to :sitter, class_name: 'User'
 
-  validate :start_time_in_future, :minimum_time_range, :availability_overlap
+  validate :start_time_in_future
+  validate :minimum_time_range
+  validate :availability_overlap
 
   def is_status?(status)
     self.status == status
@@ -25,12 +27,14 @@ class Availability < ApplicationRecord
   def availability_overlap
     if start_time.present? && end_time.present?
       Availability.where(sitter: sitter).each do |availability|
-        if start_time > availability.start_time.advance(:hours => -0.5) && start_time < availability.end_time.advance(:hours => +0.5)
-          errors.add(:start_time, "is within 30 minutes of or during another one of your availabilities.")
-          break
-        elsif end_time > availability.start_time.advance(:hours => -0.5) && end_time < availability.end_time.advance(:hours => +0.5)
-          errors.add(:end_time, "is within 30 minutes of or during another one of your availabilities.")
-          break
+        if id != availability.id
+          if start_time > availability.start_time.advance(:hours => -0.5) && start_time < availability.end_time.advance(:hours => +0.5)
+            errors.add(:start_time, "is within 30 minutes of or during another one of your availabilities.")
+            break
+          elsif end_time > availability.start_time.advance(:hours => -0.5) && end_time < availability.end_time.advance(:hours => +0.5)
+            errors.add(:end_time, "is within 30 minutes of or during another one of your availabilities.")
+            break
+          end
         end
       end
     end

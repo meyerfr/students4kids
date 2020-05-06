@@ -20,8 +20,8 @@ class UsersController < ApplicationController
 
   # GET /sitters
   def sitters
-    @start_time_query = params[:start_time].present? ? params[:start_time] : "#{Date.tomorrow}T10:00"
-    @end_time_query = params[:end_time].present? ? params[:end_time] : "#{Date.tomorrow}T16:00"
+    @start_time_query = params[:start_time].present? && params[:date].present? ? "#{params[:date]} #{params[:start_time]}" : "#{Date.tomorrow}T10:00"
+    @end_time_query = params[:end_time].present? && params[:date].present? ? "#{params[:date]} #{params[:end_time]}" : "#{Date.tomorrow}T16:00"
     @sitters = sitters_with_availabilities(@start_time_query..@end_time_query)
   end
 

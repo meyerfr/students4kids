@@ -6,8 +6,4 @@
   <%= render 'bookings_list', :bookings => @bookings_confirmed, :status => 'confirmed' %>
   <h3>Declined</h3>
   <%= render 'bookings_list', :bookings => @bookings_declined, :status => 'declined' %>
-
-  <% if current_user.is_role?('parent') %>
-    <%= link_to 'New Booking', new_booking_path %>
-  <% end %>
 </div>

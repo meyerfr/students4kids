@@ -9,9 +9,10 @@ class AvailabilitiesController < ApplicationController
 
   def create
     @availabilities = Availability.where(status == 'available' && sitter == current_user)
-    @availability = Availability.new(availability_params)
+    @availability = Availability.new()
     @availability.sitter = current_user
-    @availability.end_time = calc_end_time(availability_params)
+    @availability.start_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:start_time]} +0200")
+    @availability.end_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
 
     respond_to do |format|
       if @availability.save
@@ -28,11 +29,16 @@ class AvailabilitiesController < ApplicationController
   end
 
   def update
+    @availability.start_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:start_time]} +0200")
+    @availability.end_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
     respond_to do |format|
-      if @availability.update(availability_params)
+      if @availability.save
         format.html { redirect_to availabilities_url, notice: 'Availability was successfully updated.' }
         format.json { render :index, status: :ok, location: @availability }
       else
+        @availability.errors.full_messages.each do |error|
+          print(error)
+        end
         format.html { render :edit }
         format.json { render json: @availability.errors, status: :unprocessable_entity }
       end
@@ -56,22 +62,11 @@ class AvailabilitiesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def availability_params
-    params.require(:availability).permit(:start_time, :end_time, :status)
+    params.permit(:start_time, :end_time, :date)
   end
 
   # Check whether current user is a sitter
   def authenticate_sitter
     redirect_to root_path unless current_user.is_role?('sitter')
-  end
-
-  # Calculate the start_time & end_time
-  def calc_end_time(params)
-    DateTime.new(
-        params["start_time(1i)"].to_i,
-        params["start_time(2i)"].to_i,
-        params["start_time(3i)"].to_i,
-        params["end_time(4i)"].to_i,
-        params["end_time(5i)"].to_i
-    )
   end
 end

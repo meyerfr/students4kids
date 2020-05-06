@@ -12,32 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= form.input :first_name %>
+    <%= form.input :first_name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.input :last_name %>
+    <%= form.input :last_name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :dob %>
-    <%= form.date_select :dob %>
+    <p>Date of Birth</p>
+    <%= form.date_field :dob, as: :select, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.input :phone %>
+    <%= form.input :phone, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :bio %>
-    <%= form.text_area :bio %>
+    <%= form.input :bio, as: :text, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.input :address %>
+    <%= form.input :address, class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.button :submit, 'Submit changes', class: "btn btn-red" %>
   </div>
 <% end %>

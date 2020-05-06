@@ -1,39 +1,42 @@
-<div class="navbar navbar-expand-lg navbar-light navbar-sfk">
+<div class="navbar navbar-expand-lg navbar-sfk">
   <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "hand-print-red.png" %>
   <% end %>
 
-  <h1>Students for Kids</h1>
+  <h4>STUDENTS FOR KIDS</h4>
 
-  <ul class="navbar-nav avatar-dropdown">
+  <ul class="navbar-nav">
     <% if current_user %>
       <li class="nav-item">
         <%= link_to "COVID-19", corona_path, class: "nav-link" %>
       </li>
       <% if current_user.is_role?("parent") %>
-       <!--  <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div> -->
-
         <li class="nav-item dropdown">
-          <%= link_to "Babysitter finden", '', class: "nav-link dropdown-toggle", id: 'dropdownMenuButton', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } %>
-          <%= form_tag sitters_path, method: :get, class: 'dropdown-menu p-4', 'aria-labelledby': 'dropdownMenuButton' do %>
-            <%= datetime_field_tag :start_time,
-              "#{Date.tomorrow}T10:00",
-              class: "form-control"
+          <%= link_to "Babysitter finden",
+                      '',
+                      class: "nav-link dropdown-toggle",
+                      id: 'dropdownMenuButton',
+                      data: { toggle: 'dropdown' },
+                      aria: { haspopup: 'true', expanded: 'false' }
+          %>
+          <%= form_tag sitters_path,
+                       method: :get,
+                       class: 'dropdown-menu p-4',
+                       'aria-labelledby': 'dropdownMenuButton' do
+          %>
+            <%= date_field_tag :date,
+                               "#{Date.tomorrow}",
+                               class: "form-control"
             %>
-            <%= datetime_field_tag :end_time,
-              "#{Date.tomorrow}T16:00",
-              class: "form-control"
+            <%= time_field_tag :start_time,
+                               "10:00",
+                               class: "form-control"
             %>
-            <%= submit_tag "Search", class: "btn btn-primary" %>
+            <%= time_field_tag :end_time,
+                               "16:00",
+                               class: "form-control"
+            %>
+            <%= submit_tag "Search", class: "btn btn-red" %>
           <% end %>
         </li>
       <% elsif current_user.is_role?("sitter") %>
@@ -45,11 +48,11 @@
         <%= link_to "Bookings", bookings_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-white" %>
       </li>
     <% else %>
       <li class="nav-item">
-        <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-white" %>
       </li>
     <% end %>
   </ul>

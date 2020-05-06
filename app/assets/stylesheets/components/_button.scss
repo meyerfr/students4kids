@@ -44,3 +44,38 @@
   color: $red;
   text-decoration: none;
 }
+
+.btn-red {
+  border-radius: 5px;
+  background: $red;
+  color: white;
+}
+
+.btn-red:hover {
+  background: $red;
+  color: white;
+  opacity: 80%;
+}
+
+.btn-white {
+  border-radius: 5px;
+  background: white;
+  color: $red;
+}
+
+.btn-white:hover {
+  background: white;
+  color: $red;
+  opacity: 80%;
+}
+
+.link-red {
+  color: red;
+  text-decoration: none;
+}
+
+.link-red:hover {
+  color: red;
+  text-decoration: none;
+  opacity: 80%;
+}

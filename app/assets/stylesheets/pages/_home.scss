@@ -1,21 +1,9 @@
-// Specific CSS for your home-page
 .no-instances-info{
   padding: 20px;
   background: wheat;
   text-align: center;
   i{margin-right: 20px;}
 }
-
-// @media (max-width: 768px){
-//   h1{
-//     font-size: 1.5rem;
-//   }
-//   // .home-wrapper{
-//   //   .section{
-//   //     padding: 40px;
-//   //   }
-//   // }
-// }
 
 .home-wrapper{
   display: flex;
@@ -207,15 +195,33 @@
   }
 }
 
-// @media (max-width: 768px){
-//   .home-wrapper.section {
-//     padding: 40px;
-//     flex: 1 0 229px;
-//     .section-part{
-//       width: 100px;
-//       .part.set-width{
-//         width: 60%;
-//       }
-//     }
-//   }
-// }
+.cover {
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background-size: cover;
+}
+
+.wrapper-red {
+  width: 100%;
+  background: $red;
+  padding: 50px 0;
+}
+
+.list-item {
+  width: 100%;
+  background: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.list-item-image {
+  height: 60px;
+  width: 60px;
+}
+
+.list-item-bottom {
+  color: $red;
+  text-align: center;
+  margin-top: 10px;
+}

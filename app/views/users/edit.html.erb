@@ -1,6 +1,6 @@
-<h1>Editing User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="container">
+  <h1>Editing Profile</h1>
+  <%= render 'form', user: @user %>
+  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-red" %>
+  <%= link_to 'Back', root_path, class: "btn btn-red" %>
+</div>
