@@ -78,7 +78,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <%= link_to 'Confirm Booking',
-                    bookings_path(booking: {availability: params[:availability], sitter: params[:sitter]}),
+                    bookings_path(booking: {availability: params[:availability], sitter: params[:sitter]}, start_time: @start_time_query, end_time: @end_time_query)),
                     method: :post,
                     class: 'btn btn-red',
                     type: 'button',
