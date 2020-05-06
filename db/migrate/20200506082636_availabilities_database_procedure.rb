@@ -11,7 +11,7 @@ class AvailabilitiesDatabaseProcedure < ActiveRecord::Migration[5.2]
             availability_end_time TIMESTAMP := (SELECT end_time from availabilities where id = availability_id);
             sitter_id INT := (SELECT sitter_id from availabilities where id = availability_id);
           BEGIN
-            IF (availability_start_time <= (b_start_time + interval '3.5 hours')) THEN
+            IF (availability_start_time <= (b_start_time - interval '3.5 hours')) THEN
               INSERT INTO availabilities(sitter_id, start_time, end_time, created_at, updated_at)
               VALUES(sitter_id, availability_start_time, (b_start_time - interval '0.5 hours'), current_timestamp, current_timestamp);
             END IF;
