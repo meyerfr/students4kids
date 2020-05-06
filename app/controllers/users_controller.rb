@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def sitters_with_availabilities(parent_timerange)
     sitters = []
-    sitters_inside_radius.select do |sitter|
+    User.select{|u| u.is_role?('sitter')}.select do |sitter|
       sitter.availabilities.each do |availability|
         if availability.is_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
           sitters << { sitter: sitter, availability: availability }

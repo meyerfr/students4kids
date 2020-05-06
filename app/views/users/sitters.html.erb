@@ -75,7 +75,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= link_to 'confirm booking', bookings_path(booking: {availability_id: nil}), method: :post, class: 'btn btn-primary', type: 'button', id: 'submit-booking' %>
+        <%= link_to 'confirm booking', bookings_path(booking: {availability_id: nil}, start_time: @start_time_query, end_time: @end_time_query), method: :post, class: 'btn btn-primary', type: 'button', id: 'submit-booking' %>
       </div>
     </div>
   </div>

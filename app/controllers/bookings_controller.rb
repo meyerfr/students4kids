@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authenticate_parent, only: [:new, :create]
+  before_action :authenticate_parent!, only: [:new, :create]
   before_action :set_booking, only: [:edit, :update, :destroy]
 
   # GET /bookings
@@ -42,6 +42,9 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        start = Time.parse(params[:start_time])
+        end_time = Time.parse(params[:end_time])
+        ActiveRecord::Base.connection.exec_query("CALL update_availability (\"#{params[:start_time]}\", \"#{params[:end_time]}\", #{@booking.availability.id})")
         format.html { redirect_to bookings_path, notice: 'Booking was successfully created.' }
         format.json { render :index, status: :created, location: @booking }
       else
