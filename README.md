@@ -1,24 +1,77 @@
-# README
+# Students For Kids
+Students For Kids is a platform which @Fritz Meyer and @Fritz Schack built as a semester project at CODE University, Berlin. The platform functions as a mean to help parents find young students willing to volunteer as babysitters. The platform is based on Ruby on Rails with a PostgreSQL database.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install
+Students For Kids requires the latest version of [Ruby](https://www.ruby-lang.org/en/) and [Rails](https://rubyonrails.org/).
 
-Things you may want to cover:
+### Clone the repository
 
-* Ruby version
+```shell
+git clone git@github.com:meyerfr/students4kids.git students4kids
+cd students4kids
+```
 
-* System dependencies
+### Check your Ruby version
 
-* Configuration
+```shell
+ruby -v
+```
 
-* Database creation
+The ouput should start with something like `ruby 2.5.1`
 
-* Database initialization
+If not, install the right ruby version using [rbenv](https://github.com/rbenv/rbenv) (it could take a while):
 
-* How to run the test suite
+```shell
+rbenv install 2.5.1
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Install dependencies
 
-* Deployment instructions
+Using [Bundler](https://github.com/bundler/bundler) and [Yarn](https://github.com/yarnpkg/yarn):
 
-* ...
+```shell
+bundle && yarn
+```
+
+### Initialize the database
+
+```shell
+rails db:create db:migrate db:seed
+```
+
+## Serve
+
+```shell
+rails s
+```
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Built With
+
+* [Ruby](https://www.ruby-lang.org/en/)
+* [Rails](https://rubyonrails.org/) - Web Framework
+* [PostgreSQL](https://postgesql.org) - Database System
+
+## Authors
+
+* **[Fritz Meyer](https://github.com/meyerfr)**
+* **[Friedrich Schack](https://github.com/fritzschack)**
