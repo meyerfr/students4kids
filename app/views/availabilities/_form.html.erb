@@ -21,10 +21,10 @@
   </div>
   <div class="availability-form-submit">
     <button type="submit" class="btn btn-red availability-form-submit-btn">
-      <% if request.fullpath == "/availabilities" %>
-        New Availability
-      <% else %>
+      <% if request.fullpath.split("/")[-1] == "edit" %>
         Save Changes
+      <% else %>
+        Submit
       <% end %>
     </button>
   </div>
