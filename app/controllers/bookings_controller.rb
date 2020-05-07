@@ -32,13 +32,13 @@ class BookingsController < ApplicationController
 
   def confirm_booking
     Booking.find(params[:id]).update(status: 'confirmed')
-    ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
+    # ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
     redirect_to bookings_path
   end
 
   def decline_booking
     Booking.find(params[:id]).update(status: 'declined')
-    ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
+    # ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
     redirect_to bookings_path
   end
 

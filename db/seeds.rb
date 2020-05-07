@@ -12,6 +12,9 @@ User.create(email: 'fritz.meyer@code.berlin', first_name: 'Fritz', last_name: 'M
 # User.create(email: 'Erik@Eiermann', first_name: 'Erik', last_name: 'Eiermann', password: 'erikEiermann', role: 'pa')
 # User.create(email: 'Felix@Fuchs', first_name: 'Felix', last_name: 'Fuchs', password: 'felixFuchs', role: 'sitter', address: 'address: "858 Hickle Shoal, Parisianburg')
 
+u = User.create(email: 'adam@Adam.com', first_name: 'Adam', last_name: 'Adam', password: 'adamAdam', role: 'sitter')
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
+User.create(email: 'berta@berta.com', first_name: 'Berta', last_name: 'Berta', password: 'bertaBerta', role: 'parent')
 # Berlins latitude range 52.3700..52.5700
 # Berlins longitude range 13.2650..13.5050
 
@@ -23,7 +26,7 @@ puts 'Create Users and associated availabilities or children'
     first_name: first_name,
     last_name: last_name,
     password: "#{first_name}#{last_name}",
-    email: Faker::Internet.email,
+    email: "#{first_name.downcase}@#{last_name.downcase}.com",
     dob: Date.today - rand(7_000..25_000),
     phone: rand(10_000_000_000).to_s,
     role: %w(sitter parent).sample,
