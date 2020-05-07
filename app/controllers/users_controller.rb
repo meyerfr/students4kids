@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:sitters]
   before_action :authenticate_parent!, only: [:sitters]
   before_action :set_user, only: %i(show edit update destroy)
 
@@ -30,9 +31,9 @@ class UsersController < ApplicationController
     @sitters = Availability
                    .joins(:sitter)
                    .where(
-                       "start_time <= :parent_start_time AND end_time >= :parent_end_time AND status = :status",
-                       parent_start_time: @start_time_query,
-                       parent_end_time: @end_time_query,
+                       "start_time <= :start_time_query AND end_time >= :end_time_query AND status = :status",
+                       start_time_query: @start_time_query,
+                       end_time_query: @end_time_query,
                        status: 'available'
                    )
                    .offset(@page * SITTERS_PER_PAGE)

@@ -1,5 +1,6 @@
 class AvailabilitiesController < ApplicationController
   before_action :set_availability, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
   before_action :authenticate_sitter!
 
   AVAILABILITIES_PER_PAGE = 10
