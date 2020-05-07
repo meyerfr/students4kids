@@ -7,7 +7,7 @@
         <div class="list-item">
           <%= image_tag 'hand-print-green.png', class: "list-item-image" %>
           <div class="list-item-bottom">
-            <h3 class="green">Vertrautes Umfeld & Bekannte Kontakte</h3>
+            <h3 class="green">Familiar Surroundings & People</h3>
           </div>
         </div>
       </div>
@@ -15,7 +15,7 @@
         <div class="list-item">
           <%= image_tag 'hand-print-red.png', class: "list-item-image" %>
           <div class="list-item-bottom">
-            <h3 class="red">Ehrenamtliche Kinderbetreuung</h3>
+            <h3 class="red">Find Voluntary Babysitters</h3>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div class="list-item">
           <%= image_tag 'hand-print-yellow.png', class: "list-item-image" %>
           <div class="list-item-bottom">
-            <h3 class="yellow">Flexible & Zuverlässige Unterstützung</h3>
+            <h3 class="yellow">Flexible & Reliable Support</h3>
           </div>
         </div>
       </div>
@@ -37,11 +37,11 @@
         <div class="part set-width">
           <div class="quote">
             <i class="fas fa-quote-left darker"></i>
-            <h2 class="header">Wie ausgemacht, zur selben Uhrzeit</h2>
+            <h2 class="header">Become A Sitter</h2>
             <i class="fas fa-quote-right darker"></i>
           </div>
-          <span>Du möchtest Düsseldorf helfen und Familien in dieser Lage unterstützen? Super! Werde Teil dieses Projekts und registriere Dich bei uns. Mit deiner Unterstützung können wir Krankenschwestern, Ärzten und vielen anderen berufstätigen Eltern helfen.</span>
-          <%= link_to "Werde Babysitter", new_user_registration_path(role: 'sitter'), class: "btn btn-red" %>
+          <span>You would like to help out and support families in this situation? Great! Become part of this project and register with us. With your support we can help nurses, doctors and many other working parents.</span>
+          <%= link_to "Sign Up As A Babysitter", new_user_registration_path(role: 'sitter'), class: "btn btn-red" %>
         </div>
         <div class="part">
           <%= image_tag 'hand-print-green.png' %>
@@ -56,13 +56,13 @@
         <div class="part set-width">
           <div class="quote">
             <i class="fas fa-quote-left darker"></i>
-            <h2 class="header">Am selben Treffpunkt, wie letztes mal</h2>
+            <h2 class="header">Find A Babysitter</h2>
             <i class="fas fa-quote-right darker"></i>
           </div>
           <span>
-            Du suchst eine zuverlässige und liebevolle Betreuung für Deine Kinder in dieser Lage? Verständlich! Werde auch Du Teil unseres Projektes und wir helfen dir einen geeigneten Babysitter in deinem Bezirk zu finden.
+            Are you looking for reliable and loving care for your children in this situation? Understandable! Become part of our project and we will help you to find a suitable babysitter close to you.
           </span>
-          <%= link_to "Werde Kunde", new_user_registration_path(role: 'parent'), class: "btn btn-red" %>
+          <%= link_to "Sign Up As A Parent", new_user_registration_path(role: 'parent'), class: "btn btn-red" %>
         </div>
       </div>
     </div>

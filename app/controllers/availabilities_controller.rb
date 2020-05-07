@@ -1,26 +1,44 @@
 class AvailabilitiesController < ApplicationController
   before_action :set_availability, only: [:edit, :update, :destroy]
-  before_action :authenticate_sitter
+  before_action :authenticate_user!
+  before_action :authenticate_sitter!
+
+  AVAILABILITIES_PER_PAGE = 10
 
   def index
-    @availabilities = Availability.where(status == 'available' && sitter == current_user)
+    @page = params.fetch(:page, 0).to_i
+    @page_count = page_counter
+    @availabilities = Availability
+                          .order(
+                              :start_time
+                          )
+                          .where(
+                              "sitter_id = :id AND start_time >= :start AND status = :status",
+                              id: current_user.id,
+                              start: DateTime.current,
+                              status: 'available'
+                          )
+                          .offset(
+                              @page * AVAILABILITIES_PER_PAGE
+                          )
+                          .limit(
+                              AVAILABILITIES_PER_PAGE
+                          )
     @availability = Availability.new
   end
 
   def create
-    @availabilities = Availability.where(status == 'available' && sitter == current_user)
-    @availability = Availability.new()
-    @availability.sitter = current_user
-    @availability.start_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:start_time]} +0200")
-    @availability.end_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
+    @availability = Availability.new(
+        sitter: current_user,
+        start_time: DateTime.parse("#{availability_params[:date]} #{availability_params[:start_time]} +0200"),
+        end_time: DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
+    )
 
     respond_to do |format|
       if @availability.save
-        format.html { redirect_to availabilities_url, notice: 'Availability was successfully created.' }
-        format.json { render :index, status: :created, location: @availability }
+        format.html { redirect_to availabilities_path, notice: 'Availability was successfully created.' }
       else
-        format.html { render :index }
-        format.json { render json: @availability.errors, status: :unprocessable_entity }
+        format.html { redirect_to availabilities_path, notice: 'Availability could not be created, please try again.' }
       end
     end
   end
@@ -33,14 +51,9 @@ class AvailabilitiesController < ApplicationController
     @availability.end_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
     respond_to do |format|
       if @availability.save
-        format.html { redirect_to availabilities_url, notice: 'Availability was successfully updated.' }
-        format.json { render :index, status: :ok, location: @availability }
+        format.html { redirect_to availabilities_path, notice: 'Availability was successfully updated.' }
       else
-        @availability.errors.full_messages.each do |error|
-          print(error)
-        end
-        format.html { render :edit }
-        format.json { render json: @availability.errors, status: :unprocessable_entity }
+        format.html { redirect_to availabilities_path, notice: 'Availability could not be updated, please try again.' }
       end
     end
   end
@@ -66,7 +79,16 @@ class AvailabilitiesController < ApplicationController
   end
 
   # Check whether current user is a sitter
-  def authenticate_sitter
+  def authenticate_sitter!
     redirect_to root_path unless current_user.is_role?('sitter')
+  end
+
+  def page_counter
+    Availability.where(
+        "sitter_id = :id AND start_time >= :start AND status = :status",
+        id: current_user.id,
+        start: DateTime.current,
+        status: 'available'
+    ).count / AVAILABILITIES_PER_PAGE
   end
 end

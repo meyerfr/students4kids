@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:sitters]
   before_action :authenticate_parent!, only: [:sitters]
   before_action :set_user, only: %i(show edit update destroy)
+
+  SITTERS_PER_PAGE = 10
 
   # GET /users
   # GET /users.json
@@ -20,9 +23,21 @@ class UsersController < ApplicationController
 
   # GET /sitters
   def sitters
-    @start_time_query = params[:start_time].present? && params[:date].present? ? "#{params[:date]} #{params[:start_time]}" : "#{Date.tomorrow}T10:00"
-    @end_time_query = params[:end_time].present? && params[:date].present? ? "#{params[:date]} #{params[:end_time]}" : "#{Date.tomorrow}T16:00"
-    @sitters = sitters_with_availabilities(@start_time_query..@end_time_query)
+    @start_time_query = params[:start_time].present? && params[:date].present? ? "#{params[:date]} #{params[:start_time]}" : "#{Date.tomorrow} 10:00"
+    @end_time_query = params[:end_time].present? && params[:date].present? ? "#{params[:date]} #{params[:end_time]}" : "#{Date.tomorrow} 16:00"
+    @page = params.fetch(:page, 0).to_i
+    @page_count = page_counter(@start_time_query, @end_time_query)
+      # @sitters = sitters_with_availabilities(@start_time_query..@end_time_query).offset(@page * SITTERS_PER_PAGE).limit(SITTERS_PER_PAGE)
+    @sitters = Availability
+                   .joins(:sitter)
+                   .where(
+                       "start_time <= :start_time_query AND end_time >= :end_time_query AND status = :status",
+                       start_time_query: @start_time_query,
+                       end_time_query: @end_time_query,
+                       status: 'available'
+                   )
+                   .offset(@page * SITTERS_PER_PAGE)
+                   .limit(SITTERS_PER_PAGE)
   end
 
   # GET /users/1
@@ -89,5 +104,15 @@ class UsersController < ApplicationController
 
   def authenticate_parent!
     redirect_to current_user unless current_user.is_role?('parent')
+  end
+
+  def page_counter(start_time_query, end_time_query)
+    Availability
+        .where(
+            "start_time <= :parent_start_time AND end_time >= :parent_end_time AND status = :status",
+            parent_start_time: start_time_query,
+            parent_end_time: end_time_query,
+            status: 'available'
+        ).count / SITTERS_PER_PAGE
   end
 end

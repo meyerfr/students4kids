@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authenticate_parent!, only: [:new, :create]
-  before_action :set_booking, only: [:edit, :update, :destroy]
+  before_action :authenticate_parent!, only: [:create]
+  before_action :set_booking, only: [:confirm_booking, :decline_booking]
 
   def index
     bookings_all = Booking.all
@@ -22,25 +22,23 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
-        start = Time.parse(params[:start_time])
-        end_time = Time.parse(params[:end_time])
-        ActiveRecord::Base.connection.exec_query("CALL update_availability (\"#{params[:start_time]}\", \"#{params[:end_time]}\", #{@booking.availability.id})")
+        ActiveRecord::Base.connection.exec_query("CALL update_availability ('#{params[:start_time]}', '#{params[:end_time]}', #{@booking.availability.id})")
         format.html { redirect_to bookings_path, notice: 'Booking was successfully created.' }
-        format.json { render :index, status: :created, location: @booking }
       else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
+        format.html { redirect_to bookings_path, notice: 'Booking could not be created. Please try again' }
       end
     end
   end
 
   def confirm_booking
     Booking.find(params[:id]).update(status: 'confirmed')
+    ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
     redirect_to bookings_path
   end
 
   def decline_booking
     Booking.find(params[:id]).update(status: 'declined')
+    ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
     redirect_to bookings_path
   end
 

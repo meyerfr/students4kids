@@ -36,33 +36,13 @@ bundle && yarn
 ### Initialize the database
 
 ```shell
-rails db:create db:migrate db:seed
+rails db:create db:migrate db:seed (or just rails db:setup)
 ```
 
 ## Serve
 
 ```shell
 rails s
-```
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
 ```
 
 ## Built With

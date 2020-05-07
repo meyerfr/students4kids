@@ -35,28 +35,58 @@
   <h3>Results</h3>
   <div class="sitters-list-wrapper">
     <% if @sitters.any? %>
-      <% @sitters.each do |sitter_availability_hash| %>
+      <% @sitters.each do |availability| %>
         <div class="sitter">
           <div class="sitter-content">
-            <%= link_to sitter_availability_hash[:sitter].full_name,
+            <%= link_to availability.sitter.full_name,
+                        user_path(availability.sitter),
+                        class: "link-red"
+            %>
+            <%#= link_to sitter_availability_hash[:sitter].full_name,
                         user_path(sitter_availability_hash[:sitter]),
                         class: "link-red"
             %>
           </div>
           <div class="sitter-actions">
             <li class="d-none">
-              <%= sitter_availability_hash[:availability].start_time %> -
-              <%= sitter_availability_hash[:availability].end_time %>
+              <%= @start_time_query %> -
+              <%= @end_time_query %>
             </li>
             <%= link_to '🗓', "#", class: "emoji-link", data: {
                 toggle: 'modal',
                 target: '#myModal',
-                availability: sitter_availability_hash[:availability].id,
-                sitter: sitter_availability_hash[:sitter].id
+                availability: availability.id,
+                sitter: availability.sitter.id
             } %>
           </div>
         </div>
       <% end %>
+      <div class="pagination row">
+        <% if @page_count > 1 %>
+          <% if @page > 0 && @page == @page_count %>
+            <div class="col-2 offset-4 pagination-link">
+              <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize" %>
+            </div>
+            <div class="col-2 pagination-link">
+              <%= link_to "Next Page", availabilities_path(page: @page + 1), class: "btn btn-red btn-fullsize disabled" %>
+            </div>
+          <% elsif @page == 0 && @page < @page_count %>
+            <div class="col-2 offset-4 pagination-link">
+              <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize disabled" %>
+            </div>
+            <div class="col-2 pagination-link">
+              <%= link_to "Next Page", availabilities_path(page: @page + 1), class: "btn btn-red btn-fullsize" %>
+            </div>
+          <% else %>
+            <div class="col-2 offset-4 pagination-link">
+              <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize" %>
+            </div>
+            <div class="col-2 pagination-link">
+              <%= link_to "Next Page", availabilities_path(page: @page + 1), class: "btn btn-red btn-fullsize" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     <% else %>
       <p>No available sitters found, please try a different time.</p>
     <% end %>
@@ -78,7 +108,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <%= link_to 'Confirm Booking',
-                    bookings_path(booking: {availability: params[:availability], sitter: params[:sitter]}, start_time: @start_time_query, end_time: @end_time_query)),
+                    bookings_path(booking: {availability: params[:availability], sitter: params[:sitter]}, start_time: @start_time_query, end_time: @end_time_query),
                     method: :post,
                     class: 'btn btn-red',
                     type: 'button',

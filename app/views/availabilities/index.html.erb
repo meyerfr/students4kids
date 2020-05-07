@@ -21,4 +21,30 @@
       </div>
     </div>
   <% end %>
+  <div class="pagination row">
+    <% if @page_count > 1 %>
+      <% if @page > 0 && @page == @page_count %>
+        <div class="col-2 offset-4 pagination-link">
+          <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize" %>
+        </div>
+        <div class="col-2 pagination-link">
+          <%= link_to "Next Page", availabilities_path(page: @page + 1), class: "btn btn-red btn-fullsize disabled" %>
+        </div>
+      <% elsif @page == 0 && @page < @page_count %>
+        <div class="col-2 offset-4 pagination-link">
+          <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize disabled" %>
+        </div>
+        <div class="col-2 pagination-link">
+          <%= link_to "Next Page", availabilities_path(page: @page + 1), class: "btn btn-red btn-fullsize" %>
+        </div>
+      <% else %>
+        <div class="col-2 offset-4 pagination-link">
+          <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize" %>
+        </div>
+        <div class="col-2 pagination-link">
+          <%= link_to "Next Page", availabilities_path(page: @page + 1), class: "btn btn-red btn-fullsize" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
