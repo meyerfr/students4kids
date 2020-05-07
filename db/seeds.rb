@@ -35,7 +35,8 @@ User.create(
 
 puts('Create README User samples.')
 
-u = User.create(
+users = []
+users << User.create(
   email: 'glenn@Price.com',
   first_name: 'Glen',
   last_name: 'Price',
@@ -47,12 +48,8 @@ u = User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
-u.availabilities.create(start_time: Time.parse("#{Date.today} 8"), end_time: Time.parse("#{Date.today} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-User.create(
+
+users << User.create(
   email: 'markus@parka.com',
   first_name: 'Markus',
   last_name: 'Parka',
@@ -64,7 +61,7 @@ User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
-User.create(
+users << User.create(
   email: 'dorie@hand.com',
   first_name: 'Dorie',
   last_name: 'Hand',
@@ -77,7 +74,7 @@ User.create(
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
 
-User.create(
+users << User.create(
   email: 'jossi@sporer.com',
   first_name: 'Jossi',
   last_name: 'Sporer',
@@ -89,12 +86,8 @@ User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
-u.availabilities.create(start_time: Time.parse("#{Date.today} 8"), end_time: Time.parse("#{Date.today} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-User.create(
+
+users << User.create(
   email: 'stefan@rempel.com',
   first_name: 'Stefan',
   last_name: 'Rempel',
@@ -106,7 +99,7 @@ User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
-User.create(
+users << User.create(
   email: 'edie@ritchie.com',
   first_name: 'Edie',
   last_name: 'Ritchie',
@@ -119,7 +112,7 @@ User.create(
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
 
-User.create(
+users << User.create(
   email: 'zofia@mills.com',
   first_name: 'Zofia',
   last_name: 'Mills',
@@ -131,12 +124,8 @@ User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
-u.availabilities.create(start_time: Time.parse("#{Date.today} 8"), end_time: Time.parse("#{Date.today} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
-User.create(
+
+users << User.create(
   email: 'dallas@king.com',
   first_name: 'Dallas',
   last_name: 'King',
@@ -148,7 +137,7 @@ User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
-User.create(
+users << User.create(
   email: 'leslee@wilkinson.com',
   first_name: 'Leslee',
   last_name: 'Wilkinson',
@@ -160,6 +149,12 @@ User.create(
   radius: rand(3..10),
   bio: Faker::Lorem.paragraph(sentence_count: 4)
 )
+
+users.each do |user|
+  (Date.tomorrow..Date.tomorrow+1.month).to_a.each do |date|
+    user.availabilities.create(start_time: Time.parse("#{date} 8"), end_time: Time.parse("#{date} 22"))
+  end
+end
 
 # Berlins latitude range 52.3700..52.5700
 # Berlins longitude range 13.2650..13.5050
