@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_parent!, only: [:create]
+  before_action :set_booking, only: [:confirm_booking, :decline_booking]
 
   def index
     bookings_all = Booking.all
@@ -31,11 +32,13 @@ class BookingsController < ApplicationController
 
   def confirm_booking
     Booking.find(params[:id]).update(status: 'confirmed')
+    ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
     redirect_to bookings_path
   end
 
   def decline_booking
     Booking.find(params[:id]).update(status: 'declined')
+    ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
     redirect_to bookings_path
   end
 
