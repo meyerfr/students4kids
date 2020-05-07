@@ -4,17 +4,19 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:confirm_booking, :decline_booking]
 
   def index
-    bookings_all = Booking.all
+    future_bookings = Booking.select{|booking| booking.availability.start_time >= DateTime.current}
+    past_bookings = Booking.select{|booking| booking.availability.start_time < DateTime.current}
+
     if current_user.is_role?('parent')
-      bookings = bookings_all.where(parent: current_user)
+      future_bookings = future_bookings.select{|booking| booking.parent == current_user}
+      past_bookings = past_bookings.select{|booking| booking.parent == current_user}
     elsif current_user.is_role?('sitter')
-      bookings = bookings_all.where(sitter: current_user)
-    else
-      bookings = bookings_all.all
+      future_bookings = future_bookings.select{|booking| booking.sitter == current_user}
+      past_bookings = past_bookings.select{|booking| booking.sitter == current_user}
     end
-    @bookings_pending = bookings.where(status: 'pending')
-    @bookings_confirmed = bookings.where(status: 'confirmed')
-    @bookings_declined = bookings.where(status: 'declined')
+    @bookings_pending = future_bookings.select{|booking| booking.status == 'pending'}
+    @bookings_confirmed = future_bookings.select{|booking| booking.status == 'confirmed'}
+    @bookings_past = past_bookings.select{|booking| booking.status == 'confirmed'}
   end
 
   def create
