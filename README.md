@@ -45,6 +45,19 @@ rails db:create db:migrate db:seed (or just rails db:setup)
 rails s
 ```
 
+## Sample Parents
+* email: markus@parka.com, password: markusParka
+* email: dorie@hand.com, password: dorieHand
+* email: stefan@rempel.com, password: stefanRempel
+* email: edie@ritchie.com, password: edieRitchie
+* email: dallas@king.com, password: dallasKing
+* email: leslee@wilkinson.com, password: lesleeWilkinson
+
+## Sample Babysitters
+* email: gelnn@price.com, password: glennPrice
+* email: jossie@sporer.com, password: jossieSporer
+* email: zofia@mills.com, password: zofiaMills
+
 ## Built With
 
 * [Ruby](https://www.ruby-lang.org/en/)

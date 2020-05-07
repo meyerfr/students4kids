@@ -1,23 +1,168 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-
 require 'faker'
 
 puts('delete all Users')
 User.destroy_all
 
 puts('create Admins')
-User.create(email: 'fritz.schack@code.berlin', first_name: 'Fritz', last_name: 'Schack', password: 'fritzSchack', role: 'admin')
-User.create(email: 'fritz.meyer@code.berlin', first_name: 'Fritz', last_name: 'Meyer', password: 'fritzMeyer', role: 'admin')
+User.create(
+  email: 'fritz.schack@code.berlin',
+  first_name: 'Fritz',
+  last_name: 'Schack',
+  password: 'fritzSchack',
+  role: 'admin',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+User.create(
+  email: 'fritz.meyer@code.berlin',
+  first_name: 'Fritz',
+  last_name: 'Meyer',
+  password: 'fritzMeyer',
+  role: 'admin',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
 # User.create(email: 'Erik@Eiermann', first_name: 'Erik', last_name: 'Eiermann', password: 'erikEiermann', role: 'pa')
 # User.create(email: 'Felix@Fuchs', first_name: 'Felix', last_name: 'Fuchs', password: 'felixFuchs', role: 'sitter', address: 'address: "858 Hickle Shoal, Parisianburg')
 
-u = User.create(email: 'adam@Adam.com', first_name: 'Adam', last_name: 'Adam', password: 'adamAdam', role: 'sitter')
+puts('Create README User samples.')
+
+u = User.create(
+  email: 'glenn@Price.com',
+  first_name: 'Glen',
+  last_name: 'Price',
+  password: 'glenPrice',
+  role: 'sitter',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+u.availabilities.create(start_time: Time.parse("#{Date.today} 8"), end_time: Time.parse("#{Date.today} 22"))
 u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
-User.create(email: 'berta@berta.com', first_name: 'Berta', last_name: 'Berta', password: 'bertaBerta', role: 'parent')
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+User.create(
+  email: 'markus@parka.com',
+  first_name: 'Markus',
+  last_name: 'Parka',
+  password: 'markusParker',
+  role: 'parent',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+User.create(
+  email: 'dorie@hand.com',
+  first_name: 'Dorie',
+  last_name: 'Hand',
+  password: 'dorieHand',
+  role: 'parent',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+
+User.create(
+  email: 'jossi@sporer.com',
+  first_name: 'Jossi',
+  last_name: 'Sporer',
+  password: 'jossiSporer',
+  role: 'sitter',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+u.availabilities.create(start_time: Time.parse("#{Date.today} 8"), end_time: Time.parse("#{Date.today} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+User.create(
+  email: 'stefan@rempel.com',
+  first_name: 'Stefan',
+  last_name: 'Rempel',
+  password: 'stefanRempel',
+  role: 'parent',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+User.create(
+  email: 'edie@ritchie.com',
+  first_name: 'Edie',
+  last_name: 'Ritchie',
+  password: 'edieRitchie',
+  role: 'parent',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+
+User.create(
+  email: 'zofia@mills.com',
+  first_name: 'Zofia',
+  last_name: 'Mills',
+  password: 'zofiaMills',
+  role: 'sitter',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+u.availabilities.create(start_time: Time.parse("#{Date.today} 8"), end_time: Time.parse("#{Date.today} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow} 8"), end_time: Time.parse("#{Date.tomorrow} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+u.availabilities.create(start_time: Time.parse("#{Date.tomorrow+1} 8"), end_time: Time.parse("#{Date.tomorrow+1} 22"))
+User.create(
+  email: 'dallas@king.com',
+  first_name: 'Dallas',
+  last_name: 'King',
+  password: 'dallasKing',
+  role: 'parent',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+User.create(
+  email: 'leslee@wilkinson.com',
+  first_name: 'Leslee',
+  last_name: 'Wilkinson',
+  password: 'lesleeWilkinson',
+  role: 'parent',
+  dob: Date.today - rand(7_000..25_000), phone: rand(10_000_000_000).to_s,
+  latitude: rand(52.3700..52.5700).round(4),
+  longitude: rand(13.2650..13.5050).round(4),
+  radius: rand(3..10),
+  bio: Faker::Lorem.paragraph(sentence_count: 4)
+)
+
 # Berlins latitude range 52.3700..52.5700
 # Berlins longitude range 13.2650..13.5050
-
 puts 'Create Users and associated availabilities or children'
 100.times do
   first_name = Faker::Name.first_name
