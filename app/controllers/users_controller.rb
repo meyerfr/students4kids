@@ -6,22 +6,6 @@ class UsersController < ApplicationController
 
   SITTERS_PER_PAGE = 10
 
-  # GET /users
-  # GET /users.json
-  def index
-    @sitters = sitters_inside_radius
-    @users = User.geocoded
-
-    @markers = @sitters.map do |user|
-      {
-        lat: user.latitude,
-        lng: user.longitude,
-        infoWindow: render_to_string(partial: 'info_window', locals: { user: user }),
-        image_url: helpers.asset_url('hand-print-red.png')
-      }
-    end
-  end
-
   # GET /sitters
   def sitters
     @start_time_query = params[:start_time].present? && params[:date].present? ? "#{params[:date]} #{params[:start_time]}" : "#{Date.tomorrow} 10:00"
