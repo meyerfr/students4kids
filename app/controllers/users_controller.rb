@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:sitters]
   before_action :authenticate_parent!, only: [:sitters]
   before_action :set_user, only: %i(show edit update destroy)
+  before_action :only_correct_user!, only: [:edit, :update, :destroy]
 
   SITTERS_PER_PAGE = 10
 
@@ -43,6 +44,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @access_to_see_all_details = check_read_access
   end
 
   # GET /users/1/edit
@@ -106,6 +108,13 @@ class UsersController < ApplicationController
     redirect_to current_user unless current_user.is_role?('parent')
   end
 
+  def only_correct_user!
+    unless current_user = @user
+      flash.alert = "You don't have the rights for this action"
+      redirect_to bookings_path
+    end
+  end
+
   def page_counter(start_time_query, end_time_query)
     Availability
         .where(
@@ -114,5 +123,9 @@ class UsersController < ApplicationController
             parent_end_time: end_time_query,
             status: 'available'
         ).count / SITTERS_PER_PAGE
+  end
+
+  def check_read_access
+    current_user == @user || current_user.is_role?('admin') || current_user.sitters.select{|sitter| sitter.id == @user.id}.present? || current_user.parents.select{|parent| parent.id == @user.id}.present?
   end
 end

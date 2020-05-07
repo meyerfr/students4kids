@@ -16,21 +16,32 @@
     <%= @user.dob %>
   </p>
 
-  <p>
-    <strong>Phone:</strong>
-    <%= @user.phone %>
-  </p>
+  <% if @access_to_see_all_details == true %>
+    <p>
+      <strong>Phone:</strong>
+      <%= @user.phone %>
+    </p>
+  <% end %>
 
   <p>
     <strong>Bio:</strong>
     <%= @user.bio %>
   </p>
 
-  <p>
-    <strong>Address:</strong>
-    <%= @user.address %>
-  </p>
+  <% if @access_to_see_all_details == true %>
+    <p>
+      <strong>Address:</strong>
+      <%= @user.address %>
+    </p>
+  <% end %>
 
-  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-red" %>
-  <%= link_to 'Back', root_path, class: "btn btn-red" %>
+  <% if current_user == @user %>
+    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-red" %>
+  <% end %>
+
+  <% if current_user.is_role?('parent') %>
+    <%= link_to 'Back', sitters_path, class: "btn btn-red" %>
+  <% else %>
+    <%= link_to 'Back', bookings_path, class: "btn btn-red" %>
+  <% end %>
 </div>
