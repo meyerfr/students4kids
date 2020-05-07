@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_082636) do
+ActiveRecord::Schema.define(version: 2020_05_07_082054) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gist"
   enable_extension "plpgsql"
 
   create_table "availabilities", force: :cascade do |t|
@@ -22,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_082636) do
     t.string "status", default: "available", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "sitter_id, buffer(tsrange(start_time, end_time), '00:15:00'::interval)", name: "no_overlapping_availabilities", using: :gist
     t.index ["sitter_id"], name: "index_availabilities_on_sitter_id"
     t.index ["start_time"], name: "index_availabilities_on_start_time"
     t.index ["status"], name: "index_availabilities_on_status"
