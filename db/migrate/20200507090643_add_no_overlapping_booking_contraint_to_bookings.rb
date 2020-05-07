@@ -19,8 +19,7 @@ class AddNoOverlappingBookingContraintToBookings < ActiveRecord::Migration[5.2]
       end
       dir.down do
         execute <<-SQL
-          DROP FUNCTION IF EXISTS get_start_time;
-          DROP FUNCTION IF EXISTS get_end_time;
+          DROP FUNCTION IF EXISTS availabilities_time_range;
           ALTER TABLE bookings
             DROP CONSTRAINT no_overlapping_bookings;
         SQL
