@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_082054) do
+ActiveRecord::Schema.define(version: 2020_05_07_090643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gist"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_082054) do
     t.bigint "availability_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "parent_id, availabilities_time_range(availability_id)", name: "no_overlapping_bookings", using: :gist
     t.index ["availability_id"], name: "index_bookings_on_availability_id"
     t.index ["parent_id"], name: "index_bookings_on_parent_id"
     t.index ["sitter_id"], name: "index_bookings_on_sitter_id"
