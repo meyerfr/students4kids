@@ -3,26 +3,25 @@ class AvailabilitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_sitter!
 
-  AVAILABILITIES_PER_PAGE = 10
-
   def index
+    availabilities_per_page = 10
     @page = params.fetch(:page, 0).to_i
-    @page_count = page_counter
+    @page_count = page_counter(availabilities_per_page)
     @availabilities = Availability
-                          .order(
-                              :start_time
-                          )
                           .where(
                               "sitter_id = :id AND start_time >= :start AND status = :status",
                               id: current_user.id,
                               start: DateTime.current,
                               status: 'available'
                           )
+                          .order(
+                              :start_time
+                          )
                           .offset(
-                              @page * AVAILABILITIES_PER_PAGE
+                              @page * availabilities_per_page
                           )
                           .limit(
-                              AVAILABILITIES_PER_PAGE
+                              availabilities_per_page
                           )
     @availability = Availability.new
   end
@@ -83,12 +82,12 @@ class AvailabilitiesController < ApplicationController
     redirect_to root_path unless current_user.is_role?('sitter')
   end
 
-  def page_counter
+  def page_counter(availabilities_per_page)
     Availability.where(
         "sitter_id = :id AND start_time >= :start AND status = :status",
         id: current_user.id,
         start: DateTime.current,
         status: 'available'
-    ).count / AVAILABILITIES_PER_PAGE
+    ).count / availabilities_per_page
   end
 end

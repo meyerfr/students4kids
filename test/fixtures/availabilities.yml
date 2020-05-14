@@ -1,13 +1,77 @@
-# # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  sitter: schack (User)
-  start_time: "2020-06-01 10:00:00"
-  end_time: "2020-06-01 16:00:00"
+  sitter: schack
+  start_time: <%= DateTime.current + 3.days %>
+  end_time: <%= DateTime.current + 3.days + 3.hours %>
   status: available
 
 two:
-  sitter: schack (User)
-  start_time: "2020-04-01 10:00:00"
-  end_time: "2020-04-01 12:00:00"
-  status: MyString
+  sitter: schack
+  start_time: <%= DateTime.current + 4.days %>
+  end_time: <%= DateTime.current + 4.days + 3.hours %>
+  status: available
+
+three:
+  sitter: schack
+  start_time: <%= DateTime.current + 5.days %>
+  end_time: <%= DateTime.current + 5.days + 3.hours %>
+  status: available
+
+four:
+  sitter: schack
+  start_time: <%= DateTime.current + 6.days %>
+  end_time: <%= DateTime.current + 6.days + 3.hours %>
+  status: available
+
+five:
+  sitter: schack
+  start_time: <%= DateTime.current + 7.days %>
+  end_time: <%= DateTime.current + 7.days + 3.hours %>
+  status: available
+
+six:
+  sitter: schack
+  start_time: <%= DateTime.current + 8.days %>
+  end_time: <%= DateTime.current + 8.days + 3.hours %>
+  status: available
+
+seven:
+  sitter: schack
+  start_time: <%= DateTime.current + 9.days %>
+  end_time: <%= DateTime.current + 9.days + 3.hours %>
+  status: available
+
+eight:
+  sitter: schack
+  start_time: <%= DateTime.current + 10.days %>
+  end_time: <%= DateTime.current + 10.days + 3.hours %>
+  status: available
+
+nine:
+  sitter: schack
+  start_time: <%= DateTime.current + 11.days %>
+  end_time: <%= DateTime.current + 11.days + 3.hours %>
+  status: available
+
+ten:
+  sitter: schack
+  start_time: <%= DateTime.current + 12.days %>
+  end_time: <%= DateTime.current + 12.days + 3.hours %>
+  status: available
+
+eleven:
+  sitter: schack
+  start_time: <%= DateTime.current + 13.days %>
+  end_time: <%= DateTime.current + 13.days + 3.hours %>
+  status: available
+
+twelve:
+  sitter: schack
+  start_time: <%= DateTime.current + 14.days %>
+  end_time: <%= DateTime.current + 14.days + 3.hours %>
+  status: available
+
+thirteen:
+  sitter: lennon
+  start_time: <%= DateTime.current + 3.days %>
+  end_time: <%= DateTime.current + 3.days + 3.hours %>
+  status: available
