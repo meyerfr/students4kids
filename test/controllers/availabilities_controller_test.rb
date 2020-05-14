@@ -7,10 +7,14 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
     @availability_two = availabilities(:two)
     @availability_three = availabilities(:three)
 
-    @user = users(:schack)
+    @user_parent = users(:meyer)
+    @user_sitter = users(:schack)
+    @user_sitter_2 = users(:lennon)
+    @user_sitter_3 = users(:marley)
+
     # sign in user
     get new_user_session_url
-    sign_in(@user)
+    sign_in(@user_sitter)
     post user_session_url
 
     follow_redirect!
@@ -21,6 +25,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get availabilities_url
     assert_response :success
+    assert_template 'availabilities/index'
   end
 
   # Create Tests
@@ -48,7 +53,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to availabilities_url
   end
 
-  test 'should not create availability with start_time or end_time in the future' do
+  test 'should not create availability with start_time or end_time in the past' do
     assert_difference('Availability.count', 0) do
       post availabilities_url, params: {
           date: Date.today.change(day: Date.today.day - 1),
@@ -85,6 +90,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
         start_time: "10:00:00",
         end_time: "18:00:00",
     }
+
     assert_redirected_to availabilities_url
   end
 
@@ -118,11 +124,64 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to availabilities_url
   end
 
+  # Destroy Tests
   test 'should destroy availability' do
     assert_difference('Availability.count', -1) do
       delete availability_url(@availability_three)
     end
 
     assert_redirected_to availabilities_url
+  end
+
+  # Sitter Authentication Tests
+  test 'should authenticate user with role "sitter"' do
+    get availabilities_url
+    assert_response :success
+  end
+
+  test 'should not authenticate user with role "parent"' do
+    get new_user_session_url
+    sign_in(@user_parent)
+    post user_session_url
+
+    follow_redirect!
+    assert_response :success
+
+    get availabilities_url
+
+    assert_redirected_to root_url
+  end
+
+  # Page Count Tests
+  test 'page counter should return 1 for > 10 availability' do
+    get availabilities_url
+    assert_response :success
+    assert_equal(1, assigns(:page_count))
+  end
+
+  test 'page counter should return 0 for 1 availability' do
+    get new_user_session_url
+    sign_in(@user_sitter_2)
+    post user_session_url
+
+    follow_redirect!
+    assert_response :success
+
+    get availabilities_url
+    assert_response :success
+    assert_equal(0, assigns(:page_count))
+  end
+
+  test 'page counter should return 0 for 0 availabilities' do
+    get new_user_session_url
+    sign_in(@user_sitter_3)
+    post user_session_url
+
+    follow_redirect!
+    assert_response :success
+
+    get availabilities_url
+    assert_response :success
+    assert_equal(0, assigns(:page_count))
   end
 end
