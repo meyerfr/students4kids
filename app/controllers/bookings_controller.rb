@@ -33,14 +33,12 @@ class BookingsController < ApplicationController
   end
 
   def confirm_booking
-    Booking.find(params[:id]).update(status: 'confirmed')
-    # ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
+    Booking.find(params[:id]).update(status: "confirmed")
     redirect_to bookings_path
   end
 
   def decline_booking
-    Booking.find(params[:id]).update(status: 'declined')
-    # ActiveRecord::Base.connection.exec_query("CALL modify_availabilities (#{@booking.id})")
+    Booking.find(params[:id]).update(status: "declined")
     redirect_to bookings_path
   end
 
@@ -51,7 +49,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:sitter_id, :parent_id, :start_time, :end_time, :status, :availability_id)
+    params.require(:booking).permit(:sitter_id, :parent_id, :status, :availability_id)
   end
 
   def authenticate_parent!

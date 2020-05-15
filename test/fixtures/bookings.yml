@@ -1,13 +1,5 @@
-# # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  parent: meyer (User)
-  sitter: schack (User)
+  parent: meyer
+  sitter: schack
   status: pending
   availability: one
-
-# two:
-#   parent: two
-#   sitter: two
-#   status: MyString
-#   availability: two
