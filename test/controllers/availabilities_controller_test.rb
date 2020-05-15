@@ -3,9 +3,9 @@ require 'test_helper'
 class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
   # Setup
   setup do
-    @availability_one = availabilities(:one)
-    @availability_two = availabilities(:two)
-    @availability_three = availabilities(:three)
+    @availability_one = availabilities(:availability_one)
+    @availability_two = availabilities(:availability_two)
+    @availability_three = availabilities(:availability_three)
 
     @user_parent = users(:meyer)
     @user_sitter = users(:schack)

@@ -1,76 +1,76 @@
-one:
+availability_one:
   sitter: schack
   start_time: <%= DateTime.current + 3.days %>
   end_time: <%= DateTime.current + 3.days + 3.hours %>
   status: available
 
-two:
+availability_two:
   sitter: schack
   start_time: <%= DateTime.current + 4.days %>
   end_time: <%= DateTime.current + 4.days + 3.hours %>
   status: available
 
-three:
+availability_three:
   sitter: schack
   start_time: <%= DateTime.current + 5.days %>
   end_time: <%= DateTime.current + 5.days + 3.hours %>
   status: available
 
-four:
+availability_four:
   sitter: schack
   start_time: <%= DateTime.current + 6.days %>
   end_time: <%= DateTime.current + 6.days + 3.hours %>
   status: available
 
-five:
+availability_five:
   sitter: schack
   start_time: <%= DateTime.current + 7.days %>
   end_time: <%= DateTime.current + 7.days + 3.hours %>
   status: available
 
-six:
+availability_six:
   sitter: schack
   start_time: <%= DateTime.current + 8.days %>
   end_time: <%= DateTime.current + 8.days + 3.hours %>
   status: available
 
-seven:
+availability_seven:
   sitter: schack
   start_time: <%= DateTime.current + 9.days %>
   end_time: <%= DateTime.current + 9.days + 3.hours %>
   status: available
 
-eight:
+availability_eight:
   sitter: schack
   start_time: <%= DateTime.current + 10.days %>
   end_time: <%= DateTime.current + 10.days + 3.hours %>
   status: available
 
-nine:
+availability_nine:
   sitter: schack
   start_time: <%= DateTime.current + 11.days %>
   end_time: <%= DateTime.current + 11.days + 3.hours %>
   status: available
 
-ten:
+availability_ten:
   sitter: schack
   start_time: <%= DateTime.current + 12.days %>
   end_time: <%= DateTime.current + 12.days + 3.hours %>
   status: available
 
-eleven:
+availability_eleven:
   sitter: schack
   start_time: <%= DateTime.current + 13.days %>
   end_time: <%= DateTime.current + 13.days + 3.hours %>
   status: available
 
-twelve:
+availability_twelve:
   sitter: schack
   start_time: <%= DateTime.current + 14.days %>
   end_time: <%= DateTime.current + 14.days + 3.hours %>
   status: available
 
-thirteen:
+availability_thirteen:
   sitter: lennon
   start_time: <%= DateTime.current + 3.days %>
   end_time: <%= DateTime.current + 3.days + 3.hours %>

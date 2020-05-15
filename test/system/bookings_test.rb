@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class BookingsTest < ApplicationSystemTestCase
   setup do
-    @booking = bookings(:one)
+    @booking = bookings(:booking_one)
   end
 
   test "visiting the index" do
