@@ -3,6 +3,10 @@ require 'test_helper'
 class BookingsControllerTest < ActionDispatch::IntegrationTest
   # Setup
   setup do
+    bookings.each do |booking|
+      booking.destroy
+    end
+
     @booking = bookings(:booking_one)
     @availability = availabilities(:availability_one)
     @availability_two = availabilities(:availability_two)
@@ -25,7 +29,6 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create booking" do
-    print(bookings.to_a)
     assert_difference('Booking.count', +1) do
       post bookings_url, params: {
           booking: {

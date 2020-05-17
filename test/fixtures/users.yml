@@ -1,4 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+admin:
+  first_name: Armin
+  last_name: Admin
+  email: armin.admin@code.berlin
+  dob: 1000-10-10
+  phone: 012345678
+  bio: MyText
+  role: admin
+  encrypted_password: <%= User.new.send(:password_digest, 'arminAdmin') %>
 
 schack:
   first_name: fritz
