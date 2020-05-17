@@ -2,11 +2,6 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-
-  # def current_user
-  #   @user
-  # end
-
   setup do
     @user = users(:schack)
     # sign in user
@@ -15,11 +10,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     post user_session_url
 
     follow_redirect!
-    assert_response :success
-  end
-
-  test 'should get index' do
-    get users_url
     assert_response :success
   end
 
@@ -43,7 +33,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       delete user_url(@user)
     end
 
-    assert_redirected_to users_url
+    assert_redirected_to root_url
   end
 
   # test 'should show all sitters in the radius and with given availability if user.role == parent' do

@@ -75,3 +75,15 @@ availability_thirteen:
   start_time: <%= DateTime.current + 3.days %>
   end_time: <%= DateTime.current + 3.days + 3.hours %>
   status: available
+
+availability_past:
+  sitter: schack
+  start_time: <%= DateTime.current - 3.days %>
+  end_time: <%= DateTime.current - 3.days + 3.hours %>
+  status: available
+
+availability_3_hours:
+  sitter: schack
+  start_time: <%= DateTime.current + 15.days %>
+  end_time: <%= DateTime.current + 15.days + 2.hours %>
+  status: available
