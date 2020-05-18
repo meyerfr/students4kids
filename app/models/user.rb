@@ -19,6 +19,8 @@ class User < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
 
+  validates :first_name, :last_name, :bio, :dob, :phone, :bio, presence: true, on: :update
+
   def is_role?(role)
     self.role == role
   end
