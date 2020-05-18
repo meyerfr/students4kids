@@ -2,27 +2,27 @@ require 'test_helper'
 
 class AvailabilityTest < ActiveSupport::TestCase
   test 'is_status(status) returns true if status == availability.status' do
-    availability = availabilities(:availability_available)
+    availability = availabilities(:availability_available_availabilities_model_status)
     assert_equal true, availability.is_status?('available')
     assert_equal false, availability.is_status?('requested')
     assert_equal false, availability.is_status?('booked')
 
-    availability = availabilities(:availability_requested)
+    availability = availabilities(:availability_requested_availabilities_model_status)
     assert_equal false, availability.is_status?('available')
     assert_equal true, availability.is_status?('requested')
     assert_equal false, availability.is_status?('booked')
 
-    availability = availabilities(:availability_booked)
+    availability = availabilities(:availability_booked_availabilities_model_status)
     assert_equal false, availability.is_status?('available')
     assert_equal false, availability.is_status?('requested')
     assert_equal true, availability.is_status?('booked')
   end
 
   test 'start_time_in_future returns nil if start_time > DateTime.now' do
-    availability = availabilities(:availability_one)
+    availability = availabilities(:availability_future_availabilities_model_future_start_time)
     assert_nil availability.start_time_in_future
     assert availability.valid?
-    availability = availabilities(:availability_past)
+    availability = availabilities(:availability_past_availabilities_model_future_start_time)
     assert_equal ["cannot be in the past."], availability.start_time_in_future
     assert availability.invalid?
   end

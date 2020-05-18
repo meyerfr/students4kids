@@ -117,3 +117,35 @@ availability_to_be_booked:
   start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 31.days %>
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 31.days %>
   status: available
+
+# Availability Model Tests
+availability_available_availabilities_model_status:
+  sitter: user_sitter_availabilities_model_status
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_requested_availabilities_model_status:
+  sitter: user_sitter_availabilities_model_status
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 4.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 4.days %>
+  status: requested
+
+availability_booked_availabilities_model_status:
+  sitter: user_sitter_availabilities_model_status
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
+  status: booked
+
+availability_future_availabilities_model_future_start_time:
+  sitter: user_sitter_availabilities_model_future_start_time
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_past_availabilities_model_future_start_time:
+  sitter: user_sitter_availabilities_model_future_start_time
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") - 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") - 3.days %>
+  status: available
+
