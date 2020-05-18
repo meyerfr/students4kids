@@ -21,12 +21,12 @@
           <%= link_to '👤 Sitter', user_path(booking.sitter), class: "emoji-link" %>
         <% end %>
         <% if booking.status == 'pending' && current_user.is_role?("sitter") %>
-          <%= link_to '👍️', confirm_booking_path(booking), class: "emoji-link" %>
-          <%= link_to '️👎', decline_booking_path(booking), class: "emoji-link" %>
+          <%= link_to '👍️', confirm_booking_path(booking), method: :patch, class: "emoji-link" %>
+          <%= link_to '️👎', decline_booking_path(booking), method: :patch, class: "emoji-link" %>
         <% elsif booking.status == 'pending' && current_user.is_role?("parent") %>
-          <%= link_to '⛔', decline_booking_path(booking), class: "emoji-link" %>
+          <%= link_to '⛔', decline_booking_path(booking), method: :patch, class: "emoji-link" %>
         <% elsif booking.status == 'confirmed' %>
-          <%= link_to '⛔', decline_booking_path(booking), class: "emoji-link" %>
+          <%= link_to '⛔', decline_booking_path(booking), method: :patch, class: "emoji-link" %>
         <% end %>
       </div>
     </div>

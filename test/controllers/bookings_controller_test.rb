@@ -24,6 +24,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+=begin
   test "should create booking" do
     print(bookings.to_a)
     assert_difference('Booking.count', +1) do
@@ -40,18 +41,21 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to bookings_url
   end
+=end
 
-=begin
   test "should change booking status to confirmed" do
-    assert_equal("confirmed", @booking.status) do
-      confirm_booking_path(@booking)
+    print(confirm_booking_url(@booking))
+    assert_changes -> { @booking.status }, 'Expected the status to be confirmed' do
+      patch confirm_booking_url(@booking)
     end
+    assert_redirected_to bookings_url
+    # print(@booking.status)
   end
 
   test "should change booking status to declined" do
     assert_equal("declined", @booking.status) do
-      decline_booking_path(@booking)
+      get decline_booking_url(@booking.id)
     end
   end
-=end
+
 end
