@@ -87,3 +87,21 @@ availability_3_hours:
   start_time: <%= DateTime.current + 15.days %>
   end_time: <%= DateTime.current + 15.days + 2.hours %>
   status: available
+
+availability_available:
+  sitter: schack
+  start_time: <%= DateTime.current + 16.days %>
+  end_time: <%= DateTime.current + 16.days + 2.hours %>
+  status: available
+
+availability_requested:
+  sitter: schack
+  start_time: <%= DateTime.current + 17.days %>
+  end_time: <%= DateTime.current + 17.days + 2.hours %>
+  status: requested
+
+availability_booked:
+  sitter: schack
+  start_time: <%= DateTime.current + 18.days %>
+  end_time: <%= DateTime.current + 18.days + 2.hours %>
+  status: booked

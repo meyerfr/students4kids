@@ -10,23 +10,22 @@
           <%= booking.availability.end_time.strftime('%H:%M') %>
         </h6>
       </div>
-
       <div class="booking-actions">
         <% if current_user.is_role?("sitter") %>
-          <%= link_to '👤', user_path(booking.parent), class: "emoji-link" %>
+          <%= link_to '👤', user_path(booking.parent), id: "profile", class: "emoji-link" %>
         <% elsif current_user.is_role?("parent") %>
-          <%= link_to '👤', user_path(booking.sitter), class: "emoji-link" %>
+          <%= link_to '👤', user_path(booking.sitter), id: "profile", class: "emoji-link" %>
         <% else %>
-          <%= link_to '👤 Parent', user_path(booking.parent), class: "emoji-link" %>
-          <%= link_to '👤 Sitter', user_path(booking.sitter), class: "emoji-link" %>
+          <%= link_to '👤 Parent', user_path(booking.parent), id: "profile", class: "emoji-link" %>
+          <%= link_to '👤 Sitter', user_path(booking.sitter), id: "profile", class: "emoji-link" %>
         <% end %>
         <% if booking.status == 'pending' && current_user.is_role?("sitter") %>
-          <%= link_to '👍️', confirm_booking_path(booking), class: "emoji-link" %>
-          <%= link_to '️👎', decline_booking_path(booking), class: "emoji-link" %>
+          <%= link_to '👍️', confirm_booking_path(booking), id: "confirm", class: "emoji-link" %>
+          <%= link_to '️👎', decline_booking_path(booking), id: "decline", class: "emoji-link" %>
         <% elsif booking.status == 'pending' && current_user.is_role?("parent") %>
-          <%= link_to '⛔', decline_booking_path(booking), class: "emoji-link" %>
+          <%= link_to '⛔', decline_booking_path(booking), id: "decline", class: "emoji-link" %>
         <% elsif booking.status == 'confirmed' %>
-          <%= link_to '⛔', decline_booking_path(booking), class: "emoji-link" %>
+          <%= link_to '⛔', decline_booking_path(booking), id: "decline", class: "emoji-link" %>
         <% end %>
       </div>
     </div>

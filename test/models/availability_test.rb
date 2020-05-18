@@ -1,36 +1,80 @@
 require 'test_helper'
 
 class AvailabilityTest < ActiveSupport::TestCase
-  # Setup
-  setup do
-    @availability_one = availabilities(:availability_one)
-    @availability_two = availabilities(:availability_two)
-    @availability_three = availabilities(:availability_three)
-
-    @user_parent = users(:meyer)
-    @user_sitter = users(:schack)
-    @user_sitter_2 = users(:lennon)
-    @user_sitter_3 = users(:marley)
-  end
-
   test 'is_status(status) returns true if status == availability.status' do
-    availability = availabilities(:availability_one)
+    availability = availabilities(:availability_available)
     assert_equal true, availability.is_status?('available')
     assert_equal false, availability.is_status?('requested')
     assert_equal false, availability.is_status?('booked')
+
+    availability = availabilities(:availability_requested)
+    assert_equal false, availability.is_status?('available')
+    assert_equal true, availability.is_status?('requested')
+    assert_equal false, availability.is_status?('booked')
+
+    availability = availabilities(:availability_booked)
+    assert_equal false, availability.is_status?('available')
+    assert_equal false, availability.is_status?('requested')
+    assert_equal true, availability.is_status?('booked')
   end
 
   test 'start_time_in_future returns nil if start_time > DateTime.now' do
     availability = availabilities(:availability_one)
     assert_nil availability.start_time_in_future
+    assert availability.valid?
     availability = availabilities(:availability_past)
     assert_equal ["cannot be in the past."], availability.start_time_in_future
+    assert availability.invalid?
   end
 
   test 'minimum_time_range returns nil if end_time < (start_time + 3.hours)' do
     availability = availabilities(:availability_one)
     assert_nil availability.minimum_time_range
+    assert availability.valid?
     availability = availabilities(:availability_3_hours)
     assert_equal ["has to be at least 3 hours after the start time."], availability.minimum_time_range
+    assert availability.invalid?
+  end
+
+  test 'availability is invalid when overlapping with existing availability' do
+    availability = Availability.new(
+        start_time: availabilities(:availability_one).start_time,
+        end_time: availabilities(:availability_one).end_time,
+        sitter: availabilities(:availability_one).sitter
+    )
+    assert availability.invalid?
+  end
+
+  test 'availability is valid when all attributes are filled in' do
+    availability = Availability.new(
+        start_time: DateTime.current + 1.days,
+        end_time: DateTime.current + 1.days + 3.hours,
+        sitter: users(:marley),
+        status: "available"
+    )
+    assert availability.valid?
+  end
+
+  test 'availability is invalid when any of the attributes are missing' do
+    availability = Availability.new(
+        end_time: DateTime.current + 1.days + 3.hours,
+        sitter: users(:marley),
+        status: "available"
+    )
+    assert availability.invalid?
+
+    availability = Availability.new(
+        start_time: DateTime.current + 1.days,
+        sitter: users(:marley),
+        status: "available"
+    )
+    assert availability.invalid?
+
+    availability = Availability.new(
+        start_time: DateTime.current + 1.days,
+        end_time: DateTime.current + 1.days + 3.hours,
+        status: "available"
+    )
+    assert availability.invalid?
   end
 end

@@ -52,12 +52,17 @@
               <%= @start_time_query %> -
               <%= @end_time_query %>
             </li>
-            <%= link_to '🗓', "#", class: "emoji-link", data: {
-                toggle: 'modal',
-                target: '#myModal',
-                availability: availability.id,
-                sitter: availability.sitter.id
-            } %>
+            <%= link_to '🗓',
+                        "#",
+                        id: "book",
+                        class: "emoji-link",
+                        data: {
+                            toggle: 'modal',
+                            target: '#myModal',
+                            availability: availability.id,
+                            sitter: availability.sitter.id
+                        }
+            %>
           </div>
         </div>
       <% end %>

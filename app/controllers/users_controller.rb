@@ -93,7 +93,7 @@ class UsersController < ApplicationController
   end
 
   def only_correct_user!
-    unless current_user = @user
+    unless current_user == @user
       flash.alert = "You don't have the rights for this action"
       redirect_to bookings_path
     end
