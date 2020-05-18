@@ -41,7 +41,7 @@
             <i class="fas fa-quote-right darker"></i>
           </div>
           <span>You would like to help out and support families in this situation? Great! Become part of this project and register with us. With your support we can help nurses, doctors and many other working parents.</span>
-          <%= link_to "Sign Up As A Babysitter", new_user_registration_path(role: 'sitter'), class: "btn btn-red" %>
+          <%= link_to "Sign Up As A Babysitter", new_user_registration_path(role: 'sitter'), class: "btn btn-red", id: "signup_sitter" %>
         </div>
         <div class="part">
           <%= image_tag 'hand-print-green.png' %>
@@ -62,7 +62,7 @@
           <span>
             Are you looking for reliable and loving care for your children in this situation? Understandable! Become part of our project and we will help you to find a suitable babysitter close to you.
           </span>
-          <%= link_to "Sign Up As A Parent", new_user_registration_path(role: 'parent'), class: "btn btn-red" %>
+          <%= link_to "Sign Up As A Parent", new_user_registration_path(role: 'parent'), class: "btn btn-red", id: "signup_parent" %>
         </div>
       </div>
     </div>

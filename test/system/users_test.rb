@@ -17,41 +17,46 @@ class UsersTest < ApplicationSystemTestCase
 
   test 'user sign out' do
     sign_in(@user)
+
     visit root_url
     click_on "Log out"
+
     assert_current_path(root_path)
     assert_text "Signed out successfully."
   end
 
   test 'user registration' do
     visit root_url
-    within(".section.section-part.part.btn") do
-      click_on "Sign Up As A Babysitter"
-    end
-    assert_selector 'h2', text: 'Sign up'
+    click_on "signup_sitter"
+
     fill_in 'First name', with: "End_to_End Test"
     fill_in 'Last name', with: "End_to_End Test"
     fill_in 'Email', with: "end.to.end@test.com"
     fill_in 'user_password', with: "test1234"
     fill_in 'user_password_confirmation', with: "test1234"
     click_on 'Sign up'
+
     assert_text "Welcome! You have signed up successfully."
   end
 
   test 'show account' do
     sign_in(@user)
+
     visit root_url
     click_on "Account"
+
     assert_current_path(user_path(@user))
   end
 
   test 'edit account' do
     sign_in(@user)
+
     visit root_url
     click_on "Account"
+
     assert_current_path(user_path(@user))
-    # click_on "Edit"
-    # assert_current_path(edit_user_path(@user))
+    click_on "Edit"
+    assert_current_path(edit_user_path(@user))
     # click_on "Submit changes"
     # assert_text "User was successfully updated."
   end

@@ -13,18 +13,21 @@ class BookingsTest < ApplicationSystemTestCase
     bookings.each do |booking|
       booking.destroy
     end
-
     sign_in(@user_parent)
+
     visit root_url
     click_on "Find A Babysitter"
+
     fill_in "date", with: Date.current + 31.days
     fill_in "start_time", with: "12:00:00"
     fill_in "end_time", with: "14:00:00"
     click_on "Search"
-    find(".sitter").hover do
-      find(".sitter-actions").click_on "book"
-    end
-    find(".modal-footer").click_on "submit-booking"
+
+    find(".sitter").hover
+    click_on "make-booking"
+
+    click_on "submit-booking"
+
     assert_text "Booking was successfully created."
   end
 
@@ -32,7 +35,6 @@ class BookingsTest < ApplicationSystemTestCase
     sign_in(@user_parent)
     visit root_url
     click_on "Bookings"
-    assert_selector "h3", text: "Pending"
     find('.booking').hover
     click_on "profile"
     assert_current_path(user_path(@user_sitter))
