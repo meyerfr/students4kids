@@ -36,20 +36,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  # test 'should show all sitters in the radius and with given availability if user.role == parent' do
-
-  # end
-
   test 'should redirect to user#show path if user.role == sitter' do
     get sitters_url
     assert_redirected_to user_url(@user)
-    # print(@sitters)
-    # assert_instance_of(Array, @sitters, @sitters)
   end
-
-  # test 'should return redirect to user#show unless user.is_role?(role) == parent' do
-  #   @controller = UsersController.new
-  #   @controller.instance_eval{ authenticate_parent! }   # invoke the private method
-  #   @controller.instance_eval{ @current_account }.should eql user_user() # check the value of the instance variable
-  # end
 end

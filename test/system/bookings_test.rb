@@ -3,34 +3,28 @@ require "test_helper"
 
 class BookingsTest < ApplicationSystemTestCase
   setup do
-    bookings.each do |booking|
-      booking.destroy
-    end
-
-    @availability_one = availabilities(:availability_one)
-    @availability_two = availabilities(:availability_two)
-    @availability_three = availabilities(:availability_three)
-
     @user_parent = users(:meyer)
     @user_sitter = users(:schack)
-    @user_sitter_2 = users(:lennon)
-    @user_sitter_3 = users(:marley)
   end
 
   # Testing Parent User Stories
 
   test "book a babysitter" do
+    bookings.each do |booking|
+      booking.destroy
+    end
+
     sign_in(@user_parent)
     visit root_url
     click_on "Find A Babysitter"
-    fill_in "date", with: Date.current + 14.days
-    fill_in "start_time", with: Time.current + 30.minutes
-    fill_in "end_time", with: Time.current + 150.minutes
+    fill_in "date", with: Date.current + 31.days
+    fill_in "start_time", with: "12:00:00"
+    fill_in "end_time", with: "14:00:00"
     click_on "Search"
-    sleep(1000)
-    find('.sitter').hover
-    click_on "book"
-    click_on "Confirm Booking"
+    find(".sitter").hover do
+      find(".sitter-actions").click_on "book"
+    end
+    find(".modal-footer").click_on "submit-booking"
     assert_text "Booking was successfully created."
   end
 

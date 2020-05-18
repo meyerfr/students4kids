@@ -25,7 +25,9 @@ class UsersTest < ApplicationSystemTestCase
 
   test 'user registration' do
     visit root_url
-    click_on "Sign Up As A Babysitter"
+    within(".section.section-part.part.btn") do
+      click_on "Sign Up As A Babysitter"
+    end
     assert_selector 'h2', text: 'Sign up'
     fill_in 'First name', with: "End_to_End Test"
     fill_in 'Last name', with: "End_to_End Test"

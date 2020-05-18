@@ -1,5 +1,5 @@
 booking_one:
-  parent: meyer
   sitter: schack
+  parent: meyer
+  availability: availability_booking
   status: pending
-  availability: availability_one

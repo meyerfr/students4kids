@@ -1,107 +1,119 @@
 availability_one:
   sitter: schack
-  start_time: <%= DateTime.current + 3.days %>
-  end_time: <%= DateTime.current + 3.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
   status: available
 
 availability_two:
   sitter: schack
-  start_time: <%= DateTime.current + 4.days %>
-  end_time: <%= DateTime.current + 4.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 4.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 4.days %>
   status: available
 
 availability_three:
   sitter: schack
-  start_time: <%= DateTime.current + 5.days %>
-  end_time: <%= DateTime.current + 5.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
   status: available
 
 availability_four:
   sitter: schack
-  start_time: <%= DateTime.current + 6.days %>
-  end_time: <%= DateTime.current + 6.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 6.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 6.days %>
   status: available
 
 availability_five:
   sitter: schack
-  start_time: <%= DateTime.current + 7.days %>
-  end_time: <%= DateTime.current + 7.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 7.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 7.days %>
   status: available
 
 availability_six:
   sitter: schack
-  start_time: <%= DateTime.current + 8.days %>
-  end_time: <%= DateTime.current + 8.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 8.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 8.days %>
   status: available
 
 availability_seven:
   sitter: schack
-  start_time: <%= DateTime.current + 9.days %>
-  end_time: <%= DateTime.current + 9.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 9.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 9.days %>
   status: available
 
 availability_eight:
   sitter: schack
-  start_time: <%= DateTime.current + 10.days %>
-  end_time: <%= DateTime.current + 10.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 10.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 10.days %>
   status: available
 
 availability_nine:
   sitter: schack
-  start_time: <%= DateTime.current + 11.days %>
-  end_time: <%= DateTime.current + 11.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 11.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 11.days %>
   status: available
 
 availability_ten:
   sitter: schack
-  start_time: <%= DateTime.current + 12.days %>
-  end_time: <%= DateTime.current + 12.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 12.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 12.days %>
   status: available
 
 availability_eleven:
   sitter: schack
-  start_time: <%= DateTime.current + 13.days %>
-  end_time: <%= DateTime.current + 13.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 13.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 13.days %>
   status: available
 
 availability_twelve:
   sitter: schack
-  start_time: <%= DateTime.current + 14.days %>
-  end_time: <%= DateTime.current + 14.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 14.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 14.days %>
   status: available
 
 availability_thirteen:
   sitter: lennon
-  start_time: <%= DateTime.current + 3.days %>
-  end_time: <%= DateTime.current + 3.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
   status: available
 
 availability_past:
   sitter: schack
-  start_time: <%= DateTime.current - 3.days %>
-  end_time: <%= DateTime.current - 3.days + 3.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") - 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") - 3.days %>
   status: available
 
 availability_3_hours:
   sitter: schack
-  start_time: <%= DateTime.current + 15.days %>
-  end_time: <%= DateTime.current + 15.days + 2.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 10:00:00") + 24.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 12:00:00") + 24.days %>
   status: available
 
 availability_available:
   sitter: schack
-  start_time: <%= DateTime.current + 16.days %>
-  end_time: <%= DateTime.current + 16.days + 2.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 25.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 25.days %>
   status: available
 
 availability_requested:
   sitter: schack
-  start_time: <%= DateTime.current + 17.days %>
-  end_time: <%= DateTime.current + 17.days + 2.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 26.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 26.days %>
   status: requested
 
 availability_booked:
   sitter: schack
-  start_time: <%= DateTime.current + 18.days %>
-  end_time: <%= DateTime.current + 18.days + 2.hours %>
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 27.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 27.days %>
   status: booked
+
+availability_booking:
+  sitter: schack
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 30.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 30.days %>
+  status: requested
+
+availability_to_be_booked:
+  sitter: schack
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 31.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 31.days %>
+  status: available

@@ -19,8 +19,8 @@ class BookingsTest < ApplicationSystemTestCase
     click_on "Availabilities"
     assert_current_path("/availabilities")
     fill_in "date", with: Date.current + 20.days
-    fill_in "start_time", with: Time.current
-    fill_in "end_time", with: Time.current + 180.minutes
+    fill_in "start_time", with: Time.parse("08:00:00")
+    fill_in "end_time", with: Time.parse("22:00:00")
     click_on "Create"
     assert_text "Availability was successfully created."
   end
@@ -29,18 +29,21 @@ class BookingsTest < ApplicationSystemTestCase
     sign_in(@user_sitter_three)
     visit root_url
     click_on "Availabilities"
+
     assert_current_path(availabilities_path)
     find('.availability').hover
     click_on "edit"
+
     assert_current_path(edit_availability_path(@availability_edit))
     fill_in "date", with: Date.current + 21.days
-    fill_in "start_time", with: Time.current + 60.minutes
-    fill_in "end_time", with: Time.current + 300.minutes
+    fill_in "start_time", with: Time.parse("08:00:00")
+    fill_in "end_time", with: Time.parse("22:00:00")
     click_on "Update"
+
     assert_current_path(availabilities_path)
     date = Date.current + 21.days
-    start_time = Time.current + 60.minutes
-    end_time = Time.current + 300.minutes
+    start_time = Time.parse("08:00:00")
+    end_time = Time.parse("22:00:00")
     assert_selector "div.availability-content h6",
                     text: "#{date.strftime('%d.%m.%y')} | #{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M')}"
     assert_text "Availability was successfully updated."

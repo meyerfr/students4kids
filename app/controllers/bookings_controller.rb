@@ -33,12 +33,13 @@ class BookingsController < ApplicationController
   end
 
   def confirm_booking
-    Booking.find(params[:id]).update(status: "confirmed")
+    @booking.update(status: "confirmed")
     redirect_to bookings_path
   end
 
   def decline_booking
-    Booking.find(params[:id]).update(status: "declined")
+    @booking.update(status: "declined")
+    @booking.delete
     redirect_to bookings_path
   end
 
