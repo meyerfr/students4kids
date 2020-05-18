@@ -49,6 +49,7 @@ marley:
   encrypted_password: <%= User.new.send(:password_digest, 'bobMarley') %>
 
 # Availability Model Tests
+
 user_sitter_availabilities_model_status:
   first_name: Test
   last_name: Test
@@ -68,3 +69,23 @@ user_sitter_availabilities_model_future_start_time:
   bio: MyText
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_future_start_time') %>
+
+user_sitter_availabilities_model_minimum_time_range:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_model_minimum_time_range@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_minimum_time_range') %>
+
+user_sitter_availabilities_model_overlapping:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_model_overlapping@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_overlapping') %>

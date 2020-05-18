@@ -28,20 +28,22 @@ class AvailabilityTest < ActiveSupport::TestCase
   end
 
   test 'minimum_time_range returns nil if end_time < (start_time + 3.hours)' do
-    availability = availabilities(:availability_one)
+    availability = availabilities(:availability_long_availabilities_model_minimum_time_range)
     assert_nil availability.minimum_time_range
     assert availability.valid?
-    availability = availabilities(:availability_3_hours)
+    availability = availabilities(:availability_short_availabilities_model_minimum_time_range)
     assert_equal ["has to be at least 3 hours after the start time."], availability.minimum_time_range
     assert availability.invalid?
   end
 
   test 'availability is invalid when overlapping with existing availability' do
     availability = Availability.new(
-        start_time: availabilities(:availability_one).start_time,
-        end_time: availabilities(:availability_one).end_time,
-        sitter: availabilities(:availability_one).sitter
+        start_time: availabilities(:availability_valid_availabilities_model_overlapping).start_time,
+        end_time: availabilities(:availability_valid_availabilities_model_overlapping).end_time,
+        sitter: availabilities(:availability_valid_availabilities_model_overlapping).sitter,
+        status: "available"
     )
+    assert_equal ["has to be at least 3 hours after the start time."], availability.minimum_time_range
     assert availability.invalid?
   end
 
