@@ -1,19 +1,6 @@
 require 'test_helper'
 
 class BookingTest < ActiveSupport::TestCase
-  setup do
-    bookings.each do |booking|
-      booking.destroy
-    end
-
-    @booking = bookings(:booking_one)
-    @availability = availabilities(:availability_one)
-    @availability_two = availabilities(:availability_two)
-
-    @user_parent = users(:meyer)
-    @user_sitter = users(:schack)
-  end
-
   test 'is_status(status) returns true if status == booking.status' do
     booking = bookings(:booking_pending_bookings_model_status)
     assert_equal true, booking.is_status?('pending')
