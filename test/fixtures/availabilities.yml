@@ -118,7 +118,7 @@ availability_to_be_booked:
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 31.days %>
   status: available
 
-# Availability Model Tests
+# Availabilities Model Tests
 
 availability_available_availabilities_model_status:
   sitter: user_sitter_availabilities_model_status
@@ -168,7 +168,123 @@ availability_valid_availabilities_model_overlapping:
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
   status: available
 
-# Booking Model Tests
+# Availabilities Controller Tests
+
+availability_valid_availabilities_controller_edit_update_destroy:
+  sitter: user_sitter_availabilities_controller_edit_update_destroy
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_1:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_2:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 4.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 4.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_3:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_4:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 6.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 6.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_5:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 7.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 7.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_6:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 8.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 8.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_7:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 9.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 9.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_8:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 10.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 10.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_9:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 11.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 11.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_10:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 12.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 12.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_11:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 13.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 13.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_12:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 14.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 14.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_13:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 15.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 15.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_14:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 16.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 16.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_15_15:
+  sitter: user_sitter_availabilities_controller_page_counter_15
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 17.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 17.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_3_1:
+  sitter: user_sitter_availabilities_controller_page_counter_3
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_3_2:
+  sitter: user_sitter_availabilities_controller_page_counter_3
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 4.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 4.days %>
+  status: available
+
+availability_valid_availabilities_controller_page_counter_3_3:
+  sitter: user_sitter_availabilities_controller_page_counter_3
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
+  status: available
+
+# Bookings Model Tests
 
 availability_requested_bookings_model_status:
   sitter: user_sitter_bookings_model_status

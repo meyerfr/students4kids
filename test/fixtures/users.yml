@@ -48,7 +48,7 @@ marley:
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'bobMarley') %>
 
-# User Model Tests
+# Users Model Tests
 
 user_admin_users_model_full_name:
   first_name: Full
@@ -90,7 +90,7 @@ user_parent_users_model_is_role:
   role: parent
   encrypted_password: <%= User.new.send(:password_digest, 'user_parent_users_model_is_role') %>
 
-# Availability Model Tests
+# Availabilities Model Tests
 
 user_sitter_availabilities_model_status:
   first_name: Test
@@ -132,7 +132,89 @@ user_sitter_availabilities_model_overlapping:
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_overlapping') %>
 
-# Booking Model Tests
+# Availabilities Controller Tests
+
+user_sitter_availabilities_controller_index:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_index@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_index') %>
+
+user_sitter_availabilities_controller_create:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_create@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_create') %>
+
+user_sitter_availabilities_controller_edit_update_destroy:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_edit_update_destroy@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_edit_update_destroy') %>
+
+user_sitter_availabilities_controller_authenticate:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_authenticate@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_authenticate') %>
+
+user_parent_availabilities_controller_authenticate:
+  first_name: Test
+  last_name: Test
+  email: user_parent_availabilities_controller_authenticate@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_availabilities_controller_authenticate') %>
+
+user_sitter_availabilities_controller_page_counter_15:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_page_counter_15@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_page_counter_15') %>
+
+user_sitter_availabilities_controller_page_counter_3:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_page_counter_3@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_page_counter_3') %>
+
+user_sitter_availabilities_controller_page_counter_0:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_controller_page_counter_0@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_page_counter_0') %>
+
+# Bookings Model Tests
 
 user_sitter_bookings_model_status_one:
   first_name: Test

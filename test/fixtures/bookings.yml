@@ -4,7 +4,7 @@ booking_one:
   availability: availability_booking
   status: pending
 
-# Booking Model Tests
+# Bookings Model Tests
 
 booking_pending_bookings_model_status:
   sitter: user_sitter_bookings_model_status_one
