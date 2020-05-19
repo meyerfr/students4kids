@@ -43,7 +43,6 @@ class AvailabilityTest < ActiveSupport::TestCase
         sitter: availabilities(:availability_valid_availabilities_model_overlapping).sitter,
         status: "available"
     )
-    assert_equal ["has to be at least 3 hours after the start time."], availability.minimum_time_range
     assert availability.invalid?
   end
 

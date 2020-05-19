@@ -48,6 +48,48 @@ marley:
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'bobMarley') %>
 
+# User Model Tests
+
+user_admin_users_model_full_name:
+  first_name: Full
+  last_name: Name
+  email: user_admin_users_model_full_name@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: admin
+  encrypted_password: <%= User.new.send(:password_digest, 'user_admin_users_model_full_name') %>
+
+user_admin_users_model_is_role:
+  first_name: Test
+  last_name: Test
+  email: user_admin_users_model_is_role@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: admin
+  encrypted_password: <%= User.new.send(:password_digest, 'user_admin_users_model_is_role') %>
+
+user_sitter_users_model_is_role:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_users_model_is_role@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_users_model_is_role') %>
+
+user_parent_users_model_is_role:
+  first_name: Test
+  last_name: Test
+  email: user_parent_users_model_is_role@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_users_model_is_role') %>
+
 # Availability Model Tests
 
 user_sitter_availabilities_model_status:
