@@ -236,6 +236,59 @@ user_sitter_availabilities_controller_page_counter_0:
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_controller_page_counter_0') %>
 
+# Availabilities End-To-End Tests
+
+user_sitter_availabilities_e2e_index:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_e2e_index@code.berlin
+  dob: 1999-10-19
+  phone: 0123456789
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_e2e_index') %>
+
+user_sitter_availabilities_e2e_create:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_e2e_create@code.berlin
+  dob: 1999-10-19
+  phone: 0123456789
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_e2e_create') %>
+
+user_sitter_availabilities_e2e_edit:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_e2e_edit@code.berlin
+  dob: 1999-10-19
+  phone: 0123456789
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_e2e_edit') %>
+
+user_sitter_availabilities_e2e_delete:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_e2e_delete@code.berlin
+  dob: 1999-10-19
+  phone: 0123456789
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_e2e_delete') %>
+
+user_sitter_availabilities_e2e_pagination:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_e2e_pagination@code.berlin
+  dob: 1999-10-19
+  phone: 0123456789
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_e2e_pagination') %>
+
+
 # Bookings Model Tests
 
 user_sitter_bookings_model_status_one:

@@ -284,6 +284,110 @@ availability_valid_availabilities_controller_page_counter_3_3:
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
   status: available
 
+# Availabilities End-To-End Tests
+
+availability_valid_availabilities_e2e_edit:
+  sitter: user_sitter_availabilities_e2e_edit
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_valid_availabilities_e2e_delete:
+  sitter: user_sitter_availabilities_e2e_delete
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_1:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_2:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 4.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 4.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_3:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_4:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 6.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 6.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_5:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 7.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 7.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_6:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 8.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 8.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_7:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 9.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 9.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_8:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 10.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 10.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_9:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 11.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 11.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_10:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 12.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 12.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_11:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 13.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 13.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_12:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 14.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 14.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_13:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 15.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 15.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_14:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 16.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 16.days %>
+  status: available
+
+availability_valid_availabilities_e2e_pagination_15:
+  sitter: user_sitter_availabilities_e2e_pagination
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 17.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 17.days %>
+  status: available
+
 # Bookings Model Tests
 
 availability_requested_bookings_model_status:
