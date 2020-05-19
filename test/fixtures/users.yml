@@ -90,6 +90,18 @@ user_parent_users_model_is_role:
   role: parent
   encrypted_password: <%= User.new.send(:password_digest, 'user_parent_users_model_is_role') %>
 
+# Users Controller Tests
+
+user_sitter_users_controller_general:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_users_controller_general@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_users_controller_general') %>
+
 # Availabilities Model Tests
 
 user_sitter_availabilities_model_status:
