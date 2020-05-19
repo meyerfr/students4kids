@@ -2,18 +2,10 @@ require "application_system_test_case"
 require "test_helper"
 
 class BookingsTest < ApplicationSystemTestCase
-  setup do
-    @user_parent = users(:meyer)
-    @user_sitter = users(:schack)
-  end
-
   # Testing Parent User Stories
 
   test "book a babysitter" do
-    bookings.each do |booking|
-      booking.destroy
-    end
-    sign_in(@user_parent)
+    sign_in(users(:user_parent_bookings_e2e_make_booking))
 
     visit root_url
     click_on "Find A Babysitter"
@@ -32,32 +24,28 @@ class BookingsTest < ApplicationSystemTestCase
   end
 
   test "visit a booking's sitter profile" do
-    sign_in(@user_parent)
+    sign_in(users(:user_parent_bookings_e2e_sitter_profile))
     visit root_url
     click_on "Bookings"
     find('.booking').hover
     click_on "profile"
-    assert_current_path(user_path(@user_sitter))
+    assert_current_path(user_path(users(:user_sitter_bookings_e2e_sitter_profile)))
   end
 
   test "decline a booking request as a parent" do
-    sign_in(@user_parent)
+    sign_in(users(:user_parent_bookings_e2e_decline_booking_parent))
     visit root_url
     click_on "Bookings"
     assert_selector "h3", text: "Pending"
     find('.booking').hover
     click_on "decline"
-    booking_count = 0
-    find(".booking") do |booking|
-      booking_count += 1
-    end
-    assert_equal booking_count, 1
+    assert_equal(0, page.all(:css, '.booking').count)
   end
 
   # Testing Sitter User Stories
 
   test "confirm a booking request" do
-    sign_in(@user_sitter)
+    sign_in(users(:user_sitter_bookings_e2e_confirm_booking_sitter))
     visit root_url
     click_on "Bookings"
     assert_selector "h3", text: "Pending"
@@ -75,26 +63,22 @@ class BookingsTest < ApplicationSystemTestCase
   end
 
   test "decline a booking request as a sitter" do
-    sign_in(@user_sitter)
+    sign_in(users(:user_sitter_bookings_e2e_decline_booking_sitter))
     visit root_url
     click_on "Bookings"
     assert_selector "h3", text: "Pending"
     find('.booking').hover
     click_on "decline"
-    booking_count = 0
-    find(".booking") do |booking|
-      booking_count += 1
-    end
-    assert_equal booking_count, 1
+    assert_equal(0, page.all(:css, '.booking').count)
   end
 
   test "visit a booking's parent profile" do
-    sign_in(@user_sitter)
+    sign_in(users(:user_sitter_bookings_e2e_parent_profile))
     visit root_url
     click_on "Bookings"
     assert_selector "h3", text: "Pending"
     find('.booking').hover
     click_on "profile"
-    assert_current_path(user_path(@user_parent))
+    assert_current_path(user_path(users(:user_parent_bookings_e2e_parent_profile)))
   end
 end

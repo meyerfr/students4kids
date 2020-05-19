@@ -1,9 +1,3 @@
-booking_one:
-  sitter: schack
-  parent: meyer
-  availability: availability_booking
-  status: pending
-
 # Bookings Model Tests
 
 booking_pending_bookings_model_status:
@@ -37,3 +31,30 @@ booking_pending_bookings_controller_decline:
   parent: user_parent_bookings_controller_decline
   availability: availability_requested_bookings_controller_decline
   status: pending
+
+# Bookings End-To-End Tests
+
+booking_pending_bookings_e2e_sitter_profile:
+    parent: user_parent_bookings_e2e_sitter_profile
+    sitter: user_sitter_bookings_e2e_sitter_profile
+    availability: availability_available_bookings_e2e_sitter_profile
+
+booking_pending_bookings_e2e_decline_booking_parent:
+    parent: user_parent_bookings_e2e_decline_booking_parent
+    sitter: user_sitter_bookings_e2e_decline_booking_parent
+    availability: availability_available_bookings_e2e_decline_booking_parent
+
+booking_pending_bookings_e2e_confirm_booking_sitter:
+    parent: user_parent_bookings_e2e_confirm_booking_sitter
+    sitter: user_sitter_bookings_e2e_confirm_booking_sitter
+    availability: availability_available_bookings_e2e_confirm_booking_sitter
+
+booking_pending_bookings_e2e_decline_booking_sitter:
+    parent: user_parent_bookings_e2e_decline_booking_sitter
+    sitter: user_sitter_bookings_e2e_decline_booking_sitter
+    availability: availability_available_bookings_e2e_decline_booking_sitter
+
+booking_pending_bookings_e2e_parent_profile:
+    parent: user_parent_bookings_e2e_parent_profile
+    sitter: user_sitter_bookings_e2e_parent_profile
+    availability: availability_available_bookings_e2e_parent_profile
