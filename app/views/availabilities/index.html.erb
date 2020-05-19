@@ -18,7 +18,7 @@
 
         <div class="availability-actions">
           <td><%= link_to '✏️', edit_availability_path(availability), id: "edit", class: "emoji-link" %></td>
-          <td><%= link_to '🗑', availability, method: :delete, id: "delete", class: "emoji-link" %></td>
+          <td><%= link_to '🗑', availability_path(availability), method: :delete, id: "delete", class: "emoji-link" %></td>
         </div>
       </div>
     <% end %>

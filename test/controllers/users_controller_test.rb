@@ -7,17 +7,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get sitters' do
-    get sitters_url, params: {
-      start_time: @availability.start_time + 0.5.hours,
-      end_time: @availability.end_time - 0.5.hours
-    }
+    sign_in(users(:user_parent_users_controller_general))
+    get sitters_url
     assert_response :success
     assert_template 'users/sitters'
   end
   
   test 'should show user' do
     # Booking between schack and meyer exist in bookings.yml
-    get user_url(users(:schack))
+    get user_url(@user)
     assert_equal(assigns(:access_to_see_all_details), true, 'should be true')
     assert_response :success
     assert_template 'users/show'

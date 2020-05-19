@@ -25,6 +25,7 @@ class AddModifyAvailabilitiesProcedure < ActiveRecord::Migration[5.2]
               END IF;
               RETURN 0;
             END LOOP;
+            RETURN 0;
           END
           $BODY$
           LANGUAGE plpgsql;
