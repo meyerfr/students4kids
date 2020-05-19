@@ -12,14 +12,16 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     booking_parent = users(:user_parent_bookings_controller_create)
     booking_sitter = users(:user_sitter_bookings_controller_create)
     booking_availability = availabilities(:availability_available_bookings_controller_create)
+    booking = {
+        availability: booking_availability,
+        parent: booking_parent,
+        sitter: booking_sitter,
+        status: "pending"
+    }
+    print(booking.save)
     assert_difference('Booking.count', +1) do
       post bookings_path(
-          booking: {
-              availability: booking_availability,
-              parent: booking_parent,
-              sitter: booking_sitter,
-              status: "pending"
-          },
+          booking: booking,
           start_time: booking_availability.start_time + 30.minutes,
           end_time: booking_availability.end_time - 30.minutes
        )
