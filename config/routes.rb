@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   # Booking Routes
   resources :bookings, only: [:index, :create]
-  get 'bookings/confirm/:id', to: 'bookings#confirm_booking', as: 'confirm_booking'
-  get 'bookings/decline/:id', to: 'bookings#decline_booking', as: 'decline_booking'
+  patch 'bookings/confirm/:id', to: 'bookings#confirm_booking', as: 'confirm_booking'
+  patch 'bookings/decline/:id', to: 'bookings#decline_booking', as: 'decline_booking'
 
   # Availability Routes
   resources :availabilities, only: [:index, :create, :edit, :update, :destroy]

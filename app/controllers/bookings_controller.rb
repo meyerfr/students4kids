@@ -33,14 +33,19 @@ class BookingsController < ApplicationController
   end
 
   def confirm_booking
-    @booking.update(status: "confirmed")
-    redirect_to bookings_path
+    if @booking.update(status: 'confirmed')
+      redirect_to bookings_path
+    else
+      redirect_to :root
+    end
   end
 
   def decline_booking
-    @booking.update(status: "declined")
-    @booking.delete
-    redirect_to bookings_path
+    if @booking.update(status: 'declined')
+      redirect_to bookings_path
+    else
+      redirect_to :root
+    end
   end
 
   private

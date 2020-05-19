@@ -16,7 +16,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
       post availabilities_path, params: {
           date: "2020-06-04",
           start_time: "10:00:00",
-          end_time: "18:00:00",
+          end_time: "18:00:00"
       }
     end
 
@@ -29,7 +29,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
       post availabilities_path, params: {
           date: "2020-06-04",
           start_time: "10:00:00",
-          end_time: "12:00:00",
+          end_time: "12:00:00"
       }
     end
 
@@ -42,7 +42,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
       post availabilities_path, params: {
           date: Date.today.change(day: Date.today.day - 1),
           start_time: "10:00:00",
-          end_time: "12:00:00",
+          end_time: "12:00:00"
       }
     end
 
@@ -55,7 +55,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
       post availabilities_path, params: {
           date: "2020-06-04",
           start_time: "17:00:00",
-          end_time: "20:00:00",
+          end_time: "20:00:00"
       }
     end
 
