@@ -3,3 +3,23 @@ booking_one:
   parent: meyer
   availability: availability_booking
   status: pending
+
+# Booking Model Tests
+
+booking_pending_bookings_model_status:
+  sitter: user_sitter_bookings_model_status
+  parent: user_parent_bookings_model_status
+  availability: availability_requested_bookings_model_status
+  status: pending
+
+booking_confirmed_bookings_model_status:
+  sitter: user_sitter_bookings_model_status
+  parent: user_parent_bookings_model_status
+  availability: availability_booked_bookings_model_status
+  status: confirmed
+
+booking_declined_bookings_model_status:
+  sitter: user_sitter_bookings_model_status
+  parent: user_parent_bookings_model_status
+  availability: availability_available_bookings_model_status
+  status: declined

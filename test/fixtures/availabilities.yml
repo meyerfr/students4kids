@@ -119,6 +119,7 @@ availability_to_be_booked:
   status: available
 
 # Availability Model Tests
+
 availability_available_availabilities_model_status:
   sitter: user_sitter_availabilities_model_status
   start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
@@ -167,3 +168,22 @@ availability_valid_availabilities_model_overlapping:
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
   status: available
 
+# Booking Model Tests
+
+availability_requested_bookings_model_status:
+  sitter: user_sitter_bookings_model_status
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_booked_bookings_model_status:
+  sitter: user_sitter_bookings_model_status
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 4.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 4.days %>
+  status: available
+
+availability_available_bookings_model_status:
+  sitter: user_sitter_bookings_model_status
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
+  status: available

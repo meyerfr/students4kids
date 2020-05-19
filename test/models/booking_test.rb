@@ -14,11 +14,21 @@ class BookingTest < ActiveSupport::TestCase
     @user_sitter = users(:schack)
   end
 
-  test 'is_status?(status) returns true if status == booking.status' do
-    booking = bookings(:booking_one)
+  test 'is_status(status) returns true if status == booking.status' do
+    booking = bookings(:booking_pending_bookings_model_status)
     assert_equal true, booking.is_status?('pending')
     assert_equal false, booking.is_status?('confirmed')
     assert_equal false, booking.is_status?('declined')
+
+    booking = bookings(:booking_confirmed_bookings_model_status)
+    assert_equal false, booking.is_status?('pending')
+    assert_equal true, booking.is_status?('confirmed')
+    assert_equal false, booking.is_status?('declined')
+
+    booking = bookings(:booking_declined_bookings_model_status)
+    assert_equal false, booking.is_status?('pending')
+    assert_equal false, booking.is_status?('confirmed')
+    assert_equal true, booking.is_status?('declined')
   end
 
   test 'should validate for status' do

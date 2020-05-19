@@ -131,3 +131,25 @@ user_sitter_availabilities_model_overlapping:
   bio: MyText
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_overlapping') %>
+
+# Booking Model Tests
+
+user_sitter_bookings_model_status:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_bookings_model_status@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_model_status') %>
+
+user_parent_bookings_model_status:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_model_status@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_model_status') %>
