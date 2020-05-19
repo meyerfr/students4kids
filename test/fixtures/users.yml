@@ -134,22 +134,62 @@ user_sitter_availabilities_model_overlapping:
 
 # Booking Model Tests
 
-user_sitter_bookings_model_status:
+user_sitter_bookings_model_status_one:
   first_name: Test
   last_name: Test
-  email: user_sitter_bookings_model_status@code.berlin
+  email: user_sitter_bookings_model_status_one@code.berlin
   dob: 1940-04-25
   phone: 012345678
   bio: MyText
   role: sitter
-  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_model_status') %>
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_model_status_one') %>
 
-user_parent_bookings_model_status:
+user_parent_bookings_model_status_one:
   first_name: Test
   last_name: Test
-  email: user_parent_bookings_model_status@code.berlin
+  email: user_parent_bookings_model_status_one@code.berlin
   dob: 1940-04-25
   phone: 012345678
   bio: MyText
   role: parent
-  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_model_status') %>
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_model_status_one') %>
+
+user_sitter_bookings_model_status_two:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_bookings_model_status_two@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_model_status_two') %>
+
+user_parent_bookings_model_status_two:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_model_status_two@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_model_status_two') %>
+
+user_sitter_bookings_model_status_three:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_bookings_model_status_three@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_model_status_three') %>
+
+user_parent_bookings_model_status_three:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_model_status_three@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_model_status_three') %>
