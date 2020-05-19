@@ -31,14 +31,36 @@ class BookingTest < ActiveSupport::TestCase
     assert_equal true, booking.is_status?('declined')
   end
 
-  test 'should validate for status' do
-    assert_difference("Booking.count", +1) do
-      Booking.create(
-          sitter_id: @user_sitter.id,
-          parent_id: @user_parent.id,
-          availability_id: @availability_two.id,
-          status: "pending"
-      )
-    end
+  test 'should be valid when all attributes are present' do
+    booking = Booking.new(
+        sitter: users(:user_sitter_bookings_model_validations),
+        parent: users(:user_parent_bookings_model_validations),
+        availability: availabilities(:availability_available_bookings_model_validations),
+        status: "pending"
+    )
+    assert booking.valid?
+  end
+
+  test 'should not be valid when any attribute is not present' do
+    booking = Booking.new(
+        parent: users(:user_parent_bookings_model_validations),
+        availability: availabilities(:availability_available_bookings_model_validations),
+        status: "pending"
+    )
+    assert booking.invalid?
+
+    booking = Booking.new(
+        sitter: users(:user_sitter_bookings_model_validations),
+        availability: availabilities(:availability_available_bookings_model_validations),
+        status: "pending"
+    )
+    assert booking.invalid?
+
+    booking = Booking.new(
+        sitter: users(:user_sitter_bookings_model_validations),
+        parent: users(:user_parent_bookings_model_validations),
+        status: "pending"
+    )
+    assert booking.invalid?
   end
 end

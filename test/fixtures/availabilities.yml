@@ -187,3 +187,9 @@ availability_available_bookings_model_status:
   start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 5.days %>
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 5.days %>
   status: available
+
+availability_available_bookings_model_validations:
+  sitter: user_sitter_bookings_model_validations
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
