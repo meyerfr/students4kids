@@ -11,6 +11,10 @@ class User < ApplicationRecord
     assoc.has_many :children, foreign_key: 'parent_id'
   end
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates_inclusion_of :role, in: ['sitter', 'parent', 'admin']
+
   has_many :parents, foreign_key: 'parent_id', through: :sitter_bookings
   has_many :sitters, foreign_key: 'sitter_id', through: :parent_bookings
   # has_many :bookings, class_name: "User", foreign_key: "sitter_id"

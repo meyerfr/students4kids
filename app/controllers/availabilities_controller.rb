@@ -29,8 +29,8 @@ class AvailabilitiesController < ApplicationController
   def create
     @availability = Availability.new(
         sitter: current_user,
-        start_time: DateTime.parse("#{availability_params[:date]} #{availability_params[:start_time]} +0200"),
-        end_time: DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
+        start_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00"),
+        end_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
     )
 
     respond_to do |format|
@@ -46,8 +46,8 @@ class AvailabilitiesController < ApplicationController
   end
 
   def update
-    @availability.start_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:start_time]} +0200")
-    @availability.end_time = DateTime.parse("#{availability_params[:date]} #{availability_params[:end_time]} +0200")
+    @availability.start_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00")
+    @availability.end_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
     respond_to do |format|
       if @availability.save
         format.html { redirect_to availabilities_path, notice: 'Availability was successfully updated.' }
@@ -61,7 +61,6 @@ class AvailabilitiesController < ApplicationController
     @availability.destroy
     respond_to do |format|
       format.html { redirect_to availabilities_url, notice: 'Availability was successfully deleted.' }
-      format.json { head :no_content }
     end
   end
 

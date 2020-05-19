@@ -38,12 +38,14 @@ class BookingsController < ApplicationController
     else
       redirect_to :root
     end
-    # @booking.update(status: "confirmed")
   end
 
   def decline_booking
-    @booking.update(status: "declined")
-    redirect_to bookings_path
+    if @booking.update(status: 'declined')
+      redirect_to bookings_path
+    else
+      redirect_to :root
+    end
   end
 
   private

@@ -1,5 +1,39 @@
 booking_one:
-  parent: meyer
   sitter: schack
+  parent: meyer
+  availability: availability_booking
   status: pending
-  availability: availability_one
+
+# Bookings Model Tests
+
+booking_pending_bookings_model_status:
+  sitter: user_sitter_bookings_model_status_one
+  parent: user_parent_bookings_model_status_one
+  availability: availability_requested_bookings_model_status
+  status: pending
+
+booking_confirmed_bookings_model_status:
+  sitter: user_sitter_bookings_model_status_two
+  parent: user_parent_bookings_model_status_two
+  availability: availability_booked_bookings_model_status
+  status: confirmed
+
+booking_declined_bookings_model_status:
+  sitter: user_sitter_bookings_model_status_three
+  parent: user_parent_bookings_model_status_three
+  availability: availability_available_bookings_model_status
+  status: declined
+
+# Bookings Controller Tests
+
+booking_pending_bookings_controller_confirm:
+  sitter: user_sitter_bookings_controller_confirm
+  parent: user_parent_bookings_controller_confirm
+  availability: availability_requested_bookings_controller_confirm
+  status: pending
+
+booking_pending_bookings_controller_decline:
+  sitter: user_sitter_bookings_controller_decline
+  parent: user_parent_bookings_controller_decline
+  availability: availability_requested_bookings_controller_decline
+  status: pending

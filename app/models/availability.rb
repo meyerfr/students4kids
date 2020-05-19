@@ -4,6 +4,9 @@ class Availability < ApplicationRecord
   validate :start_time_in_future
   validate :minimum_time_range
   validate :availability_overlap
+  validates :start_time, presence: true
+  validates :end_time, presence: true
+  validates :sitter_id, presence: true
 
   def is_status?(status)
     self.status == status

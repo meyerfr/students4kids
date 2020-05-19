@@ -17,13 +17,13 @@
         </div>
 
         <div class="availability-actions">
-          <td><%= link_to '✏️', edit_availability_path(availability), class: "emoji-link" %></td>
-          <td><%= link_to '🗑', availability, method: :delete, data: {confirm: 'Are you sure?'}, class: "emoji-link" %></td>
+          <td><%= link_to '✏️', edit_availability_path(availability), id: "edit", class: "emoji-link" %></td>
+          <td><%= link_to '🗑', availability, method: :delete, id: "delete", class: "emoji-link" %></td>
         </div>
       </div>
     <% end %>
     <div class="pagination row">
-      <% if @page_count > 1 %>
+      <% if @page_count >= 1 %>
         <% if @page > 0 && @page == @page_count %>
           <div class="col-2 offset-4 pagination-link">
             <%= link_to "Previous Page", availabilities_path(page: @page - 1), class: "btn btn-red btn-fullsize" %>

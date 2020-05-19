@@ -53,7 +53,6 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       format.html { redirect_to :root, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -91,7 +90,7 @@ class UsersController < ApplicationController
   end
 
   def only_correct_user!
-    unless current_user = @user
+    unless current_user == @user
       flash.alert = "You don't have the rights for this action"
       redirect_to bookings_path
     end
