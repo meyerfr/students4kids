@@ -116,6 +116,16 @@ user_sitter_availabilities_model_overlapping:
   role: sitter
   encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_overlapping') %>
 
+user_sitter_availabilities_model_validations:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_availabilities_model_validations@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_availabilities_model_validations') %>
+
 # Availabilities Controller Tests
 
 user_sitter_availabilities_controller_index:

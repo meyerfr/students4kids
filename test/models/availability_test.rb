@@ -50,7 +50,7 @@ class AvailabilityTest < ActiveSupport::TestCase
     availability = Availability.new(
         start_time: DateTime.current + 1.days,
         end_time: DateTime.current + 1.days + 3.hours,
-        sitter: users(:marley),
+        sitter: users(:user_sitter_availabilities_model_validations),
         status: "available"
     )
     assert availability.valid?
@@ -59,14 +59,14 @@ class AvailabilityTest < ActiveSupport::TestCase
   test 'availability is invalid when any of the attributes are missing' do
     availability = Availability.new(
         end_time: DateTime.current + 1.days + 3.hours,
-        sitter: users(:marley),
+        sitter: users(:user_sitter_availabilities_model_validations),
         status: "available"
     )
     assert availability.invalid?
 
     availability = Availability.new(
         start_time: DateTime.current + 1.days,
-        sitter: users(:marley),
+        sitter: users(:user_sitter_availabilities_model_validations),
         status: "available"
     )
     assert availability.invalid?
