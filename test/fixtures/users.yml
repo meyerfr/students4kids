@@ -307,3 +307,75 @@ user_parent_bookings_model_validations:
   bio: MyText
   role: parent
   encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_model_validations') %>
+
+# Bookings Controller Tests
+
+user_parent_bookings_controller_index:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_controller_index@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_controller_index') %>
+
+user_parent_bookings_controller_create:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_controller_create@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_controller_create') %>
+
+user_sitter_bookings_controller_create:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_bookings_controller_create@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_controller_create') %>
+
+user_parent_bookings_controller_confirm:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_controller_confirm@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_controller_confirm') %>
+
+user_sitter_bookings_controller_confirm:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_bookings_controller_confirm@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_controller_confirm') %>
+
+user_parent_bookings_controller_decline:
+  first_name: Test
+  last_name: Test
+  email: user_parent_bookings_controller_decline@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: parent
+  encrypted_password: <%= User.new.send(:password_digest, 'user_parent_bookings_controller_decline') %>
+
+user_sitter_bookings_controller_decline:
+  first_name: Test
+  last_name: Test
+  email: user_sitter_bookings_controller_decline@code.berlin
+  dob: 1940-04-25
+  phone: 012345678
+  bio: MyText
+  role: sitter
+  encrypted_password: <%= User.new.send(:password_digest, 'user_sitter_bookings_controller_decline') %>

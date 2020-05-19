@@ -23,3 +23,17 @@ booking_declined_bookings_model_status:
   parent: user_parent_bookings_model_status_three
   availability: availability_available_bookings_model_status
   status: declined
+
+# Bookings Controller Tests
+
+booking_pending_bookings_controller_confirm:
+  sitter: user_sitter_bookings_controller_confirm
+  parent: user_parent_bookings_controller_confirm
+  availability: availability_requested_bookings_controller_confirm
+  status: pending
+
+booking_pending_bookings_controller_decline:
+  sitter: user_sitter_bookings_controller_decline
+  parent: user_parent_bookings_controller_decline
+  availability: availability_requested_bookings_controller_decline
+  status: pending

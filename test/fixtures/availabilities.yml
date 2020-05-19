@@ -309,3 +309,23 @@ availability_available_bookings_model_validations:
   start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
   end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
   status: available
+
+# Bookings Controller Tests
+
+availability_available_bookings_controller_create:
+  sitter: user_sitter_bookings_controller_create
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: available
+
+availability_requested_bookings_controller_confirm:
+  sitter: user_sitter_bookings_controller_confirm
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: requested
+
+availability_requested_bookings_controller_decline:
+  sitter: user_sitter_bookings_controller_decline
+  start_time: <%= DateTime.parse("#{Date.today} 08:00:00") + 3.days %>
+  end_time: <%= DateTime.parse("#{Date.today} 22:00:00") + 3.days %>
+  status: requested

@@ -1,60 +1,42 @@
 require 'test_helper'
 
 class BookingsControllerTest < ActionDispatch::IntegrationTest
-  # Setup
-  setup do
-    bookings.each do |booking|
-      booking.destroy
-    end
-
-    @booking = bookings(:booking_one)
-    @availability = availabilities(:availability_one)
-    @availability_two = availabilities(:availability_two)
-
-    @user_parent = users(:meyer)
-    @user_sitter = users(:schack)
-
-    # sign in user
-    get new_user_session_url
-    sign_in(@user_parent)
-    post user_session_url
-
-    follow_redirect!
-    assert_response :success
-  end
-
   test "should get index" do
+    sign_in(users(:user_parent_bookings_controller_index))
     get bookings_url
     assert_response :success
   end
 
   test "should create booking" do
+    sign_in(users(:user_parent_bookings_controller_create))
+    booking_sitter = users(:user_sitter_bookings_controller_create)
+    booking_availability = availabilities(:availability_available_bookings_controller_create)
     assert_difference('Booking.count', +1) do
       post bookings_url, params: {
           booking: {
-              availability_id: @availability_two.id,
-              sitter_id: @user_sitter.id,
+              availability: booking_availability,
+              sitter: booking_sitter,
               status: "pending"
           },
-          start_time: @availability_two.start_time,
-          end_time: @availability_two.end_time
+          start_time: booking_availability.start_time,
+          end_time: booking_availability.end_time
       }
     end
 
     assert_redirected_to bookings_url
   end
 
-=begin
   test "should change booking status to confirmed" do
-    assert_equal("confirmed", @booking.status) do
-      confirm_booking_path(@booking)
-    end
+    sign_in(users(:user_parent_bookings_controller_confirm))
+    booking = bookings(:booking_pending_bookings_controller_confirm)
+    patch confirm_booking_path(booking)
+    assert_equal("confirmed", booking.status)
   end
 
   test "should change booking status to declined" do
-    assert_equal("declined", @booking.status) do
-      decline_booking_path(@booking)
-    end
+    sign_in(users(:user_parent_bookings_controller_decline))
+    booking = bookings(:booking_pending_bookings_controller_decline)
+    patch decline_booking_path(booking)
+    assert_equal("declined", booking.status)
   end
-=end
 end
