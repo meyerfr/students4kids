@@ -48,6 +48,9 @@ class AvailabilitiesTest < ApplicationSystemTestCase
     assert_text "Availability was successfully updated."
   end
 
+  # Issue - Similar to the error when trying the user story "Edit a user profile", the testing framework seems to
+  # interrupt the user session and hence prohibits the test to pass. When going throught the steps manually, there
+  # are absolutely no problems.
 =begin
   test "delete an availability" do
     sign_in(users(:user_sitter_availabilities_e2e_delete))
