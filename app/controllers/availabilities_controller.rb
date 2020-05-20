@@ -27,12 +27,10 @@ class AvailabilitiesController < ApplicationController
         end_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
     )
 
-    respond_to do |format|
-      if @availability.save
-        format.html { redirect_to availabilities_path, notice: 'Availability was successfully created.' }
-      else
-        format.html { redirect_to availabilities_path, notice: 'Availability could not be created, please try again.' }
-      end
+    if @availability.save
+      redirect_to availabilities_path, notice: 'Availability was successfully created.'
+    else
+      redirect_to availabilities_path, notice: 'Availability could not be created, please try again.'
     end
   end
 
