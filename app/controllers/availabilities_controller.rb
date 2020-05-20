@@ -8,15 +8,9 @@ class AvailabilitiesController < ApplicationController
     @page = params.fetch(:page, 0).to_i
     @page_count = page_counter(availabilities_per_page)
     @availabilities = future_user_availabilities
-                          .order(
-                              :start_time
-                          )
-                          .offset(
-                              @page * availabilities_per_page
-                          )
-                          .limit(
-                              availabilities_per_page
-                          )
+                          .order(:start_time)
+                          .offset(@page * availabilities_per_page)
+                          .limit(availabilities_per_page)
     @availability = Availability.new
   end
 
@@ -53,6 +47,7 @@ class AvailabilitiesController < ApplicationController
   end
 
   private
+
   def future_user_availabilities
     Availability.where(
         "sitter_id = :id AND start_time >= :start AND status = :status",
@@ -62,17 +57,14 @@ class AvailabilitiesController < ApplicationController
     )
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_availability
     @availability = Availability.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def availability_params
     params.permit(:start_time, :end_time, :date)
   end
 
-  # Check whether current user is a sitter
   def authenticate_sitter!
     redirect_to root_path unless current_user.is_role?('sitter')
   end
