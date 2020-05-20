@@ -7,13 +7,7 @@ class AvailabilitiesController < ApplicationController
     availabilities_per_page = 10
     @page = params.fetch(:page, 0).to_i
     @page_count = page_counter(availabilities_per_page)
-    @availabilities = Availability
-                          .where(
-                              "sitter_id = :id AND start_time >= :start AND status = :status",
-                              id: current_user.id,
-                              start: DateTime.current,
-                              status: 'available'
-                          )
+    @availabilities = future_user_availabilities
                           .order(
                               :start_time
                           )
@@ -65,6 +59,14 @@ class AvailabilitiesController < ApplicationController
   end
 
   private
+  def future_user_availabilities
+    Availability.where(
+        "sitter_id = :id AND start_time >= :start AND status = :status",
+        id: current_user.id,
+        start: DateTime.current,
+        status: 'available'
+    )
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_availability
@@ -82,11 +84,6 @@ class AvailabilitiesController < ApplicationController
   end
 
   def page_counter(availabilities_per_page)
-    Availability.where(
-        "sitter_id = :id AND start_time >= :start AND status = :status",
-        id: current_user.id,
-        start: DateTime.current,
-        status: 'available'
-    ).count / availabilities_per_page
+    future_user_availabilities.count / availabilities_per_page
   end
 end
