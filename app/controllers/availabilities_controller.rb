@@ -49,9 +49,7 @@ class AvailabilitiesController < ApplicationController
 
   def destroy
     @availability.destroy
-    respond_to do |format|
-      format.html { redirect_to availabilities_url, notice: 'Availability was successfully deleted.' }
-    end
+    redirect_to availabilities_url, notice: 'Availability was successfully deleted.'
   end
 
   private
