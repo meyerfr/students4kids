@@ -40,12 +40,10 @@ class AvailabilitiesController < ApplicationController
   def update
     @availability.start_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00")
     @availability.end_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
-    respond_to do |format|
-      if @availability.save
-        format.html { redirect_to availabilities_path, notice: 'Availability was successfully updated.' }
-      else
-        format.html { redirect_to availabilities_path, notice: 'Availability could not be updated, please try again.' }
-      end
+    if @availability.save
+      redirect_to availabilities_path, notice: 'Availability was successfully updated.'
+    else
+      redirect_to availabilities_path, notice: 'Availability could not be updated, please try again.'
     end
   end
 
