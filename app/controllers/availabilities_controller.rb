@@ -4,14 +4,14 @@ class AvailabilitiesController < ApplicationController
   before_action :authenticate_sitter!
 
   def index
-    availabilities_per_page = 10
+    page_items = 10
     @page = params.fetch(:page, 0).to_i
-    @page_count = page_counter(availabilities_per_page)
+    @page_count = page_counter(page_items)
+    @availability = Availability.new
     @availabilities = future_user_availabilities
                           .order(:start_time)
-                          .offset(@page * availabilities_per_page)
-                          .limit(availabilities_per_page)
-    @availability = Availability.new
+                          .offset(@page * page_items)
+                          .limit(page_items)
   end
 
   def create
@@ -69,7 +69,7 @@ class AvailabilitiesController < ApplicationController
     redirect_to root_path unless current_user.is_role?('sitter')
   end
 
-  def page_counter(availabilities_per_page)
-    future_user_availabilities.count / availabilities_per_page
+  def page_counter(page_items)
+    future_user_availabilities.count / page_items
   end
 end
