@@ -7,6 +7,7 @@ class AvailabilitiesController < ApplicationController
     page_items = 10
     @page = params.fetch(:page, 0).to_i
     @page_count = page_counter(page_items)
+
     @availability = Availability.new
     @availabilities = future_user_availabilities
                           .order(:start_time)
@@ -17,8 +18,8 @@ class AvailabilitiesController < ApplicationController
   def create
     @availability = Availability.new(
         sitter: current_user,
-        start_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00"),
-        end_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
+        start_time: parse_date_time(availability_params[:date], availability_params[:start_time]),
+        end_time: parse_date_time(availability_params[:date], availability_params[:end_time])
     )
 
     if @availability.save
@@ -32,8 +33,9 @@ class AvailabilitiesController < ApplicationController
   end
 
   def update
-    @availability.start_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00")
-    @availability.end_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
+    @availability.start_time = parse_date_time(availability_params[:date], availability_params[:start_time])
+    @availability.end_time = parse_date_time(availability_params[:date], availability_params[:end_time])
+
     if @availability.save
       redirect_to availabilities_path, notice: 'Availability was successfully updated.'
     else
@@ -43,10 +45,14 @@ class AvailabilitiesController < ApplicationController
 
   def destroy
     @availability.destroy
-    redirect_to availabilities_url, notice: 'Availability was successfully deleted.'
+    redirect_to availabilities_path, notice: 'Availability was successfully deleted.'
   end
 
   private
+
+  def parse_date_time(date, time)
+    DateTime.parse("#{date}T#{time}+02:00")
+  end
 
   def future_user_availabilities
     Availability.where(
