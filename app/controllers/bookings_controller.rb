@@ -3,22 +3,21 @@ class BookingsController < ApplicationController
   before_action only: [:create] do |action|
     action.authenticate_parent!(bookings_path)
   end
-  before_action :set_booking, only: [:confirm_booking, :decline_booking]
+  before_action :set_booking, only: %i(:confirm_booking :decline_booking)
 
   def index
-    future_bookings = Booking.select{|booking| booking.availability.start_time >= DateTime.current}
-    past_bookings = Booking.select{|booking| booking.availability.start_time < DateTime.current}
-
+    # set future_bookings & past_bookings
     if current_user.is_role?('parent')
-      future_bookings = future_bookings.select{|booking| booking.parent == current_user}
-      past_bookings = past_bookings.select{|booking| booking.parent == current_user}
+      future_bookings = current_user.parent_bookings.select { |b| b.availability.start_time >= DateTime.current }
+      past_bookings = current_user.parent_bookings.select { |b| b.availability.start_time < DateTime.current }
     elsif current_user.is_role?('sitter')
-      future_bookings = future_bookings.select{|booking| booking.sitter == current_user}
-      past_bookings = past_bookings.select{|booking| booking.sitter == current_user}
+      future_bookings = current_user.sitter_bookings.select { |b| b.availability.start_time >= DateTime.current }
+      past_bookings = current_user.sitter_bookings.select { |b| b.availability.start_time < DateTime.current }
     end
-    @bookings_pending = future_bookings.select{|booking| booking.status == 'pending'}
-    @bookings_confirmed = future_bookings.select{|booking| booking.status == 'confirmed'}
-    @bookings_past = past_bookings.select{|booking| booking.status == 'confirmed'}
+
+    @bookings_pending = future_bookings.select { |booking| booking.status == 'pending' }
+    @bookings_confirmed = future_bookings.select { |booking| booking.status == 'confirmed' }
+    @bookings_past = past_bookings.select { |booking| booking.status == 'confirmed' }
   end
 
   def create
