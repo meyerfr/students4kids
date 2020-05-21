@@ -1,16 +1,16 @@
 <% if bookings.any? %>
   <% bookings.each do |booking| %>
-    <div class="booking">
-      <div class="booking-weekday">
+    <div class="listing">
+      <div class="listing-weekday">
         <h6><%= booking.availability.start_time.strftime('%a').upcase %></h6>
       </div>
-      <div class="booking-content">
+      <div class="listing-content">
         <h6>
           <%= booking.availability.start_time.strftime('%d.%m.%y | %H:%M') %> -
           <%= booking.availability.end_time.strftime('%H:%M') %>
         </h6>
       </div>
-      <div class="booking-actions">
+      <div class="listing-actions">
         <% if current_user.is_role?("sitter") %>
           <%= link_to '👤', user_path(booking.parent), id: "profile", class: "emoji-link" %>
         <% elsif current_user.is_role?("parent") %>

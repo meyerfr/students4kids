@@ -33,21 +33,17 @@
     </div>
   <% end %>
   <h3>Results</h3>
-  <div class="sitters-list-wrapper">
+  <div class="list-wrapper">
     <% if @sitters.any? %>
       <% @sitters.each do |availability| %>
-        <div class="sitter">
-          <div class="sitter-content">
+        <div class="listing">
+          <div class="listing-content">
             <%= link_to availability.sitter.full_name,
                         user_path(availability.sitter),
                         class: "link-red"
             %>
-            <%#= link_to sitter_availability_hash[:sitter].full_name,
-                        user_path(sitter_availability_hash[:sitter]),
-                        class: "link-red"
-            %>
           </div>
-          <div class="sitter-actions">
+          <div class="listing-actions">
             <li class="d-none">
               <%= @start_time_query %> -
               <%= @end_time_query %>
