@@ -8,8 +8,7 @@ class UsersController < ApplicationController
 
   # GET /sitters
   def sitters
-    @start_time_query = params[:start_time].present? && params[:date].present? ? "#{params[:date]} #{params[:start_time]}" : "#{Date.tomorrow} 10:00"
-    @end_time_query = params[:end_time].present? && params[:date].present? ? "#{params[:date]} #{params[:end_time]}" : "#{Date.tomorrow} 16:00"
+    set_time_queries
     @page = params.fetch(:page, 0).to_i
     @page_count = page_counter(@start_time_query, @end_time_query)
       # @sitters = sitters_with_availabilities(@start_time_query..@end_time_query).offset(@page * SITTERS_PER_PAGE).limit(SITTERS_PER_PAGE)
@@ -86,13 +85,25 @@ class UsersController < ApplicationController
   end
 
   def authenticate_parent!
-    redirect_to current_user unless current_user.is_role?('parent')
+    return if current_user.is_role?('parent')
+
+    redirect_to current_userd
   end
 
   def only_correct_user!
-    unless current_user == @user
-      flash.alert = "You don't have the rights for this action"
-      redirect_to bookings_path
+    return if current_user == @user
+
+    flash.alert = "You don't have the rights for this action"
+    redirect_to bookings_path
+  end
+
+  def set_time_queries
+    if params[:start_time].present? && params[:end_time].present?
+      @start_time_query = Time.parse("#{params[:date]} #{params[:start_time]}")
+      @end_time_query = Time.parse("#{params[:date]} #{params[:end_time]}")
+    else
+      @start_time_query = Time.parse("#{Date.tomorrow} 10:00")
+      @end_time_query = Time.parse("#{Date.tomorrow} 16:00")
     end
   end
 
@@ -107,6 +118,6 @@ class UsersController < ApplicationController
   end
 
   def check_read_access
-    current_user == @user || current_user.is_role?('admin') || current_user.sitters.select{|sitter| sitter.id == @user.id}.present? || current_user.parents.select{|parent| parent.id == @user.id}.present?
+    current_user == @user || current_user.is_role?('admin') || current_user.sitters.select{ |sitter| sitter.id == @user.id }.present? || current_user.parents.select{ |parent| parent.id == @user.id }.present?
   end
 end
