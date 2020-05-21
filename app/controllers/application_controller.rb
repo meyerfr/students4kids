@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
       return if current_user.is_role?(role)
 
       if fallback_path.present?
-        redirect_to fallback_path
+        redirect_to fallback_path, notice: "You have to be a #{role} to access"
       else
-        root_path
+        redirect_to root_path, notice: "You have to be a #{role} to access"
       end
     end
   end
