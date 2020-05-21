@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:sitters]
-  before_action :authenticate_parent!, only: [:sitters]
+  before_action only: [:sitters] do |action|
+    action.authenticate_parent!(user_path(current_user))
+  end
   before_action :set_user, only: %i(show edit update destroy)
   before_action :only_correct_user!, only: [:edit, :update, :destroy]
 
@@ -57,15 +58,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
   end
 
+  # currently not disabled
   def sitters_inside_radius
     @sitters = helpers.all_sitters.select(&:geocoded?)
     @sitters.select { |s| s.distance_to(current_user) <= s.radius }
-  end
-
-  def authenticate_parent!
-    return if current_user.is_role?('parent')
-
-    redirect_to current_userd
   end
 
   def only_correct_user!
