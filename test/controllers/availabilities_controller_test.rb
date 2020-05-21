@@ -121,7 +121,7 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
       delete availability_url(availabilities(:availability_valid_availabilities_controller_edit_update_destroy))
     end
 
-    assert_redirected_to availabilities_url
+    assert_redirected_to availabilities_path
   end
 
   # Sitter Authentication Tests

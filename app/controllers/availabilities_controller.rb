@@ -4,41 +4,28 @@ class AvailabilitiesController < ApplicationController
   before_action :authenticate_sitter!
 
   def index
-    availabilities_per_page = 10
+    page_items = 10
     @page = params.fetch(:page, 0).to_i
-    @page_count = page_counter(availabilities_per_page)
-    @availabilities = Availability
-                          .where(
-                              "sitter_id = :id AND start_time >= :start AND status = :status",
-                              id: current_user.id,
-                              start: DateTime.current,
-                              status: 'available'
-                          )
-                          .order(
-                              :start_time
-                          )
-                          .offset(
-                              @page * availabilities_per_page
-                          )
-                          .limit(
-                              availabilities_per_page
-                          )
+    @page_count = page_counter(page_items)
+
     @availability = Availability.new
+    @availabilities = future_user_availabilities
+                          .order(:start_time)
+                          .offset(@page * page_items)
+                          .limit(page_items)
   end
 
   def create
     @availability = Availability.new(
         sitter: current_user,
-        start_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00"),
-        end_time: DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
+        start_time: parse_date_time(availability_params[:date], availability_params[:start_time]),
+        end_time: parse_date_time(availability_params[:date], availability_params[:end_time])
     )
 
-    respond_to do |format|
-      if @availability.save
-        format.html { redirect_to availabilities_path, notice: 'Availability was successfully created.' }
-      else
-        format.html { redirect_to availabilities_path, notice: 'Availability could not be created, please try again.' }
-      end
+    if @availability.save
+      redirect_to availabilities_path, notice: 'Availability was successfully created.'
+    else
+      redirect_to availabilities_path, notice: 'Availability could not be created, please try again.'
     end
   end
 
@@ -46,42 +33,45 @@ class AvailabilitiesController < ApplicationController
   end
 
   def update
-    @availability.start_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:start_time]}+02:00")
-    @availability.end_time = DateTime.parse("#{availability_params[:date]}T#{availability_params[:end_time]}+02:00")
-    respond_to do |format|
-      if @availability.save
-        format.html { redirect_to availabilities_path, notice: 'Availability was successfully updated.' }
-      else
-        format.html { redirect_to availabilities_path, notice: 'Availability could not be updated, please try again.' }
-      end
+    @availability.start_time = parse_date_time(availability_params[:date], availability_params[:start_time])
+    @availability.end_time = parse_date_time(availability_params[:date], availability_params[:end_time])
+
+    if @availability.save
+      redirect_to availabilities_path, notice: 'Availability was successfully updated.'
+    else
+      redirect_to availabilities_path, notice: 'Availability could not be updated, please try again.'
     end
   end
 
   def destroy
     @availability.destroy
-    respond_to do |format|
-      format.html { redirect_to availabilities_url, notice: 'Availability was successfully deleted.' }
-    end
+    redirect_to availabilities_path, notice: 'Availability was successfully deleted.'
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_availability
-    @availability = Availability.find(params[:id])
+  def parse_date_time(date, time)
+    DateTime.parse("#{date}T#{time}+02:00")
   end
 
-  # Only allow a list of trusted parameters through.
-  def availability_params
-    params.permit(:start_time, :end_time, :date)
-  end
-
-  def page_counter(availabilities_per_page)
+  def future_user_availabilities
     Availability.where(
         "sitter_id = :id AND start_time >= :start AND status = :status",
         id: current_user.id,
         start: DateTime.current,
         status: 'available'
-    ).count / availabilities_per_page
+    )
+  end
+
+  def set_availability
+    @availability = Availability.find(params[:id])
+  end
+
+  def availability_params
+    params.permit(:start_time, :end_time, :date)
+  end
+
+  def page_counter(page_items)
+    future_user_availabilities.count / page_items
   end
 end
