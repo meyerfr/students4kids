@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:sitters]
-  before_action :authenticate_parent!, only: [:sitters]
+  before_action only: [:sitters] do |action|
+    action.authenticate_parent!(user_path(current_user))
+  end
   before_action :set_user, only: %i(show edit update destroy)
   before_action :only_correct_user!, only: [:edit, :update, :destroy]
 
@@ -8,11 +9,9 @@ class UsersController < ApplicationController
 
   # GET /sitters
   def sitters
-    @start_time_query = params[:start_time].present? && params[:date].present? ? "#{params[:date]} #{params[:start_time]}" : "#{Date.tomorrow} 10:00"
-    @end_time_query = params[:end_time].present? && params[:date].present? ? "#{params[:date]} #{params[:end_time]}" : "#{Date.tomorrow} 16:00"
+    set_time_queries
     @page = params.fetch(:page, 0).to_i
     @page_count = page_counter(@start_time_query, @end_time_query)
-      # @sitters = sitters_with_availabilities(@start_time_query..@end_time_query).offset(@page * SITTERS_PER_PAGE).limit(SITTERS_PER_PAGE)
     @sitters = Availability
                    .joins(:sitter)
                    .where(
@@ -26,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
     @access_to_see_all_details = check_read_access
   end
@@ -36,63 +34,50 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit, notice: 'Oops something went wrong.'
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to :root, notice: 'User was successfully destroyed.' }
-    end
+    redirect_to :root, notice: 'User was successfully destroyed.'
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
   end
 
+  # currently not disabled
   def sitters_inside_radius
     @sitters = helpers.all_sitters.select(&:geocoded?)
     @sitters.select { |s| s.distance_to(current_user) <= s.radius }
   end
 
-  def sitters_with_availabilities(parent_timerange)
-    sitters = []
-    User.select{|u| u.is_role?('sitter')}.select do |sitter|
-      sitter.availabilities.each do |availability|
-        if availability.is_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
-          sitters << { sitter: sitter, availability: availability }
-        end
-      end
-    end
-    sitters
-  end
-
-  def authenticate_parent!
-    redirect_to current_user unless current_user.is_role?('parent')
-  end
-
   def only_correct_user!
-    unless current_user == @user
-      flash.alert = "You don't have the rights for this action"
-      redirect_to bookings_path
+    return if current_user == @user
+
+    flash.alert = "You don't have the rights for this action"
+    redirect_to bookings_path
+  end
+
+  def set_time_queries
+    if params[:start_time].present? && params[:end_time].present?
+      @start_time_query = Time.parse("#{params[:date]} #{params[:start_time]}")
+      @end_time_query = Time.parse("#{params[:date]} #{params[:end_time]}")
+    else
+      @start_time_query = Time.parse("#{Date.tomorrow} 10:00")
+      @end_time_query = Time.parse("#{Date.tomorrow} 16:00")
     end
   end
 
@@ -107,6 +92,6 @@ class UsersController < ApplicationController
   end
 
   def check_read_access
-    current_user == @user || current_user.is_role?('admin') || current_user.sitters.select{|sitter| sitter.id == @user.id}.present? || current_user.parents.select{|parent| parent.id == @user.id}.present?
+    current_user == @user || current_user.is_role?('admin') || current_user.sitters.select{ |sitter| sitter.id == @user.id }.present? || current_user.parents.select{ |parent| parent.id == @user.id }.present?
   end
 end

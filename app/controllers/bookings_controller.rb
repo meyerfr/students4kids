@@ -1,6 +1,8 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authenticate_parent!, only: [:create]
+  before_action only: [:create] do |action|
+    action.authenticate_parent!(bookings_path)
+  end
   before_action :set_booking, only: [:confirm_booking, :decline_booking]
 
   def index
@@ -56,9 +58,5 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:sitter_id, :parent_id, :status, :availability_id)
-  end
-
-  def authenticate_parent!
-    redirect_to bookings_path unless current_user.is_role?('parent')
   end
 end

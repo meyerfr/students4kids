@@ -76,11 +76,6 @@ class AvailabilitiesController < ApplicationController
     params.permit(:start_time, :end_time, :date)
   end
 
-  # Check whether current user is a sitter
-  def authenticate_sitter!
-    redirect_to root_path unless current_user.is_role?('sitter')
-  end
-
   def page_counter(availabilities_per_page)
     Availability.where(
         "sitter_id = :id AND start_time >= :start AND status = :status",

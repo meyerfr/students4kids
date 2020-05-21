@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :users, only: [:show, :edit, :update, :destroy]
+  # Sitters Route
+  get "sitters", to: "users#sitters", as: "sitters"
 
   # Booking Routes
   resources :bookings, only: [:index, :create]
@@ -18,6 +20,4 @@ Rails.application.routes.draw do
   # Availability Routes
   resources :availabilities, only: [:index, :create, :edit, :update, :destroy]
 
-  # Sitters Routes
-  get "sitters", to: "users#sitters", as: "sitters"
 end
