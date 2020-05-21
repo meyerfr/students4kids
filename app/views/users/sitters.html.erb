@@ -10,19 +10,19 @@
       <div class="booking-form-inputs">
         <div class="booking-form-date">
           <%= date_field_tag :date,
-                            @start_time_query.present? ? @start_time_query.to_date : "#{Date.tomorrow}",
+                            @start_time_query.to_date,
                             class: "form-control"
           %>
         </div>
         <div class="booking-form-time">
           <%= time_field_tag :start_time,
-                           @start_time_query.present? ? @start_time_query.split(" ")[1] : "10:00",
+                           @start_time_query,
                            class: "form-control"
           %>
         </div>
         <div class="booking-form-time">
           <%= time_field_tag :end_time,
-                           @end_time_query.present? ? @end_time_query.split(" ")[1] : "16:00",
+                           @end_time_query,
                            class: "form-control"
           %>
         </div>

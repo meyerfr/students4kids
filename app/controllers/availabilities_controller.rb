@@ -71,10 +71,6 @@ class AvailabilitiesController < ApplicationController
     params.permit(:start_time, :end_time, :date)
   end
 
-  def authenticate_sitter!
-    redirect_to root_path unless current_user.is_role?('sitter')
-  end
-
   def page_counter(page_items)
     future_user_availabilities.count / page_items
   end
