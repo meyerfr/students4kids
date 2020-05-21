@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     set_time_queries
     @page = params.fetch(:page, 0).to_i
     @page_count = page_counter(@start_time_query, @end_time_query)
-      # @sitters = sitters_with_availabilities(@start_time_query..@end_time_query).offset(@page * SITTERS_PER_PAGE).limit(SITTERS_PER_PAGE)
     @sitters = Availability
                    .joins(:sitter)
                    .where(
@@ -37,12 +36,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit, notice: 'Oops something went wrong.'
     end
   end
 
@@ -50,9 +47,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to :root, notice: 'User was successfully destroyed.' }
-    end
+    redirect_to :root, notice: 'User was successfully destroyed.'
   end
 
   private
@@ -70,18 +65,6 @@ class UsersController < ApplicationController
   def sitters_inside_radius
     @sitters = helpers.all_sitters.select(&:geocoded?)
     @sitters.select { |s| s.distance_to(current_user) <= s.radius }
-  end
-
-  def sitters_with_availabilities(parent_timerange)
-    sitters = []
-    User.select{|u| u.is_role?('sitter')}.select do |sitter|
-      sitter.availabilities.each do |availability|
-        if availability.is_status?('available') && (availability.start_time..availability.end_time).cover?(parent_timerange)
-          sitters << { sitter: sitter, availability: availability }
-        end
-      end
-    end
-    sitters
   end
 
   def authenticate_parent!
