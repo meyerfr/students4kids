@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
     @access_to_see_all_details = check_read_access
   end
@@ -34,7 +33,6 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
@@ -44,7 +42,6 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     redirect_to :root, notice: 'User was successfully destroyed.'
@@ -52,12 +49,10 @@ class UsersController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:first_name, :last_name, :dob, :phone, :bio, :role, :address, :longitude, :latitude)
   end
