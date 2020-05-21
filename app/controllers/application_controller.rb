@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
     define_method("authenticate_#{role}!") do |*fallback_path|
       return if current_user.is_role?(role)
 
-      if fallback_path.present?
-        redirect_to fallback_path, notice: "You have to be a #{role} to access"
+      if fallback_path[0].present?
+        redirect_to fallback_path[0], notice: "You have to be a #{role} to access"
       else
         redirect_to root_path, notice: "You have to be a #{role} to access"
       end
