@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:sitters]
   before_action only: [:sitters] do |action|
     action.authenticate_parent!(user_path(current_user))
   end
