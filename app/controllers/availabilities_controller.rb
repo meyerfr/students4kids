@@ -18,14 +18,20 @@ class AvailabilitiesController < ApplicationController
   def create
     @availability = Availability.new(
         sitter: current_user,
-        start_time: parse_date_time(availability_params[:date], availability_params[:start_time]),
-        end_time: parse_date_time(availability_params[:date], availability_params[:end_time])
+        start_time: parse_date_time(
+            availability_params[:date],
+            availability_params[:start_time]
+        ),
+        end_time: parse_date_time(
+            availability_params[:date],
+            availability_params[:end_time]
+        )
     )
 
     if @availability.save
-      redirect_to availabilities_path, notice: 'Availability was successfully created.'
+      index_redirect('Availability was successfully created.')
     else
-      redirect_to availabilities_path, notice: 'Availability could not be created, please try again.'
+      index_redirect('Availability could not be created, please try again.')
     end
   end
 
@@ -33,22 +39,32 @@ class AvailabilitiesController < ApplicationController
   end
 
   def update
-    @availability.start_time = parse_date_time(availability_params[:date], availability_params[:start_time])
-    @availability.end_time = parse_date_time(availability_params[:date], availability_params[:end_time])
+    @availability.start_time = parse_date_time(
+        availability_params[:date],
+        availability_params[:start_time]
+    )
+    @availability.end_time = parse_date_time(
+        availability_params[:date],
+        availability_params[:end_time]
+    )
 
     if @availability.save
-      redirect_to availabilities_path, notice: 'Availability was successfully updated.'
+      index_redirect('Availability was successfully updated.')
     else
-      redirect_to availabilities_path, notice: 'Availability could not be updated, please try again.'
+      index_redirect('Availability could not be updated, please try again.')
     end
   end
 
   def destroy
     @availability.destroy
-    redirect_to availabilities_path, notice: 'Availability was successfully deleted.'
+    index_redirect('Availability was successfully deleted.')
   end
 
   private
+
+  def index_redirect(notice)
+    redirect_to availabilities_path, notice: notice
+  end
 
   def parse_date_time(date, time)
     DateTime.parse("#{date}T#{time}+02:00")
@@ -69,6 +85,10 @@ class AvailabilitiesController < ApplicationController
 
   def availability_params
     params.permit(:start_time, :end_time, :date)
+  end
+
+  def authenticate_sitter!
+    redirect_to root_path unless current_user.is_role?('sitter')
   end
 
   def page_counter(page_items)
