@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action only: [:create] do |action|
     action.authenticate_parent!(bookings_path)
   end
-  before_action :set_booking, only: %i(:confirm_booking :decline_booking)
+  before_action :set_booking, only: [:confirm_booking, :decline_booking]
 
   def index
     # set future_bookings & past_bookings

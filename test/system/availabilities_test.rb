@@ -30,7 +30,7 @@ class AvailabilitiesTest < ApplicationSystemTestCase
     click_on "Availabilities"
 
     assert_current_path(availabilities_path)
-    find('.availability').hover
+    find('.listing').hover
     click_on "edit"
 
     assert_current_path(edit_availability_path(availabilities(:availability_valid_availabilities_e2e_edit)))
@@ -43,7 +43,7 @@ class AvailabilitiesTest < ApplicationSystemTestCase
     date = Date.current + 21.days
     start_time = Time.parse("08:00:00")
     end_time = Time.parse("22:00:00")
-    assert_selector "div.availability-content h6",
+    assert_selector "div.listing-content h6",
                     text: "#{date.strftime('%d.%m.%y')} | #{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M')}"
     assert_text "Availability was successfully updated."
   end

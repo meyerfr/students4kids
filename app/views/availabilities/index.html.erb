@@ -5,18 +5,18 @@
   <% end %>
   <% if @availabilities.any? %>
     <% @availabilities.each do |availability| %>
-      <div class="availability">
-        <div class="availability-weekday">
+      <div class="listing">
+        <div class="listing-weekday">
           <h6><%= availability.start_time.strftime('%a').upcase %></h6>
         </div>
-        <div class="availability-content">
+        <div class="listing-content">
           <h6>
             <%= availability.start_time.strftime('%d.%m.%y | %H:%M') %> -
             <%= availability.end_time.strftime('%H:%M') %>
           </h6>
         </div>
 
-        <div class="availability-actions">
+        <div class="listing-actions">
           <td><%= link_to '✏️', edit_availability_path(availability), id: "edit", class: "emoji-link" %></td>
           <td><%= link_to '🗑', availability_path(availability), method: :delete, id: "delete", class: "emoji-link" %></td>
         </div>

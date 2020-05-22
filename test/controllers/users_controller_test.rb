@@ -60,7 +60,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
   
   test 'should redirect to user#show path if user.role == sitter' do
-    get sitters_url
-    assert_redirected_to user_url(@user)
+    get sitters_path
+    assert_redirected_to user_path(@user)
   end
 end
