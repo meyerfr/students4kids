@@ -9,10 +9,8 @@ class AvailabilitiesController < ApplicationController
     @page_count = page_counter(page_items)
 
     @availability = Availability.new
-    @availabilities = future_user_availabilities
-                          .order(:start_time)
-                          .offset(@page * page_items)
-                          .limit(page_items)
+    @availabilities = paginate(future_user_availabilities, @page, page_items)
+
   end
 
   def create
@@ -91,7 +89,14 @@ class AvailabilitiesController < ApplicationController
     redirect_to root_path unless current_user.is_role?('sitter')
   end
 
+  def paginate(availabilities, page, page_items)
+    availabilities
+        .order(:start_time)
+        .offset(page * page_items)
+        .limit(page_items)
+  end
+
   def page_counter(page_items)
-    future_user_availabilities.count / page_items
+    future_user_availabilities.count / page_items.to_f
   end
 end
