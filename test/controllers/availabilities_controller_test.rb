@@ -142,14 +142,14 @@ class AvailabilitiesControllerTest < ActionDispatch::IntegrationTest
     sign_in(users(:user_sitter_availabilities_controller_page_counter_15))
     get availabilities_path
     assert_response :success
-    assert_equal(1, assigns(:page_count))
+    assert_equal(1.5, assigns(:page_count))
   end
 
-  test 'page counter should return 0 for 3 availabilities' do
+  test 'page counter should return 0.3 for 3 availabilities' do
     sign_in(users(:user_sitter_availabilities_controller_page_counter_3))
     get availabilities_path
     assert_response :success
-    assert_equal(0, assigns(:page_count))
+    assert_equal(0.3, assigns(:page_count))
   end
 
   test 'page counter should return 0 for 0 availabilities' do
