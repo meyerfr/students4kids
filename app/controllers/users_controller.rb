@@ -12,17 +12,9 @@ class UsersController < ApplicationController
   def sitters
     set_time_queries
     @page = params.fetch(:page, 0).to_i
-    @page_count = page_counter(@start_time_query, @end_time_query)
-    @sitters = Availability
-                   .joins(:sitter)
-                   .where(
-                       "start_time <= :start_time_query AND end_time >= :end_time_query AND status = :status",
-                       start_time_query: @start_time_query,
-                       end_time_query: @end_time_query,
-                       status: 'available'
-                   )
-                   .offset(@page * SITTERS_PER_PAGE)
-                   .limit(SITTERS_PER_PAGE)
+    availabilities = availabilities_inside_timerange(@start_time_query, @end_time_query)
+    @page_count = availabilities.count / SITTERS_PER_PAGE
+    @sitters = availabilities.offset(@page * SITTERS_PER_PAGE).limit(SITTERS_PER_PAGE)
   end
 
   # GET /users/1
@@ -82,14 +74,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def page_counter(start_time_query, end_time_query)
-    Availability
-        .where(
-            "start_time <= :parent_start_time AND end_time >= :parent_end_time AND status = :status",
-            parent_start_time: start_time_query,
-            parent_end_time: end_time_query,
-            status: 'available'
-        ).count / SITTERS_PER_PAGE
+  def availabilities_inside_timerange(start_time, end_time)
+    Availability.where(
+      "start_time <= :parent_start_time AND end_time >= :parent_end_time AND status = :status",
+      parent_start_time: start_time,
+      parent_end_time: end_time,
+      status: 'available'
+    )
   end
 
   def check_read_access
