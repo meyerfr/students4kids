@@ -6,10 +6,10 @@ class AvailabilitiesController < ApplicationController
   def index
     page_items = 10
     @page = params.fetch(:page, 0).to_i
-    @page_count = page_counter(page_items)
+    @page_count = count_pages(page_items)
 
     @availability = Availability.new
-    @availabilities = paginate(future_user_availabilities, @page, page_items)
+    @availabilities = paginate_availabilities(get_user_availabilities, @page, page_items)
 
   end
 
@@ -27,9 +27,9 @@ class AvailabilitiesController < ApplicationController
     )
 
     if @availability.save
-      index_redirect('Availability was successfully created.')
+      redirect_to_index('Availability was successfully created.')
     else
-      index_redirect('Availability could not be created, please try again.')
+      redirect_to_index('Availability could not be created, please try again.')
     end
   end
 
@@ -47,20 +47,20 @@ class AvailabilitiesController < ApplicationController
     )
 
     if @availability.save
-      index_redirect('Availability was successfully updated.')
+      redirect_to_index('Availability was successfully updated.')
     else
-      index_redirect('Availability could not be updated, please try again.')
+      redirect_to_index('Availability could not be updated, please try again.')
     end
   end
 
   def destroy
     @availability.destroy
-    index_redirect('Availability was successfully deleted.')
+    redirect_to_index('Availability was successfully deleted.')
   end
 
   private
 
-  def index_redirect(notice)
+  def redirect_to_index(notice)
     redirect_to availabilities_path, notice: notice
   end
 
@@ -68,7 +68,7 @@ class AvailabilitiesController < ApplicationController
     DateTime.parse("#{date}T#{time}+02:00")
   end
 
-  def future_user_availabilities
+  def get_user_availabilities
     Availability.where(
         "sitter_id = :id AND start_time >= :start AND status = :status",
         id: current_user.id,
@@ -89,14 +89,14 @@ class AvailabilitiesController < ApplicationController
     redirect_to root_path unless current_user.is_role?('sitter')
   end
 
-  def paginate(availabilities, page, page_items)
+  def paginate_availabilities(availabilities, page, page_items)
     availabilities
         .order(:start_time)
         .offset(page * page_items)
         .limit(page_items)
   end
 
-  def page_counter(page_items)
-    future_user_availabilities.count / page_items.to_f
+  def count_pages(page_items)
+    get_user_availabilities.count / page_items.to_f
   end
 end
