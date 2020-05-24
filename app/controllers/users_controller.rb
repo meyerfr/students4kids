@@ -4,37 +4,26 @@ class UsersController < ApplicationController
     action.authenticate_parent!(user_path(current_user))
   end
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :only_correct_user!, only: [:edit, :update, :destroy]
+  before_action :verify_correct_user!, only: [:edit, :update, :destroy]
 
   SITTERS_PER_PAGE = 10
 
-  # GET /sitters
   def sitters
     set_time_queries
     @page = params.fetch(:page, 0).to_i
-    @page_count = page_counter(@start_time_query, @end_time_query)
-    @sitters = Availability
-                   .joins(:sitter)
-                   .where(
-                       "start_time <= :start_time_query AND end_time >= :end_time_query AND status = :status",
-                       start_time_query: @start_time_query,
-                       end_time_query: @end_time_query,
-                       status: 'available'
-                   )
+    @page_count = count_pages(@start_time_query, @end_time_query)
+    @sitters = get_available_sitters(@start_time_query, @end_time_query)
                    .offset(@page * SITTERS_PER_PAGE)
                    .limit(SITTERS_PER_PAGE)
   end
 
-  # GET /users/1
   def show
     @access_to_see_all_details = check_read_access
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
@@ -43,7 +32,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
   def destroy
     @user.destroy
     redirect_to :root, notice: 'User was successfully destroyed.'
@@ -60,12 +48,12 @@ class UsersController < ApplicationController
   end
 
   # currently not disabled
-  def sitters_inside_radius
+  def get_sitters_inside_radius
     @sitters = helpers.all_sitters.select(&:geocoded?)
     @sitters.select { |s| s.distance_to(current_user) <= s.radius }
   end
 
-  def only_correct_user!
+  def verify_correct_user!
     return if current_user == @user
 
     flash.alert = "You don't have the rights for this action"
@@ -82,14 +70,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def page_counter(start_time_query, end_time_query)
-    Availability
-        .where(
-            "start_time <= :parent_start_time AND end_time >= :parent_end_time AND status = :status",
-            parent_start_time: start_time_query,
-            parent_end_time: end_time_query,
-            status: 'available'
-        ).count / SITTERS_PER_PAGE
+  def get_available_sitters(start_time_query, end_time_query)
+    Availability.where(
+        "start_time <= :parent_start_time AND end_time >= :parent_end_time AND status = :status",
+        parent_start_time: start_time_query,
+        parent_end_time: end_time_query,
+        status: 'available'
+    )
+  end
+
+  def count_pages(start_time_query, end_time_query)
+    get_available_sitters(start_time_query, end_time_query).count / SITTERS_PER_PAGE
   end
 
   def check_read_access
