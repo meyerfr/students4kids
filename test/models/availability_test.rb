@@ -18,21 +18,21 @@ class AvailabilityTest < ActiveSupport::TestCase
     assert_equal true, availability.is_status?('booked')
   end
 
-  test 'start_time_in_future returns nil if start_time > DateTime.now' do
+  test 'validate_start_time_in_future returns nil if start_time > DateTime.now' do
     availability = availabilities(:availability_future_availabilities_model_future_start_time)
-    assert_nil availability.start_time_in_future
+    assert_nil availability.validate_start_time_in_future
     assert availability.valid?
     availability = availabilities(:availability_past_availabilities_model_future_start_time)
-    assert_equal ["cannot be in the past."], availability.start_time_in_future
+    assert_equal ["cannot be in the past."], availability.validate_start_time_in_future
     assert availability.invalid?
   end
 
-  test 'minimum_time_range returns nil if end_time < (start_time + 3.hours)' do
+  test 'validate_minimum_time_range returns nil if end_time < (start_time + 3.hours)' do
     availability = availabilities(:availability_long_availabilities_model_minimum_time_range)
-    assert_nil availability.minimum_time_range
+    assert_nil availability.validate_minimum_time_range
     assert availability.valid?
     availability = availabilities(:availability_short_availabilities_model_minimum_time_range)
-    assert_equal ["has to be at least 3 hours after the start time."], availability.minimum_time_range
+    assert_equal ["has to be at least 3 hours after the start time."], availability.validate_minimum_time_range
     assert availability.invalid?
   end
 

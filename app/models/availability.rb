@@ -3,27 +3,27 @@ class Availability < ApplicationRecord
   belongs_to :sitter, class_name: 'User'
 
   # Attribute Validations
-  validate :start_time_in_future
-  validate :minimum_time_range
-  validate :availability_overlap
+  validate :validate_start_time_in_future
+  validate :validate_minimum_time_range
+  validate :validate_availability_overlap
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :sitter_id, presence: true
 
   # Attribute Validation Functions
-  def start_time_in_future
+  def validate_start_time_in_future
     if start_time.present? && start_time < DateTime.now
       errors.add(:start_time, "cannot be in the past.")
     end
   end
 
-  def minimum_time_range
+  def validate_minimum_time_range
     if start_time.present? && end_time.present? && end_time < (start_time.advance(:hours => 3))
       errors.add(:end_time, "has to be at least 3 hours after the start time.")
     end
   end
 
-  def availability_overlap
+  def validate_availability_overlap
     if start_time.present? && end_time.present?
       Availability.where(sitter: sitter).each do |availability|
         if id != availability.id
