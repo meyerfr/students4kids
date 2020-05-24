@@ -6,18 +6,9 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:confirm_booking, :decline_booking]
 
   def index
-    # set future_bookings & past_bookings
-    if current_user.is_role?('parent')
-      future_bookings = current_user.parent_bookings.select { |b| b.availability.start_time >= DateTime.current }
-      past_bookings = current_user.parent_bookings.select { |b| b.availability.start_time < DateTime.current }
-    elsif current_user.is_role?('sitter')
-      future_bookings = current_user.sitter_bookings.select { |b| b.availability.start_time >= DateTime.current }
-      past_bookings = current_user.sitter_bookings.select { |b| b.availability.start_time < DateTime.current }
-    end
-
-    @bookings_pending = future_bookings.select { |booking| booking.is_status?('pending') }
-    @bookings_confirmed = future_bookings.select { |booking| booking.is_status?('confirmed') }
-    @bookings_past = past_bookings.select { |booking| booking.is_status?('confirmed') }
+    @bookings_pending = get_future_bookings.select { |booking| booking.is_status?('pending') }
+    @bookings_confirmed = get_future_bookings.select { |booking| booking.is_status?('confirmed') }
+    @bookings_past = get_past_bookings.select { |booking| booking.is_status?('confirmed') }
   end
 
   def create
@@ -47,6 +38,26 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def get_future_bookings
+    if current_user.is_role?('parent')
+      future_bookings = current_user.parent_bookings.select { |b| b.availability.start_time >= DateTime.current }
+    elsif current_user.is_role?('sitter')
+      future_bookings = current_user.sitter_bookings.select { |b| b.availability.start_time >= DateTime.current }
+    end
+
+    return future_bookings
+  end
+
+  def get_past_bookings
+    if current_user.is_role?('parent')
+      past_bookings = current_user.parent_bookings.select { |b| b.availability.start_time < DateTime.current }
+    elsif current_user.is_role?('sitter')
+      past_bookings = current_user.sitter_bookings.select { |b| b.availability.start_time < DateTime.current }
+    end
+
+    return past_bookings
+  end
 
   def set_booking
     @booking = Booking.find(params[:id])
